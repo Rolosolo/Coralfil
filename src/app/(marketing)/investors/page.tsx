@@ -1,17 +1,16 @@
+"use client";
+
 import { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
 import Link from "next/link";
-import { Download, TrendingUp, ArrowRight, ShieldCheck, Globe, Users } from "lucide-react";
-
-export const metadata: Metadata = {
-    title: "Investor Relations",
-    description: "Join the venture-backed coalition scale-up. Download our Series B investment prospectus and impact report.",
-    alternates: {
-        canonical: './',
-    },
-};
+import { Download, TrendingUp, ArrowRight, ShieldCheck, Globe, Users, FileText } from "lucide-react";
+import { investorPackService } from "@/lib/investor-pack";
 
 export default function InvestorPage() {
+    const handleDownloadRDPack = () => {
+        investorPackService.downloadAsMarkdown();
+    };
+
     return (
         <main className="min-h-screen bg-[#02060c] pt-24 pb-20">
             <JsonLd data={{
@@ -69,7 +68,7 @@ export default function InvestorPage() {
                     </div>
                 </div>
 
-                <div className="bg-[#0c1629] rounded-3xl p-10 md:p-16 border border-white/5 flex flex-col md:flex-row items-center justify-between gap-10 relative overflow-hidden">
+                <div className="bg-[#0c1629] rounded-3xl p-10 md:p-16 border border-white/5 flex flex-col md:flex-row items-center justify-between gap-10 relative overflow-hidden mb-12">
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_right,rgba(0,119,190,0.1)_0%,transparent_60%)]"></div>
                     <div className="relative z-10 max-w-xl">
                         <h2 className="text-3xl font-bold text-white mb-4">Download Investor Prospectus (Q1 2026)</h2>
@@ -91,6 +90,46 @@ export default function InvestorPage() {
                         <div className="w-48 h-64 bg-white/5 border border-white/10 rounded-xl rotate-6 hover:rotate-0 transition-transform duration-500 shadow-2xl flex items-center justify-center">
                             <span className="text-xs font-bold text-slate-600 uppercase tracking-widest rotate-90">Confidential</span>
                         </div>
+                    </div>
+                </div>
+
+                {/* New R&D Pack Section */}
+                <div className="bg-gradient-to-br from-[#00D9C0]/10 to-[#0077BE]/10 rounded-3xl p-10 md:p-16 border border-[#00D9C0]/20 relative overflow-hidden">
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_left,rgba(0,217,192,0.15)_0%,transparent_60%)]"></div>
+                    <div className="relative z-10">
+                        <div className="flex items-center gap-3 mb-6">
+                            <FileText className="w-12 h-12 text-[#00D9C0]" />
+                            <div>
+                                <h2 className="text-3xl font-bold text-white">R&D Technical Brief</h2>
+                                <p className="text-sm text-[#00D9C0] font-bold uppercase tracking-widest">Manufacturing & Confirmation Trials</p>
+                            </div>
+                        </div>
+                        <p className="text-slate-300 mb-8 max-w-3xl">
+                            Comprehensive research roadmap covering manufacturing process development, confirmation trial methodology,
+                            evidence-based research citations, and hypothesized outcome ranges. Includes $2.8M budget allocation,
+                            24-month timeline, and risk mitigation strategies.
+                        </p>
+                        <div className="grid md:grid-cols-3 gap-6 mb-8">
+                            <div className="bg-black/20 p-6 rounded-xl border border-white/10">
+                                <div className="text-2xl font-bold text-[#00D9C0] mb-2">22-38%</div>
+                                <div className="text-xs text-slate-400 uppercase tracking-widest">Settlement Rate Increase</div>
+                            </div>
+                            <div className="bg-black/20 p-6 rounded-xl border border-white/10">
+                                <div className="text-2xl font-bold text-[#00D9C0] mb-2">18-35%</div>
+                                <div className="text-xs text-slate-400 uppercase tracking-widest">Growth Rate Increase</div>
+                            </div>
+                            <div className="bg-black/20 p-6 rounded-xl border border-white/10">
+                                <div className="text-2xl font-bold text-[#00D9C0] mb-2">2.5-4.2x</div>
+                                <div className="text-xs text-slate-400 uppercase tracking-widest">Recruitment Density</div>
+                            </div>
+                        </div>
+                        <button
+                            onClick={handleDownloadRDPack}
+                            className="bg-[#00D9C0] hover:bg-[#00D9C0]/90 text-black px-8 py-4 rounded-xl font-bold flex items-center gap-2 transition-all shadow-xl shadow-[#00D9C0]/20"
+                        >
+                            <Download size={20} />
+                            Download R&D Pack
+                        </button>
                     </div>
                 </div>
             </div>
