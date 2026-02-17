@@ -5,7 +5,7 @@ import Link from "next/link";
 import {
     ArrowRight, ChevronRight, Layers, Box, Cpu, FileCheck,
     Terminal, Settings2, Grid, Dna, Droplets, Activity,
-    Play, Pause, Zap, Info, Shield, Sun, Moon, Sunrise, Beaker
+    Play, Pause, Zap, Info, Shield, Sun, Moon, Sunrise, Beaker, Printer
 } from "lucide-react";
 import EnvironmentalScanner from "@/components/dashboard/EnvironmentalScanner";
 import StatusLog from "@/components/dashboard/StatusLog";
@@ -13,10 +13,13 @@ import { SpeciesMatrix } from "@/components/dashboard/SpeciesMatrix";
 import { ComponentType } from "react";
 import { CoralfillSynthesisEngine } from "@/components/dashboard/CoralfillSynthesisEngine";
 import { useTheme, EnvTheme } from "@/components/dashboard/ThemeController";
+import { SatelliteMapOverlay } from "@/components/dashboard/SatelliteMapOverlay";
+import { CBrickExporter } from "@/components/dashboard/CBrickExporter";
 import { dataService } from "@/lib/data-service";
 import { Project, SpeciesProfile } from "@/lib/demo-data";
+import { noaaService, NOAAData } from "@/lib/noaa-service";
 
-type TabType = "parameters" | "species" | "synthesis" | "simulation";
+type TabType = "parameters" | "species" | "synthesis" | "manufacturing";
 
 export default function DesignPage({ params }: { params: { id: string } }) {
     const { theme, setTheme } = useTheme();
@@ -25,8 +28,10 @@ export default function DesignPage({ params }: { params: { id: string } }) {
     const [mixRatio, setMixRatio] = useState(85);
     const [selectedSpecies, setSelectedSpecies] = useState<string[]>([]);
     const [isSimulating, setIsSimulating] = useState(false);
+    const [viewMode, setViewMode] = useState<'sim' | 'sat'>('sim');
     const [species, setSpecies] = useState<SpeciesProfile[]>([]);
     const [project, setProject] = useState<Project | null>(null);
+    const [noaaData, setNoaaData] = useState<NOAAData | null>(null);
 
     useEffect(() => {
         const loadData = async () => {
@@ -39,6 +44,11 @@ export default function DesignPage({ params }: { params: { id: string } }) {
             if (pData?.targetSpecies) {
                 setSelectedSpecies(pData.targetSpecies);
             }
+
+            // Auto-populate NOAA data based on project location (or defaults for specific sectors)
+            // GBR Sector A-4: LAT: -14.672 | LON: 145.421
+            const nData = await noaaService.getCoralMetrics(-14.672, 145.421);
+            setNoaaData(nData);
         };
         loadData();
     }, [params.id]);
@@ -56,13 +66,13 @@ export default function DesignPage({ params }: { params: { id: string } }) {
                 <div className="p-6 bg-white/[0.03] rounded-[32px] border border-white/10 glass-panel">
                     <div className="text-[10px] font-black text-primary uppercase tracking-[0.25em] mb-3">Project Vector</div>
                     <div className="flex flex-col gap-1 mb-6">
-                        <h1 className="text-xl font-black text-white uppercase tracking-tight leading-none">Sector A-4</h1>
-                        <p className="text-xs text-slate-500 font-mono italic">Northern Great Barrier Reef</p>
+                        <h1 className="text-xl font-black text-white uppercase tracking-tight leading-none">{project?.name || "Sector A-4"}</h1>
+                        <p className="text-xs text-slate-500 font-mono italic">{project?.location || "Northern Great Barrier Reef"}</p>
                     </div>
 
                     <div className="space-y-6">
-                        <div className="h-44">
-                            <EnvironmentalScanner />
+                        <div className="h-56">
+                            <EnvironmentalScanner noaaData={noaaData} />
                         </div>
                         <StatusLog />
                     </div>
@@ -114,20 +124,45 @@ export default function DesignPage({ params }: { params: { id: string } }) {
                     ))}
                 </div>
 
-                {/* 3D Visualizer (Placeholder Mock) */}
-                <div className={`absolute inset-0 flex items-center justify-center transition-transform duration-1000 ${isSimulating ? 'scale-110' : 'scale-100'}`}>
-                    <div className="relative w-[80%] h-[80%] flex items-center justify-center">
-                        <div className={`absolute inset-0 bg-primary/10 blur-[150px] rounded-full transition-all duration-1000 ${isSimulating ? 'opacity-100 scale-125' : 'opacity-20'}`}></div>
-                        <img
-                            src={selectedBrick === "hex"
-                                ? "https://lh3.googleusercontent.com/aida-public/AB6AXuC-7VNh1Dz7HPG50qXW05jsncOXKSFu5ekx1--FTHYoJ_zRiKuWzxVeYLFyeeCHlg6oWlzygogeIle-utrOBgud8WlKBgHTPdokffbIKfG1E561H7BwSQeO9_X651agp6TpQtQ8FAuIWa9R9DOTbBDxVeT3DknhKP9UXU0SgECWUlAO63D-8NLoheeqkzx0YhQAdyN75duv2cC3e_Q6YVPiss7aTpK92k4_BXUn4Zk1jIKTeTFV5eMQQL05yLRdktHCntJF0zHctz0"
-                                : "https://images.unsplash.com/photo-1546026423-cc4642628d2b?auto=format&fit=crop&q=80&w=800"}
-                            alt="C-Brick View"
-                            className={`max-w-[70%] max-h-[70%] object-contain relative z-20 transition-all duration-700 ${isSimulating ? 'drop-shadow-[0_0_50px_rgba(0,217,192,0.6)] brightness-110' : 'drop-shadow-[0_0_30px_rgba(0,217,192,0.2)] grayscale-[30%]'
-                                }`}
-                        />
-                    </div>
+                {/* View Mode Toggle */}
+                <div className="absolute top-8 left-8 z-30 flex items-center gap-1 bg-black/60 p-1 rounded-2xl border border-white/10 backdrop-blur-md">
+                    <button
+                        onClick={() => setViewMode('sim')}
+                        className={`px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${viewMode === 'sim' ? 'bg-primary text-black shadow-lg' : 'text-slate-400 hover:text-white'}`}
+                    >
+                        Simulation
+                    </button>
+                    <button
+                        onClick={() => setViewMode('sat')}
+                        className={`px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${viewMode === 'sat' ? 'bg-primary text-black shadow-lg' : 'text-slate-400 hover:text-white'}`}
+                    >
+                        Satellite Intel
+                    </button>
                 </div>
+
+                {/* Satellite View Overlay */}
+                {viewMode === 'sat' && (
+                    <div className="absolute inset-0 z-20">
+                        <SatelliteMapOverlay />
+                    </div>
+                )}
+
+                {/* 3D Visualizer (Placeholder Mock) - Only visible in 'sim' mode */}
+                {viewMode === 'sim' && (
+                    <div className={`absolute inset-0 flex items-center justify-center transition-transform duration-1000 ${isSimulating ? 'scale-110' : 'scale-100'}`}>
+                        <div className="relative w-[80%] h-[80%] flex items-center justify-center">
+                            <div className={`absolute inset-0 bg-primary/10 blur-[150px] rounded-full transition-all duration-1000 ${isSimulating ? 'opacity-100 scale-125' : 'opacity-20'}`}></div>
+                            <img
+                                src={selectedBrick === "hex"
+                                    ? "https://lh3.googleusercontent.com/aida-public/AB6AXuC-7VNh1Dz7HPG50qXW05jsncOXKSFu5ekx1--FTHYoJ_zRiKuWzxVeYLFyeeCHlg6oWlzygogeIle-utrOBgud8WlKBgHTPdokffbIKfG1E561H7BwSQeO9_X651agp6TpQtQ8FAuIWa9R9DOTbBDxVeT3DknhKP9UXU0SgECWUlAO63D-8NLoheeqkzx0YhQAdyN75duv2cC3e_Q6YVPiss7aTpK92k4_BXUn4Zk1jIKTeTFV5eMQQL05yLRdktHCntJF0zHctz0"
+                                    : "https://images.unsplash.com/photo-1546026423-cc4642628d2b?auto=format&fit=crop&q=80&w=800"}
+                                alt="C-Brick View"
+                                className={`max-w-[70%] max-h-[70%] object-contain relative z-20 transition-all duration-700 ${isSimulating ? 'drop-shadow-[0_0_50px_rgba(0,217,192,0.6)] brightness-110' : 'drop-shadow-[0_0_30px_rgba(0,217,192,0.2)] grayscale-[30%]'
+                                    }`}
+                            />
+                        </div>
+                    </div>
+                )}
 
                 {/* Simulation HUD Overlays */}
                 {isSimulating && (
@@ -200,7 +235,7 @@ export default function DesignPage({ params }: { params: { id: string } }) {
                 <div className="flex-1 bg-white/[0.03] rounded-[48px] border border-white/10 flex flex-col overflow-hidden glass-panel">
                     {/* Modular Tabs */}
                     <div className="flex p-3 bg-black/40 border-b border-white/10 gap-2">
-                        {(['parameters', 'species', 'synthesis'] as TabType[]).map((tab) => (
+                        {(['parameters', 'species', 'synthesis', 'manufacturing'] as TabType[]).map((tab) => (
                             <button
                                 key={tab}
                                 onClick={() => setActiveTab(tab)}
@@ -212,6 +247,7 @@ export default function DesignPage({ params }: { params: { id: string } }) {
                                 {tab === 'parameters' && <Settings2 size={16} />}
                                 {tab === 'species' && <Dna size={16} />}
                                 {tab === 'synthesis' && <Beaker size={16} />}
+                                {tab === 'manufacturing' && <Printer size={16} />}
                                 {tab}
                             </button>
                         ))}
@@ -267,6 +303,10 @@ export default function DesignPage({ params }: { params: { id: string } }) {
                                 speciesId={selectedSpecies[0]}
                                 environmentType={project?.environmentType}
                             />
+                        )}
+
+                        {activeTab === 'manufacturing' && (
+                            <CBrickExporter brickType={selectedBrick} mixRatio={mixRatio} />
                         )}
                     </div>
 

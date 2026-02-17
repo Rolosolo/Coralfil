@@ -5,6 +5,7 @@ import {
 } from "lucide-react";
 import { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
+import { GlassSpongeFeature } from "@/components/marketing/GlassSpongeFeature";
 
 export const metadata: Metadata = {
   title: "CoralFil - 24/7 Automated Marine Restoration Solutions",
@@ -52,10 +53,7 @@ export default function Home() {
               Explore ReefMaker™ AI
               <Rocket className="w-5 h-5 group-hover:-translate-y-1 transition-transform" />
             </Link>
-            <button className="btn-premium px-10 py-5 rounded-full text-lg font-semibold text-white bg-white/5 backdrop-blur-lg border border-white/10 flex items-center gap-3 hover:bg-white/10">
-              <PlayCircle className="w-6 h-6 text-[#00D9C0]" />
-              Watch the Film
-            </button>
+            <GlassSpongeFeature />
           </div>
         </div>
 
@@ -224,7 +222,7 @@ export default function Home() {
               <div className="text-4xl font-mono text-white mb-6">$450 <span className="text-sm text-gray-400 font-sans font-normal tracking-normal">/ 10 units</span></div>
               <ul className="space-y-4 mb-10 text-sm text-gray-200 flex-grow">
                 <li className="flex items-center gap-3"><CheckCircle className="text-[#00f2ff] w-4 h-4" />Dedicated underwater plaque</li>
-                <li className="flex items-center gap-3"><CheckCircle className="text-[#00f2ff] w-4 h-4" />Direct video monitoring feed</li>
+                <li className="flex items-center gap-3"><CheckCircle className="text-[#00f2ff] w-4 h-4" />Bi-annual biological photography</li>
                 <li className="flex items-center gap-3"><CheckCircle className="text-[#00f2ff] w-4 h-4" />Verified Carbon Credits (Tax Rebate)</li>
                 <li className="flex items-center gap-3"><CheckCircle className="text-[#00f2ff] w-4 h-4" />~250kg CO2 Sequestration</li>
               </ul>
@@ -236,11 +234,12 @@ export default function Home() {
               <div className="h-16 w-16 rounded-2xl bg-white/5 flex items-center justify-center mb-8 group-hover:bg-[#FF6B6B]/20 transition-all border border-white/10">
                 <Brain className="text-[#FF6B6B] w-8 h-8" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-3">Corporate Reef</h3>
+              <h3 className="text-2xl font-bold text-white mb-3">Corporate & Philanthropic</h3>
               <div className="text-4xl font-mono text-white mb-6">$5k+ <span className="text-sm text-gray-500 font-sans font-normal tracking-normal">/ bespoke</span></div>
               <ul className="space-y-4 mb-10 text-sm text-gray-400 flex-grow">
-                <li className="flex items-center gap-3"><CheckCircle className="text-[#FF6B6B] w-4 h-4" />Full site sponsorship branding</li>
-                <li className="flex items-center gap-3"><CheckCircle className="text-[#FF6B6B] w-4 h-4" />CSR Real-time Impact Report API</li>
+                <li className="flex items-center gap-3"><CheckCircle className="text-[#FF6B6B] w-4 h-4" />Location selection from target projects</li>
+                <li className="flex items-center gap-3"><CheckCircle className="text-[#FF6B6B] w-4 h-4" />Co-sponsored events & materials</li>
+                <li className="flex items-center gap-3"><CheckCircle className="text-[#FF6B6B] w-4 h-4" />Access to high-fidelity media assets</li>
                 <li className="flex items-center gap-3"><CheckCircle className="text-[#FF6B6B] w-4 h-4" />Institutional Carbon Offsets</li>
               </ul>
               <button className="w-full py-4 rounded-xl border border-white/20 text-white hover:bg-white hover:text-black transition-all font-bold tracking-wide">Contact Sales</button>
