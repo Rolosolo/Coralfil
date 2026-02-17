@@ -18,8 +18,10 @@ import { CBrickExporter } from "@/components/dashboard/CBrickExporter";
 import { dataService } from "@/lib/data-service";
 import { Project, SpeciesProfile } from "@/lib/demo-data";
 import { noaaService, NOAAData } from "@/lib/noaa-service";
+import { CoralStickExporter } from "@/components/dashboard/CoralStickExporter";
+import { QuotationGenerator } from "@/components/dashboard/QuotationGenerator";
 
-type TabType = "parameters" | "species" | "synthesis" | "manufacturing";
+type TabType = "parameters" | "species" | "synthesis" | "manufacturing" | "quotation";
 
 export default function DesignPage({ params }: { params: { id: string } }) {
     const { theme, setTheme } = useTheme();
@@ -32,6 +34,12 @@ export default function DesignPage({ params }: { params: { id: string } }) {
     const [species, setSpecies] = useState<SpeciesProfile[]>([]);
     const [project, setProject] = useState<Project | null>(null);
     const [noaaData, setNoaaData] = useState<NOAAData | null>(null);
+
+    // CoralStick formulation state
+    const [ionicStrength, setIonicStrength] = useState(85);
+    const [uvFilterLevel, setUvFilterLevel] = useState(92);
+    const [nutrientDensity, setNutrientDensity] = useState(45);
+    const [spawningTrigger, setSpawningTrigger] = useState(true);
 
     useEffect(() => {
         const loadData = async () => {
@@ -234,12 +242,12 @@ export default function DesignPage({ params }: { params: { id: string } }) {
             <div className="w-full xl:w-[480px] flex flex-col shrink-0 z-20">
                 <div className="flex-1 bg-white/[0.03] rounded-[48px] border border-white/10 flex flex-col overflow-hidden glass-panel">
                     {/* Modular Tabs */}
-                    <div className="flex p-3 bg-black/40 border-b border-white/10 gap-2">
-                        {(['parameters', 'species', 'synthesis', 'manufacturing'] as TabType[]).map((tab) => (
+                    <div className="flex p-3 bg-black/40 border-b border-white/10 gap-2 overflow-x-auto">
+                        {(['parameters', 'species', 'synthesis', 'manufacturing', 'quotation'] as TabType[]).map((tab) => (
                             <button
                                 key={tab}
                                 onClick={() => setActiveTab(tab)}
-                                className={`flex-1 py-4 rounded-3xl flex flex-col items-center gap-1.5 transition-all text-[10px] font-black uppercase tracking-[0.2em] ${activeTab === tab
+                                className={`flex-1 py-4 rounded-3xl flex flex-col items-center gap-1.5 transition-all text-[10px] font-black uppercase tracking-[0.2em] whitespace-nowrap ${activeTab === tab
                                     ? 'bg-primary/15 text-primary border border-primary/30 shadow-[inset_0_0_20px_rgba(0,217,192,0.1)]'
                                     : 'text-slate-500 hover:text-slate-300 hover:bg-white/5'
                                     }`}
@@ -248,6 +256,7 @@ export default function DesignPage({ params }: { params: { id: string } }) {
                                 {tab === 'species' && <Dna size={16} />}
                                 {tab === 'synthesis' && <Beaker size={16} />}
                                 {tab === 'manufacturing' && <Printer size={16} />}
+                                {tab === 'quotation' && <Terminal size={16} />}
                                 {tab}
                             </button>
                         ))}
@@ -307,6 +316,16 @@ export default function DesignPage({ params }: { params: { id: string } }) {
 
                         {activeTab === 'manufacturing' && (
                             <CBrickExporter brickType={selectedBrick} mixRatio={mixRatio} />
+                        )}
+
+                        {activeTab === 'quotation' && (
+                            <QuotationGenerator
+                                brickType={selectedBrick}
+                                mixRatio={mixRatio}
+                                ionicStrength={ionicStrength}
+                                uvFilterLevel={uvFilterLevel}
+                                projectId={params.id}
+                            />
                         )}
                     </div>
 
