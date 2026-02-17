@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 
 import { dataService } from "@/lib/data-service";
+import { getBiomimeticContext } from "@/lib/context7";
 
 interface ChemicalMatrix {
     aminoAcids: {
@@ -28,7 +29,7 @@ interface ChemicalMatrix {
     };
 }
 
-export function CoralfillSynthesisEngine({ speciesId }: { speciesId?: string }) {
+export function CoralfillSynthesisEngine({ speciesId, environmentType }: { speciesId?: string; environmentType?: string }) {
     const [matrix, setMatrix] = useState<ChemicalMatrix>({
         aminoAcids: { aspartic_acid: 45, glutamic_acid: 30, taurine: 25 },
         minerals: { calcium: 85, magnesium: 10, strontium: 4, potassium: 1 },
@@ -44,8 +45,7 @@ export function CoralfillSynthesisEngine({ speciesId }: { speciesId?: string }) 
             setIsLoading(true);
             const [data, insight] = await Promise.all([
                 dataService.getCoralfillFormula(speciesId),
-                // We'll mock the environment for now, but in reality it comes from project context
-                import("@/lib/context7").then(m => m.getBiomimeticContext(speciesId, "shallow_tropical"))
+                getBiomimeticContext(speciesId, environmentType || "shallow_tropical")
             ]);
 
             if (data) {
@@ -60,12 +60,12 @@ export function CoralfillSynthesisEngine({ speciesId }: { speciesId?: string }) 
                 });
             }
             if (insight) {
-                setAiInsight(String((insight as any).best_practice_tip || ""));
+                setAiInsight(String((insight as any).best_practice_tip || "Synthesis computes both the C-Brick substrate and CoralStick additive from the same Coralfill™ Base. Formula adapted for species settlement biomimicry."));
             }
             setIsLoading(false);
         };
         loadFormula();
-    }, [speciesId]);
+    }, [speciesId, environmentType]);
 
     // Compute Biomimicry Score based on ratios and nutrient density
     const biomimicryScore = Math.round(Math.min(100, (matrix.ratios.oysterShell + matrix.aminoAcids.aspartic_acid + matrix.minerals.calcium) / 2));

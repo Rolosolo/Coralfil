@@ -263,7 +263,10 @@ export default function DesignPage({ params }: { params: { id: string } }) {
                         )}
 
                         {activeTab === 'synthesis' && (
-                            <CoralfillSynthesisEngine speciesId={selectedSpecies[0]} />
+                            <CoralfillSynthesisEngine
+                                speciesId={selectedSpecies[0]}
+                                environmentType={project?.environmentType}
+                            />
                         )}
                     </div>
 

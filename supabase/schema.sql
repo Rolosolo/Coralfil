@@ -9,7 +9,8 @@ CREATE TABLE IF NOT EXISTS projects (
   last_updated TIMESTAMPTZ DEFAULT NOW(),
   lat FLOAT8,
   lng FLOAT8,
-  target_species TEXT[]
+  target_species TEXT[],
+  environment_type TEXT DEFAULT 'shallow_tropical'
 );
 
 -- Species Table

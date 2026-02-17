@@ -10,6 +10,7 @@ export interface Project {
     lastUpdated: string;
     coordinates: [number, number]; // Lat, Lng
     targetSpecies: string[];
+    environmentType: string;
 }
 
 export interface SpeciesProfile {
@@ -41,7 +42,8 @@ export const MOCK_PROJECTS: Project[] = [
         progress: 45,
         lastUpdated: "2 mins ago",
         coordinates: [-16.5003, 145.6338],
-        targetSpecies: ["sp_acropora", "sp_pocillopora"]
+        targetSpecies: ["sp_acropora", "sp_pocillopora"],
+        environmentType: "shallow_tropical"
     },
     {
         id: "proj_002",
@@ -52,7 +54,8 @@ export const MOCK_PROJECTS: Project[] = [
         progress: 92,
         lastUpdated: "4 hours ago",
         coordinates: [5.3333, 73.0000],
-        targetSpecies: ["sp_porites"]
+        targetSpecies: ["sp_porites"],
+        environmentType: "shallow_tropical"
     },
     {
         id: "proj_003",
@@ -63,7 +66,8 @@ export const MOCK_PROJECTS: Project[] = [
         progress: 15,
         lastUpdated: "1 day ago",
         coordinates: [25.0865, -80.4473],
-        targetSpecies: ["sp_acropora_cerv"]
+        targetSpecies: ["sp_acropora_cerv"],
+        environmentType: "turbid_inshore"
     }
 ];
 

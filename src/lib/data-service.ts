@@ -22,7 +22,8 @@ export const dataService = {
             progress: p.progress,
             lastUpdated: p.last_updated,
             coordinates: [p.lat, p.lng],
-            targetSpecies: p.target_species || []
+            targetSpecies: p.target_species || [],
+            environmentType: p.environment_type
         }));
     },
 
@@ -44,7 +45,8 @@ export const dataService = {
             progress: data.progress,
             lastUpdated: data.last_updated,
             coordinates: [data.lat, data.lng],
-            targetSpecies: data.target_species || []
+            targetSpecies: data.target_species,
+            environmentType: data.environment_type
         };
     },
 
