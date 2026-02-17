@@ -1,4 +1,5 @@
 import { JsonLd } from "@/components/JsonLd";
+import { Analytics } from "@vercel/analytics/next";
 
 import type { Metadata } from "next";
 import { Space_Grotesk, Poppins } from "next/font/google";
@@ -93,6 +94,7 @@ export default function RootLayout({
       >
         <JsonLd data={jsonLd} />
         {children}
+        <Analytics />
       </body>
     </html>
   );
