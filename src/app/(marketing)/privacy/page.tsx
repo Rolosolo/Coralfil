@@ -1,3 +1,10 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Privacy Policy | CoralFil",
+    description: "CoralFil's commitment to data privacy and security in marine restoration technology.",
+};
+
 export default function PrivacyPage() {
     return (
         <div className="min-h-screen bg-[#02060c] text-white pt-24 px-6 flex items-center justify-center">

@@ -22,12 +22,14 @@ export function QuotationGenerator({
     mixRatio,
     ionicStrength,
     uvFilterLevel,
+    selectedConsortium,
     projectId
 }: {
     brickType: string;
     mixRatio: number;
     ionicStrength: number;
     uvFilterLevel: number;
+    selectedConsortium?: string | null;
     projectId: string;
 }) {
     const [brickCount, setBrickCount] = useState(500);
@@ -68,6 +70,7 @@ export function QuotationGenerator({
             mixRatio,
             ionicStrength,
             uvFilterLevel,
+            selectedConsortium,
             generatedAt: new Date().toISOString()
         };
         const blob = new Blob([JSON.stringify(quoteData, null, 2)], { type: 'application/json' });
@@ -80,6 +83,7 @@ export function QuotationGenerator({
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
     };
+
 
     const handleExportFactSheet = () => {
         const factSheet = regulatoryDocs.generateFactSheet(projectId, brickCount, coralStickKg);
@@ -117,8 +121,8 @@ export function QuotationGenerator({
                                 key={t}
                                 onClick={() => setTier(t)}
                                 className={`p-4 rounded-2xl border-2 transition-all ${tier === t
-                                        ? 'border-primary bg-primary/10 text-primary'
-                                        : 'border-white/10 bg-white/5 text-slate-400 hover:border-white/20'
+                                    ? 'border-primary bg-primary/10 text-primary'
+                                    : 'border-white/10 bg-white/5 text-slate-400 hover:border-white/20'
                                     }`}
                             >
                                 <div className="text-xs font-black uppercase tracking-widest">{t}</div>
@@ -209,6 +213,56 @@ export function QuotationGenerator({
                         <span className="text-xs">Fact Sheet</span>
                     </button>
                 </div>
+
+                {/* Donation Checkout (Small Orders) */}
+                {quote.totalCost < 50000 && (
+                    <div className="pt-4 border-t border-white/5 space-y-4">
+                        <div className="flex items-center justify-between">
+                            <h4 className="text-xs font-black text-white uppercase tracking-widest">Rapid Fulfillment</h4>
+                            <div className="px-2 py-0.5 bg-green-500/20 text-green-400 text-[8px] font-black uppercase tracking-tighter rounded border border-green-500/20">
+                                Direct Checkout Available
+                            </div>
+                        </div>
+                        <button
+                            className="w-full bg-white text-black font-black py-4 rounded-2xl transition-all flex items-center justify-center gap-2 hover:bg-primary hover:text-black shadow-lg"
+                        >
+                            <Package size={18} />
+                            <span className="text-xs">Complete Order (Credit/Debit)</span>
+                        </button>
+                        <p className="text-[10px] text-slate-500 text-center italic">
+                            For orders under $50k, we support immediate card processing and 14-day global shipping.
+                        </p>
+                    </div>
+                )}
+            </div>
+
+            {/* Logistics & Timeline */}
+            <div className="glass-panel p-6 rounded-2xl border border-white/10 space-y-4">
+                <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                        <Package size={16} className="text-secondary" />
+                        <h4 className="text-sm font-black text-white uppercase tracking-widest">Logistics Timeline</h4>
+                    </div>
+                    <span className="text-[10px] font-mono text-secondary font-bold uppercase tracking-widest">Priority Beta</span>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                    <div className="bg-black/20 p-4 rounded-xl border border-white/5">
+                        <div className="text-[10px] text-slate-500 uppercase font-black mb-1">Order to Ship</div>
+                        <div className="text-xl font-mono font-black text-white">12-18 <span className="text-xs">DAYS</span></div>
+                    </div>
+                    <div className="bg-black/20 p-4 rounded-xl border border-white/5">
+                        <div className="text-[10px] text-slate-500 uppercase font-black mb-1">Transit ETA</div>
+                        <div className="text-xl font-mono font-black text-white">4-6 <span className="text-xs">DAYS</span></div>
+                    </div>
+                </div>
+
+                <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden">
+                    <div className="h-full bg-secondary w-3/4 animate-pulse"></div>
+                </div>
+                <p className="text-[10px] text-slate-500 leading-relaxed italic">
+                    Manufacturing window based on current throughput of 850 units/day. Global shipping estimates are VAT inclusive for DFO/NOAA designated zones.
+                </p>
             </div>
 
             {/* Regulatory Info */}

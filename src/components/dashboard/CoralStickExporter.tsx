@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { Download, FileJson, Droplets, Zap, Shield, Info } from "lucide-react";
+import { motion, AnimatePresence } from "@/components/motion-client";
 
 interface CoralStickSpec {
     pelletSpecs: {
@@ -14,6 +15,8 @@ interface CoralStickSpec {
         uvFilterLevel: number;
         nutrientDensity: number;
         spawningTrigger: boolean;
+        selectedConsortium?: string | null;
+        cellDensity?: number;
     };
     packaging: {
         pelletsPerKg: number;
@@ -26,12 +29,16 @@ export function CoralStickExporter({
     ionicStrength,
     uvFilterLevel,
     nutrientDensity,
-    spawningTrigger
+    spawningTrigger,
+    selectedConsortium,
+    cellDensity
 }: {
     ionicStrength: number;
     uvFilterLevel: number;
     nutrientDensity: number;
     spawningTrigger: boolean;
+    selectedConsortium?: string | null;
+    cellDensity?: number;
 }) {
     const generateSpec = (): CoralStickSpec => {
         return {
@@ -44,7 +51,9 @@ export function CoralStickExporter({
                 ionicStrength,
                 uvFilterLevel,
                 nutrientDensity,
-                spawningTrigger
+                spawningTrigger,
+                selectedConsortium,
+                cellDensity
             },
             packaging: {
                 pelletsPerKg: 435,
@@ -68,7 +77,12 @@ export function CoralStickExporter({
     };
 
     return (
-        <div className="glass-panel p-8 rounded-[32px] border border-white/10 space-y-6">
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="glass-panel p-8 rounded-[32px] border border-white/10 space-y-6"
+        >
             <div className="flex items-center justify-between">
                 <div>
                     <h3 className="text-lg font-black text-white uppercase tracking-tight flex items-center gap-2">
@@ -83,14 +97,22 @@ export function CoralStickExporter({
             </div>
 
             {/* Pellet Preview */}
-            <div className="bg-[#02060c] rounded-2xl p-6 border border-white/5 flex items-center justify-center relative overflow-hidden group">
+            <motion.div
+                whileHover={{ scale: 1.02 }}
+                className="bg-[#02060c] rounded-2xl p-6 border border-white/5 flex items-center justify-center relative overflow-hidden group"
+            >
                 <div className="absolute inset-0 bg-gradient-to-br from-secondary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div className="relative z-10 text-center">
-                    <Droplets size={64} className="text-secondary/40 mx-auto mb-3" />
+                    <motion.div
+                        animate={{ y: [0, -5, 0] }}
+                        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                    >
+                        <Droplets size={64} className="text-secondary/40 mx-auto mb-3" />
+                    </motion.div>
                     <div className="text-sm font-mono text-white">Ionic Bonding Pellet</div>
                     <div className="text-xs text-slate-500 mt-1">Ø 8.5mm | 2.3g | 435 pellets/kg</div>
                 </div>
-            </div>
+            </motion.div>
 
             {/* Composition Display */}
             <div className="bg-secondary/5 border border-secondary/10 rounded-xl p-4 space-y-2">
@@ -117,6 +139,12 @@ export function CoralStickExporter({
                             {spawningTrigger ? 'ACTIVE' : 'INACTIVE'}
                         </span>
                     </div>
+                    {selectedConsortium && (
+                        <div className="flex justify-between border-t border-secondary/20 pt-1 mt-1">
+                            <span className="font-bold underline">Probiotic Consortium</span>
+                            <span className="font-mono text-primary">{selectedConsortium}</span>
+                        </div>
+                    )}
                 </div>
             </div>
 
@@ -136,13 +164,15 @@ export function CoralStickExporter({
             </div>
 
             {/* Export Button */}
-            <button
+            <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 onClick={handleExport}
                 className="w-full bg-secondary hover:bg-secondary/90 text-black font-black py-4 rounded-2xl transition-all flex items-center justify-center gap-3 shadow-xl shadow-secondary/20 hover:shadow-secondary/40"
             >
                 <Download size={20} />
                 Export CoralStick Spec
-            </button>
+            </motion.button>
 
             <div className="flex items-start gap-2 p-3 bg-blue-500/10 border border-blue-500/20 rounded-xl">
                 <Info size={14} className="text-blue-400 mt-0.5 shrink-0" />
@@ -150,6 +180,6 @@ export function CoralStickExporter({
                     Exports a JSON specification for CoralStick pellet production. Includes ionic composition, dissolution rate, and packaging requirements for industrial manufacturing.
                 </p>
             </div>
-        </div>
+        </motion.div>
     );
 }

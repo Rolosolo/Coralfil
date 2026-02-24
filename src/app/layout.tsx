@@ -1,5 +1,6 @@
 import { JsonLd } from "@/components/JsonLd";
 import { Analytics } from "@vercel/analytics/next";
+import { LayoutGroup } from "@/components/motion-client";
 
 import type { Metadata } from "next";
 import { Space_Grotesk, Poppins } from "next/font/google";
@@ -44,6 +45,10 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: './',
+  },
+  icons: {
+    icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
   },
 };
 
@@ -92,9 +97,11 @@ export default function RootLayout({
       <body
         className={`${spaceGrotesk.variable} ${poppins.variable} antialiased bg-background-light dark:bg-background-dark text-slate-900 dark:text-white`}
       >
-        <JsonLd data={jsonLd} />
-        {children}
-        <Analytics />
+        <LayoutGroup id="reefmaker-immersion">
+          <JsonLd data={jsonLd} />
+          {children}
+          <Analytics />
+        </LayoutGroup>
       </body>
     </html>
   );

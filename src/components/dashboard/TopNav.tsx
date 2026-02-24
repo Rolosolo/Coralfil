@@ -1,31 +1,46 @@
 "use client";
 
 import { Droplets, Edit2, Bell, Settings } from "lucide-react";
+import { motion } from "@/components/motion-client";
 
 export function TopNav() {
     return (
         <header className="h-16 bg-[#02060c] border-b border-white/10 flex items-center justify-between px-6 z-20 shrink-0 relative">
             {/* Left: Branding */}
             <div className="flex items-center gap-4 min-w-[240px]">
-                <div className="w-10 h-10 bg-gradient-to-tr from-primary to-primary-dark rounded-xl flex items-center justify-center text-black shadow-[0_0_30px_rgba(0,217,192,0.3)] border border-primary/20 group cursor-pointer overflow-hidden">
+                <motion.div
+                    whileHover={{ scale: 1.05, rotate: 5 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="w-10 h-10 bg-gradient-to-tr from-primary to-primary-dark rounded-xl flex items-center justify-center text-black shadow-[0_0_30px_rgba(0,217,192,0.3)] border border-primary/20 group cursor-pointer overflow-hidden relative"
+                >
                     <div className="absolute inset-0 bg-white/20 translate-y-12 group-hover:translate-y-0 transition-transform duration-500"></div>
                     <Droplets size={24} className="fill-current relative z-10" />
-                </div>
+                </motion.div>
                 <div className="flex flex-col justify-center gap-0.5">
                     <h1 className="text-white font-black text-[13px] leading-none tracking-[-0.02em]">REEFMAKER™ <span className="text-primary">CORE</span></h1>
                     <div className="flex items-center gap-1.5">
                         <span className="text-[9px] text-primary/60 font-black tracking-[0.3em] uppercase">NEURAL HUD</span>
                         <div className="w-1 h-1 rounded-full bg-primary/40 animate-pulse"></div>
-                        <span className="text-[8px] text-slate-500 font-mono">v4.2.0-SIM</span>
+                        <span className="text-[8px] text-slate-500 font-mono">v2.0.0-PRO</span>
                     </div>
                 </div>
             </div>
 
             {/* Center: Environment Mode Selector */}
             <div className="flex-1 flex justify-center">
-                <div className="flex items-center gap-1 bg-black/40 p-1 rounded-full border border-white/10 shadow-inner">
-                    <button className="px-5 py-1.5 rounded-full bg-primary text-black font-black text-[10px] uppercase tracking-widest shadow-lg shadow-primary/20 transition-all">Planning</button>
-                    <button className="px-5 py-1.5 rounded-full text-slate-500 hover:text-slate-300 font-black text-[10px] uppercase tracking-widest transition-all">Simulation</button>
+                <div className="flex items-center gap-1 bg-black/40 p-1 rounded-full border border-white/10 shadow-inner relative">
+                    <motion.button
+                        whileHover={{ backgroundColor: "rgba(0, 217, 192, 1)" }}
+                        className="px-5 py-1.5 rounded-full bg-primary text-black font-black text-[10px] uppercase tracking-widest shadow-lg shadow-primary/20 transition-all"
+                    >
+                        Planning
+                    </motion.button>
+                    <motion.button
+                        whileHover={{ color: "white" }}
+                        className="px-5 py-1.5 rounded-full text-slate-500 hover:text-slate-300 font-black text-[10px] uppercase tracking-widest transition-all"
+                    >
+                        Simulation
+                    </motion.button>
                 </div>
             </div>
 

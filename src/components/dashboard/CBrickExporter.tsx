@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { Download, FileJson, Printer, Box, Layers, Zap, Info } from "lucide-react";
+import { motion, AnimatePresence } from "@/components/motion-client";
 
 interface PrintSpec {
     geometry: {
@@ -62,7 +63,11 @@ export function CBrickExporter({ brickType, mixRatio }: { brickType: string; mix
     };
 
     return (
-        <div className="glass-panel p-8 rounded-[32px] border border-white/10 space-y-6">
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="glass-panel p-8 rounded-[32px] border border-white/10 space-y-6"
+        >
             <div className="flex items-center justify-between">
                 <div>
                     <h3 className="text-lg font-black text-white uppercase tracking-tight flex items-center gap-2">
@@ -77,14 +82,22 @@ export function CBrickExporter({ brickType, mixRatio }: { brickType: string; mix
             </div>
 
             {/* Brick Preview */}
-            <div className="bg-[#02060c] rounded-2xl p-6 border border-white/5 flex items-center justify-center relative overflow-hidden group">
+            <motion.div
+                whileHover={{ scale: 1.02 }}
+                className="bg-[#02060c] rounded-2xl p-6 border border-white/5 flex items-center justify-center relative overflow-hidden group"
+            >
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div className="relative z-10 text-center">
-                    <Box size={64} className="text-primary/40 mx-auto mb-3" />
+                    <motion.div
+                        animate={{ y: [0, -5, 0] }}
+                        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                    >
+                        <Box size={64} className="text-primary/40 mx-auto mb-3" />
+                    </motion.div>
                     <div className="text-sm font-mono text-white">{brickType === "hex" ? "Hexagonal Lattice" : "Standard Lattice"}</div>
                     <div className="text-xs text-slate-500 mt-1">150 × 80 × 150 mm</div>
                 </div>
-            </div>
+            </motion.div>
 
             {/* Print Parameters */}
             <div className="space-y-4">
@@ -168,13 +181,15 @@ export function CBrickExporter({ brickType, mixRatio }: { brickType: string; mix
             </div>
 
             {/* Export Button */}
-            <button
+            <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 onClick={handleExport}
                 className="w-full bg-primary hover:bg-primary/90 text-black font-black py-4 rounded-2xl transition-all flex items-center justify-center gap-3 shadow-xl shadow-primary/20 hover:shadow-primary/40"
             >
                 <Download size={20} />
                 Export Manufacturing Spec
-            </button>
+            </motion.button>
 
             <div className="flex items-start gap-2 p-3 bg-blue-500/10 border border-blue-500/20 rounded-xl">
                 <Info size={14} className="text-blue-400 mt-0.5 shrink-0" />
@@ -182,6 +197,6 @@ export function CBrickExporter({ brickType, mixRatio }: { brickType: string; mix
                     Exports a JSON specification compatible with industrial FDM/FFF printers. Includes geometry, material composition, and optimized print parameters for high-volume production.
                 </p>
             </div>
-        </div>
+        </motion.div>
     );
 }

@@ -9,7 +9,7 @@ const LOG_MESSAGES = [
     "Synthesizing wave energy drag coefficients...",
     "Warning: Salinity spike detected in Sector B.",
     "Optimizing pore geometry for CaCO3 synthesis.",
-    "AI Recommendation: Incrase structural density by 14%.",
+    "AI Recommendation: Increase structural density by 14%.",
     "Context7::Retrieving local species behavior patterns...",
     "Simulation: 98.4% success rate for Acropora recruitment."
 ];

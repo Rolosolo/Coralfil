@@ -104,8 +104,8 @@ ${factSheet.materialSafety.handlingInstructions.map(i => `- ${i}`).join('\n')}
 
 ## Environmental Certifications
 
-- **EPA Approved**: ${factSheet.environmentalCertifications.epaApproved ? '✅ Yes' : '❌ No'}
-- **NOAA Compliant**: ${factSheet.environmentalCertifications.noaaCompliant ? '✅ Yes' : '❌ No'}
+- **EPA Approved**: ${factSheet.environmentalCertifications.epaApproved ? 'Yes' : 'No'}
+- **NOAA Compliant**: ${factSheet.environmentalCertifications.noaaCompliant ? 'Yes' : 'No'}
 
 ### Required Permits
 ${factSheet.environmentalCertifications.localPermits.map(p => `- ${p}`).join('\n')}

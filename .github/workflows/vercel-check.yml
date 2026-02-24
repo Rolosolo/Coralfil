@@ -14,5 +14,20 @@ jobs:
 
       - name: notify vercel
         uses: vercel/repository-dispatch/actions/status@v1
-        with:
-          name: Vercel - coralfil: checker
+
+
+      - name: Stage changes
+        run: git add .
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -m "Update"
+
+      - name: Push changes
+        run: git push origin main
+
+
+      - name: add remote
+        run: git remote add origin https://github.com/Rolosolo/Coralfil   

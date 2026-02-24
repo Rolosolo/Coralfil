@@ -90,9 +90,22 @@ export async function seedDatabase() {
                 settlement_multiplier: 1.9,
                 growth_acceleration: 1.4,
                 biomimicry_score: 88
+            },
+            {
+                target_species_id: "sp_brain",
+                environment_type: "shallow_tropical",
+                amino_acid_profile: { aspartic_acid: 15, glutamic_acid: 60, taurine: 25 },
+                mineral_profile: { calcium: 80, magnesium: 12, strontium: 6, potassium: 2 },
+                oyster_shell_ratio: 50,
+                alginate_ratio: 30,
+                chitosan_ratio: 20,
+                settlement_multiplier: 2.1,
+                growth_acceleration: 1.2,
+                biomimicry_score: 91
             }
         ]);
     if (formulaError) console.error("Formula seeding error:", formulaError);
 
     console.log("Seeding complete.");
 }
+

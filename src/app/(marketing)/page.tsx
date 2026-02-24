@@ -1,11 +1,19 @@
+import { motion } from "@/components/motion-client";
+import { GlassSpongeFeature } from "@/components/marketing/GlassSpongeFeature";
+import { JsonLd } from "@/components/JsonLd";
+import type { Metadata } from "next";
 import Link from "next/link";
 import {
-  PlayCircle, ArrowRight, Brain, Network,
-  FlaskConical, CheckCircle2, Leaf, Handshake, ChevronDown, Rocket, Grid, Lock, CheckCircle
+  Rocket,
+  ChevronDown,
+  ArrowRight,
+  FlaskConical,
+  Grid,
+  Brain,
+  Handshake,
+  CheckCircle,
+  Network
 } from "lucide-react";
-import { Metadata } from "next";
-import { JsonLd } from "@/components/JsonLd";
-import { GlassSpongeFeature } from "@/components/marketing/GlassSpongeFeature";
 
 export const metadata: Metadata = {
   title: "CoralFil - 24/7 Automated Marine Restoration Solutions",
@@ -24,44 +32,91 @@ export default function Home() {
       <section className="relative h-screen w-full overflow-hidden flex items-center justify-center bg-[#010307]">
         {/* Background Image / Placeholder for Video */}
         <div className="absolute inset-0 z-0">
-          <img
-            alt="Deep Ocean Mystical Environment"
-            className="w-full h-full object-cover opacity-60 mix-blend-luminosity scale-110 animate-float"
+          <motion.img
+            initial={{ scale: 1.2, opacity: 0 }}
+            animate={{ scale: 1.1, opacity: 0.6 }}
+            transition={{ duration: 2, ease: "easeOut" }}
+            alt="Cinematic deep sea coral reef environment visualization"
+            className="w-full h-full object-cover mix-blend-luminosity animate-float"
             style={{ animationDuration: '20s' }}
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuCovIh_7Q6DF2l3xdQQ7w51SV46VEOqVydGiNH2GzC4gXgVCySb2acCYrjvKzk0U5GoL4FknBlIbP-bJ1BmMxXIjfW_UgFqgMQEMgHepX0kIzft4X8gNBqlLq-te7h5XlIpKY_6dQnAuWE4J_vuyqD5qDZCpBro6ti2D4QI-h-duNILkpyubD3swqeaUJsQ4cxtOG0Ou89gkuzl6NBs2dR76piTudHvED9D2TQT7FXOo2rFXifuXvW1AXQIpeIjTivZUOWNj2nIqdU"
           />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(2,6,12,0.8)_100%)]"></div>
           {/* Bioluminescent Streaks */}
-          <div className="absolute top-1/4 -left-1/4 w-[150%] h-1 rotate-12 bg-gradient-to-r from-transparent via-[#00D9C0] to-transparent blur-[40px] opacity-20"></div>
-          <div className="absolute top-2/3 -right-1/4 w-[150%] h-1 -rotate-6 bg-gradient-to-r from-transparent via-[#00D9C0] to-transparent blur-[40px] opacity-15"></div>
+          <motion.div
+            initial={{ opacity: 0, x: -100 }}
+            animate={{ opacity: 0.2, x: 0 }}
+            transition={{ delay: 1, duration: 2 }}
+            className="absolute top-1/4 -left-1/4 w-[150%] h-1 rotate-12 bg-gradient-to-r from-transparent via-[#00D9C0] to-transparent blur-[40px]"
+          ></motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 100 }}
+            animate={{ opacity: 0.15, x: 0 }}
+            transition={{ delay: 1.5, duration: 2 }}
+            className="absolute top-2/3 -right-1/4 w-[150%] h-1 -rotate-6 bg-gradient-to-r from-transparent via-[#00D9C0] to-transparent blur-[40px]"
+          ></motion.div>
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#02060c]/20 to-[#02060c]"></div>
         </div>
 
-        <div className="relative z-10 text-center max-w-5xl px-6 mt-12">
-          <div className="inline-block mb-6 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-[10px] uppercase tracking-[0.3em] font-semibold text-[#00D9C0] animate-fade-in">
-            The Future of Marine Restoration
-          </div>
-          <h1 className="text-6xl md:text-8xl font-bold tracking-tighter leading-[1.05] mb-8 text-white">
+        <div className="relative z-10 text-center max-w-5xl 2xl:max-w-7xl px-6 mt-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="flex items-center justify-center gap-3 mb-6"
+          >
+            <div className="px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-[10px] uppercase tracking-[0.3em] font-semibold text-[#00D9C0]">
+              The Future of Marine Restoration
+            </div>
+            <div className="px-3 py-1.5 rounded-full bg-[#00D9C0] text-black text-[10px] uppercase tracking-widest font-black shadow-[0_0_20px_rgba(0,217,192,0.4)]">
+              v2.0 PRO
+            </div>
+          </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.2 }}
+            className="text-6xl md:text-8xl font-bold tracking-tighter leading-[1.05] mb-8 text-white"
+          >
             Restoring Reefs at the<br />
             <span className="text-glow-gradient">Speed of Nature.</span>
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-300 font-light mb-12 max-w-2xl mx-auto leading-relaxed opacity-90">
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.9, y: 0 }}
+            transition={{ duration: 1, delay: 0.4 }}
+            className="text-xl md:text-2xl text-gray-300 font-light mb-12 max-w-2xl mx-auto leading-relaxed"
+          >
             A mystical synthesis of marine biology and machine intelligence. Rebuilding ocean ecosystems with suspended precision.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+          </motion.p>
+
+          <motion.div
+            layoutId="hero-viewport"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.6, type: "spring", stiffness: 100 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-6"
+          >
             <Link href="/dashboard" className="btn-premium bg-[#0077BE]/90 hover:bg-[#0077BE] text-white px-10 py-5 rounded-full text-lg font-semibold flex items-center gap-3 group">
               Explore ReefMaker™ AI
               <Rocket className="w-5 h-5 group-hover:-translate-y-1 transition-transform" />
             </Link>
             <GlassSpongeFeature />
-          </div>
+          </motion.div>
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-12 left-0 right-0 flex flex-col items-center gap-2 opacity-40 animate-bounce">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.4 }}
+          transition={{ delay: 2, duration: 1 }}
+          className="absolute bottom-12 left-0 right-0 flex flex-col items-center gap-2 animate-bounce"
+        >
           <span className="text-[10px] uppercase tracking-[0.4em] font-medium text-white">Descent</span>
           <ChevronDown className="w-8 h-8 text-white" />
-        </div>
+        </motion.div>
       </section>
 
       {/* ------------------------------- */}
@@ -70,7 +125,12 @@ export default function Home() {
       <section className="py-32 bg-[#02060c] relative" id="impact">
         <div className="container mx-auto px-6 max-w-7xl">
           <div className="grid md:grid-cols-2 gap-20 items-center mb-24">
-            <div>
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1 }}
+            >
               <h2 className="text-4xl md:text-6xl font-semibold mb-8 leading-tight tracking-tight text-white">
                 We're Losing Our Oceans.<br />
                 <span className="text-gray-600">But We're Building Them Back.</span>
@@ -78,24 +138,47 @@ export default function Home() {
               <p className="text-xl text-gray-400 font-light leading-relaxed">
                 Traditional restoration is too slow. Too expensive. Too small. We engineered a better way—guided by nature, powered by AI.
               </p>
-            </div>
-            <div className="grid grid-cols-2 gap-8">
-              <div className="glass-card p-8 rounded-3xl">
+            </motion.div>
+            <motion.div
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={{
+                hidden: { opacity: 0 },
+                show: {
+                  opacity: 1,
+                  transition: {
+                    staggerChildren: 0.2
+                  }
+                }
+              }}
+              className="grid grid-cols-2 gap-8"
+            >
+              <motion.div
+                variants={{ hidden: { opacity: 0, y: 30 }, show: { opacity: 1, y: 0 } }}
+                className="glass-card p-8 rounded-3xl"
+              >
                 <div className="text-4xl font-bold text-[#FF6B6B] font-mono mb-2">95%</div>
                 <div className="text-xs text-gray-500 uppercase tracking-[0.2em] font-bold">Larvae Loss</div>
                 <p className="text-gray-400 text-sm mt-3 leading-relaxed">Of coral larvae never find a suitable home in the wild.</p>
-              </div>
-              <div className="glass-card p-8 rounded-3xl">
+              </motion.div>
+              <motion.div
+                variants={{ hidden: { opacity: 0, y: 30 }, show: { opacity: 1, y: 0 } }}
+                className="glass-card p-8 rounded-3xl"
+              >
                 <div className="text-4xl font-bold text-[#FF6B6B] font-mono mb-2">90%</div>
                 <div className="text-xs text-gray-500 uppercase tracking-[0.2em] font-bold">Risk Level</div>
                 <p className="text-gray-400 text-sm mt-3 leading-relaxed">Of reefs projected at critical risk by 2050.</p>
-              </div>
-              <div className="glass-card p-8 rounded-3xl col-span-2">
+              </motion.div>
+              <motion.div
+                variants={{ hidden: { opacity: 0, y: 30 }, show: { opacity: 1, y: 0 } }}
+                className="glass-card p-8 rounded-3xl col-span-2"
+              >
                 <div className="text-4xl font-bold text-[#00D9C0] font-mono mb-2">$2.7T</div>
                 <div className="text-xs text-gray-500 uppercase tracking-[0.2em] font-bold">Ecosystem Value</div>
                 <p className="text-gray-400 text-sm mt-3 leading-relaxed">In global ecosystem services at stake annually across the blue economy.</p>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -114,7 +197,7 @@ export default function Home() {
             {/* Card 1: Pellets */}
             <div className="group relative overflow-hidden rounded-[2.5rem] bg-[#0c1629] border border-white/5 hover:border-[#00D9C0]/30 transition-all duration-500 min-h-[600px] flex flex-col justify-between p-10">
               <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#02060c] z-10"></div>
-              <img alt="Pellets" className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-1000 ease-out"
+              <img alt="CoralStick™ precision nutrition ionic pellets" className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-1000 ease-out"
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXDak9hm-FGIaoyQE8dVvICB8GuqH2uymw9pLeLqvvOkG1uJyeMvKvRlbIsivt2bUHNwjywi1NXtSQ4qWP2Pm-VkBBamZh1Ivs8fv82c9u35OVd5t972fjNMX-_1yEqQVZTw_dTs36kWanvM5SXwzwud4Fik4Pvt_QHJcG2ydiQ4eLGuAw6nyPh1Bev5Q2Ud-8BcBuYFDiDuv4_C0pLmi7bK729wLqkDBcNnBAJviMaBYaCNjER7yYGwVu6z2WyRZptjdUwXEiVQ8" />
               <div className="relative z-20">
                 <div className="w-14 h-14 rounded-2xl bg-white/5 backdrop-blur flex items-center justify-center mb-8 border border-white/10">
@@ -135,7 +218,7 @@ export default function Home() {
             {/* Card 2: C-Brick */}
             <div className="group relative overflow-hidden rounded-[2.5rem] bg-[#0c1629] border border-white/5 hover:border-[#00D9C0]/30 transition-all duration-500 min-h-[600px] flex flex-col justify-between p-10">
               <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#02060c] z-10"></div>
-              <img alt="C-Brick" className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-1000 ease-out"
+              <img alt="C-Brick™ 3D-printed biomimetic coral substrate" className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-1000 ease-out"
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-7VNh1Dz7HPG50qXW05jsncOXKSFu5ekx1--FTHYoJ_zRiKuWzxVeYLFyeeCHlg6oWlzygogeIle-utrOBgud8WlKBgHTPdokffbIKfG1E561H7BwSQeO9_X651agp6TpQtQ8FAuIWa9R9DOTbBDxVeT3DknhKP9UXU0SgECWUlAO63D-8NLoheeqkzx0YhQAdyN75duv2cC3e_Q6YVPiss7aTpK92k4_BXUn4Zk1jIKTeTFV5eMQQL05yLRdktHCntJF0zHctz0" />
               <div className="relative z-20">
                 <div className="w-14 h-14 rounded-2xl bg-white/5 backdrop-blur flex items-center justify-center mb-8 border border-white/10">
@@ -156,7 +239,7 @@ export default function Home() {
             {/* Card 3: AI (Highlighted) */}
             <div className="group relative overflow-hidden rounded-[2.5rem] bg-[#0c1629] ring-1 ring-[#00D9C0]/30 shadow-[0_0_80px_rgba(0,217,192,0.1)] transition-all duration-500 min-h-[600px] flex flex-col justify-between p-10 lg:-mt-10 lg:h-[680px]">
               <div className="absolute inset-0 bg-gradient-to-b from-[#00D9C0]/10 to-[#02060c] z-10"></div>
-              <img alt="AI Network" className="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:scale-110 transition-transform duration-1000 ease-out"
+              <img alt="ReefMaker™ AI neural network visualization" className="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:scale-110 transition-transform duration-1000 ease-out"
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_g7AQNgeKotOibvi5Tdw4TJ8mNU5Gg_L0E4xy9YH-YhN9ypvSF7CmnGyWV_4hzF764bFoXQLQamv_ZQjpFqzPBT7Opkr3w1Qj9AInvOFYJqnJM0d_y0iujqoLmAOpW9SKH83aTR9fLVXV_dJS-l7mrKQTiKDjRhYTxEjC6LUmBzq1wasZKvzqX9qHN8hjXqIsfiGwnr37QYymoevsBUzIIg7iyKilMqhLVKn4i89KmZUqgvlB_ch7MYNCUigHJPYkBqBGPzDa-Vo" />
               <div className="relative z-20">
                 <div className="w-16 h-16 rounded-2xl bg-[#00D9C0] flex items-center justify-center mb-10 shadow-2xl shadow-[#00D9C0]/50">

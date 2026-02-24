@@ -2,6 +2,7 @@
 
 import { Check, PauseCircle } from "lucide-react";
 import Link from "next/link";
+import { motion } from "@/components/motion-client";
 
 export function Sidebar() {
     const steps = [
@@ -29,7 +30,13 @@ export function Sidebar() {
 
                 <nav className="flex flex-col gap-1.5">
                     {steps.map((step, index) => (
-                        <div key={step.number} className="relative">
+                        <motion.div
+                            key={step.number}
+                            initial={{ x: -20, opacity: 0 }}
+                            animate={{ x: 0, opacity: 1 }}
+                            transition={{ delay: index * 0.1 }}
+                            className="relative"
+                        >
                             <Link
                                 href={step.href}
                                 className={`flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all duration-300 group border h-14 ${step.status === 'active'
@@ -39,18 +46,21 @@ export function Sidebar() {
                                         : 'border-transparent hover:bg-white/5 opacity-40 hover:opacity-100'
                                     }`}
                             >
-                                <div className={`flex-shrink-0 w-8 h-8 rounded-xl flex items-center justify-center transition-all duration-500 scale-100 group-hover:scale-110 ${step.status === 'active'
-                                    ? 'bg-primary text-black shadow-[0_0_25px_rgba(0,217,192,0.6)]' :
-                                    step.status === 'completed'
-                                        ? 'border border-primary/50 text-primary bg-primary/10' :
-                                        'border border-white/10 bg-black/40 text-slate-500'
-                                    }`}>
+                                <motion.div
+                                    whileHover={{ scale: 1.1 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    className={`flex-shrink-0 w-8 h-8 rounded-xl flex items-center justify-center transition-all duration-500 scale-100 group-hover:scale-110 ${step.status === 'active'
+                                        ? 'bg-primary text-black shadow-[0_0_25px_rgba(0,217,192,0.6)]' :
+                                        step.status === 'completed'
+                                            ? 'border border-primary/50 text-primary bg-primary/10' :
+                                            'border border-white/10 bg-black/40 text-slate-500'
+                                        }`}>
                                     {step.status === 'completed' ? (
                                         <Check size={16} strokeWidth={3} />
                                     ) : (
                                         <span className="text-xs font-black font-mono tracking-tighter">{step.number}</span>
                                     )}
-                                </div>
+                                </motion.div>
                                 <div className="flex flex-col">
                                     <span className={`text-xs font-bold uppercase tracking-widest leading-none ${step.status === 'active' ? 'text-white' :
                                         step.status === 'completed' ? 'text-slate-300' : 'text-slate-500'
@@ -58,7 +68,13 @@ export function Sidebar() {
                                         {step.label}
                                     </span>
                                     {step.status === 'active' && (
-                                        <span className="text-[9px] text-primary/80 font-bold mt-1 animate-pulse">SYSTEM ONLINE</span>
+                                        <motion.span
+                                            animate={{ opacity: [0.5, 1, 0.5] }}
+                                            transition={{ duration: 2, repeat: Infinity }}
+                                            className="text-[9px] text-primary/80 font-bold mt-1"
+                                        >
+                                            SYSTEM ONLINE
+                                        </motion.span>
                                     )}
                                 </div>
                             </Link>
@@ -66,7 +82,7 @@ export function Sidebar() {
                             {index < steps.length - 1 && (
                                 <div className="ml-[1.5rem] h-4 w-[1px] bg-gradient-to-b from-white/10 to-transparent my-0.5"></div>
                             )}
-                        </div>
+                        </motion.div>
                     ))}
                 </nav>
 

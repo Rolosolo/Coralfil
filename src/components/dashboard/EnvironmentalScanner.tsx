@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Thermometer, Waves, Gauge, Droplets, Activity, ShieldAlert } from "lucide-react";
+import { Thermometer, Waves, Gauge, Droplets, Activity, ShieldAlert, Globe, Map } from "lucide-react";
 import { NOAAData } from "@/lib/noaa-service";
+import { AllenAtlasData } from "@/lib/allen-atlas-service";
 
-export default function EnvironmentalScanner({ noaaData }: { noaaData?: NOAAData | null }) {
+export default function EnvironmentalScanner({ noaaData, atlasData }: { noaaData?: NOAAData | null, atlasData?: AllenAtlasData | null }) {
     const [scanning, setScanning] = useState(true);
     const [progress, setProgress] = useState(0);
 
@@ -23,7 +24,7 @@ export default function EnvironmentalScanner({ noaaData }: { noaaData?: NOAAData
             });
         }, 30);
         return () => clearInterval(timer);
-    }, [noaaData]);
+    }, [noaaData, atlasData]);
 
     return (
         <div className="glass-panel p-6 rounded-2xl border border-white/10 h-full flex flex-col relative overflow-hidden">
@@ -36,7 +37,7 @@ export default function EnvironmentalScanner({ noaaData }: { noaaData?: NOAAData
                     <span className="text-xs text-primary font-mono">SYNCING {progress}%</span>
                 ) : (
                     <div className="flex items-center gap-2">
-                        <span className="text-[8px] px-2 py-0.5 rounded-full bg-primary/20 text-primary border border-primary/20 font-mono tracking-tighter">NOAA CRW SOURCE</span>
+                        <span className="text-[8px] px-2 py-0.5 rounded-full bg-primary/20 text-primary border border-primary/20 font-mono tracking-tighter uppercase whitespace-nowrap">Integrated Remote Sensing</span>
                         <span className="text-xs text-[#00ffca] font-mono">ONLINE</span>
                     </div>
                 )}
@@ -72,22 +73,22 @@ export default function EnvironmentalScanner({ noaaData }: { noaaData?: NOAAData
                         <div className="text-[9px] text-red-400 font-bold mt-1 uppercase tracking-tighter">{noaaData?.bleaching_risk || "Alert Level 1"}</div>
                     </div>
 
-                    {/* Metric 3: Salinity (Client Provided) */}
-                    <div className="bg-[#02060c] p-3 rounded-xl border border-white/5 opacity-60">
-                        <div className="text-slate-500 text-[10px] uppercase mb-1 flex items-center gap-2">
-                            <Droplets size={12} /> Salinity
+                    {/* Metric 3: Geomorphic Zone (ACA) */}
+                    <div className="bg-[#02060c] p-3 rounded-xl border border-primary/10 relative group overflow-hidden">
+                        <div className="text-primary/60 text-[10px] uppercase mb-1 flex items-center gap-2 font-black">
+                            <Map size={12} /> Geomorphic (ACA)
                         </div>
-                        <div className="text-xl font-mono text-white/50">35.2<span className="text-[10px] text-slate-500 ml-1">ppt</span></div>
-                        <div className="text-[8px] text-slate-500 font-mono mt-1 italic">CLIENT SPECIFIED</div>
+                        <div className="text-sm font-bold text-white uppercase tracking-tight truncate">{atlasData?.geomorphicZone || "Inner Reef Flat"}</div>
+                        <div className="absolute top-1 right-2 text-[8px] font-mono text-primary/40">{((atlasData?.confidence ?? 0.89) * 100).toFixed(0)}% CONF</div>
                     </div>
 
-                    {/* Metric 4: Flow (Client Provided) */}
-                    <div className="bg-[#02060c] p-3 rounded-xl border border-white/5 opacity-60">
-                        <div className="text-slate-500 text-[10px] uppercase mb-1 flex items-center gap-2">
-                            <Waves size={12} /> Flow Rate
+                    {/* Metric 4: Benthic Habitat (ACA) */}
+                    <div className="bg-[#02060c] p-3 rounded-xl border border-primary/10 relative group overflow-hidden">
+                        <div className="text-primary/60 text-[10px] uppercase mb-1 flex items-center gap-2 font-black">
+                            <Globe size={12} /> Benthic (ACA)
                         </div>
-                        <div className="text-xl font-mono text-white/50">2.4<span className="text-[10px] text-slate-500 ml-1">m/s</span></div>
-                        <div className="text-[8px] text-slate-500 font-mono mt-1 italic">CLIENT SPECIFIED</div>
+                        <div className="text-sm font-bold text-white uppercase tracking-tight">{atlasData?.benthicHabitat || "Coral/Algae"}</div>
+                        <div className="text-[9px] text-slate-500 font-mono mt-1 italic">DEPTH: {atlasData?.bathymetry || -4.2}m</div>
                     </div>
                 </div>
             )}

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /dashboard/project/*/design/ # Keep internal design iterations private
+Sitemap: https://coralfill.com/sitemap.xml

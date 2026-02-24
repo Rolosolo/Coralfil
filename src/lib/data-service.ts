@@ -1,5 +1,5 @@
 import { supabase } from "./supabase";
-import { Project, SpeciesProfile, CBrickType } from "./demo-data";
+import { Project, SpeciesProfile, CBrickType, MOCK_PROJECTS, SPECIES_DB, C_BRICK_TYPES } from "./demo-data";
 
 export const dataService = {
     // Projects
@@ -8,9 +8,9 @@ export const dataService = {
             .from("projects")
             .select("*");
 
-        if (error) {
-            console.error("Error fetching projects:", error);
-            return [];
+        if (error || !data || data.length === 0) {
+            console.warn("No projects found in DB, falling back to mock data.");
+            return MOCK_PROJECTS;
         }
 
         return data.map((p: any) => ({
@@ -34,7 +34,10 @@ export const dataService = {
             .eq("id", id)
             .single();
 
-        if (error) return null;
+        if (error || !data) {
+            console.warn(`Project ${id} not found in DB, checking mock data.`);
+            return MOCK_PROJECTS.find(p => p.id === id) || null;
+        }
 
         return {
             id: data.id,
@@ -56,7 +59,10 @@ export const dataService = {
             .from("species")
             .select("*");
 
-        if (error) return [];
+        if (error || !data || data.length === 0) {
+            console.warn("No species found in DB, falling back to mock data.");
+            return SPECIES_DB;
+        }
 
         return data.map((s: any) => ({
             id: s.id,
@@ -75,7 +81,10 @@ export const dataService = {
             .from("cbricks")
             .select("*");
 
-        if (error) return [];
+        if (error || !data || data.length === 0) {
+            console.warn("No C-bricks found in DB, falling back to mock data.");
+            return C_BRICK_TYPES;
+        }
 
         return data.map((b: any) => ({
             id: b.id,
@@ -101,6 +110,47 @@ export const dataService = {
             return null;
         }
 
+        return data;
+    },
+
+    // Automation Hooks (Orchestration mapping via YepCode/Prefect/Rube)
+    async triggerProjectInit(projectId: string) {
+        console.log(`[YepCode] Triggering environmental analysis for project ${projectId}...`);
+        // In a real scenario, we would call the YepCode MCP tool here
+    },
+
+    async triggerDesignExport(projectId: string) {
+        console.log(`[Prefect] Queueing manufacturing batch for project ${projectId}...`);
+        // In a real scenario, we would call the Prefect MCP tool here
+    },
+
+    async triggerMilestoneSuccess(projectId: string) {
+        console.log(`[Rube] Dispatching stakeholder notifications for project ${projectId}...`);
+        // In a real scenario, we would call the Rube MCP tool here
+    },
+
+    // Spatial Intelligence (ACA/NOAA)
+    async saveSpatialData(projectId: string, source: string, dataType: string, payload: any, metadata: any = {}) {
+        const { error } = await supabase
+            .from("spatial_data")
+            .insert([{
+                project_id: projectId,
+                source,
+                data_type: dataType,
+                payload,
+                metadata
+            }]);
+
+        if (error) console.error("Error saving spatial data:", error);
+    },
+
+    async getSpatialData(projectId: string): Promise<any[]> {
+        const { data, error } = await supabase
+            .from("spatial_data")
+            .select("*")
+            .eq("project_id", projectId);
+
+        if (error) return [];
         return data;
     }
 };

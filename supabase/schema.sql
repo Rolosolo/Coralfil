@@ -89,3 +89,14 @@ BEGIN
     ALTER TABLE design_configs ADD COLUMN coralfill_formula_id UUID REFERENCES coralfill_formulas(id);
   END IF;
 END $$;
+
+-- Spatial Data Table (ACA/NOAA Persistence Layer)
+CREATE TABLE IF NOT EXISTS spatial_data (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  project_id UUID REFERENCES projects(id) ON DELETE CASCADE,
+  source TEXT NOT NULL, -- e.g., 'Allen Coral Atlas', 'NOAA'
+  data_type TEXT NOT NULL, -- e.g., 'benthic', 'geomorphic', 'turbidity', 'sst'
+  payload JSONB NOT NULL, -- The actual data object
+  metadata JSONB, -- Resolution, confidence, etc.
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
