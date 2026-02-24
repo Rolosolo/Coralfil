@@ -68,7 +68,7 @@ export default function HomeClient() {
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#010307]/50 to-[#010307]"></div>
                 </div>
 
-                <div className="relative z-10 text-center max-w-5xl px-6">
+                <div className="relative z-10 text-center max-w-5xl px-6 mt-32">
                     {/* Removed 'The Intelligence of Marine Restoration' badge per user request */}
 
                     <motion.h1
@@ -265,6 +265,68 @@ export default function HomeClient() {
                             <ArrowRight size={16} />
                         </Link>
                     </div>
+                </div>
+            </section>
+
+            {/* 4. SEA FLOOR VISUALIZATION        */}
+            {/* ------------------------------- */}
+            <section className="relative h-screen w-full overflow-hidden bg-[#010307]">
+                <div className="absolute inset-0">
+                    <motion.img
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{ opacity: 0.6, y: 0 }}
+                        viewport={{ once: false, margin: "-20%" }}
+                        transition={{ duration: 2, ease: "easeOut" }}
+                        alt="Sea floor coral colony visualization"
+                        className="w-full h-full object-cover mix-blend-screen brightness-50"
+                        src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&q=80&w=2000"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#010307] via-transparent to-[#010307]"></div>
+
+                    {/* Bioluminescent Drifting Plankton */}
+                    <div className="absolute inset-0 z-10 pointer-events-none">
+                        {[...Array(30)].map((_, i) => (
+                            <motion.div
+                                key={i}
+                                className="absolute w-1.5 h-1.5 rounded-full bg-[#00D9C0]"
+                                initial={{
+                                    x: (Math.random() * 100) + "%",
+                                    y: (Math.random() * 100) + "%",
+                                    opacity: 0
+                                }}
+                                animate={{
+                                    x: ["0%", (Math.random() * 10 - 5) + "%", "0%"],
+                                    y: ["0%", "-100px", "-200px"],
+                                    opacity: [0, 0.4, 0],
+                                    scale: [1, 2, 1]
+                                }}
+                                transition={{
+                                    duration: 15 + Math.random() * 15,
+                                    repeat: Infinity,
+                                    delay: Math.random() * 10
+                                }}
+                                style={{
+                                    boxShadow: '0 0 10px #00D9C0, 0 0 20px #00D9C0'
+                                }}
+                            />
+                        ))}
+                    </div>
+                </div>
+
+                <div className="relative z-20 h-full flex items-center justify-center container mx-auto px-6">
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="text-center max-w-4xl"
+                    >
+                        <h2 className="text-4xl md:text-8xl font-bold tracking-tighter text-white mb-8">
+                            A Living <span className="text-[#00D9C0] drop-shadow-[0_0_30px_rgba(0,217,192,0.8)]">Legacy.</span>
+                        </h2>
+                        <p className="text-xl text-gray-400 font-light leading-relaxed max-w-2xl mx-auto">
+                            The ocean floors are the silent architects of our survival. We are giving them back their voice.
+                        </p>
+                    </motion.div>
                 </div>
             </section>
         </div>

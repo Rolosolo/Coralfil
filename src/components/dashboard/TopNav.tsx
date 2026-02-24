@@ -13,23 +13,22 @@ export function TopNav({ onHelpClick }: TopNavProps) {
         <header className="h-16 bg-[#010307] border-b border-white/5 flex items-center justify-between px-6 z-20 shrink-0 relative">
             {/* Left: Branding */}
             <div className="flex items-center gap-4 min-w-[240px]">
-                <Link href="/">
-                    <motion.div
-                        whileHover={{ scale: 1.05 }}
-                        className="w-10 h-10 bg-white/[0.03] border border-white/10 rounded-lg flex items-center justify-center text-[#00D9C0] shadow-2xl group cursor-pointer"
-                    >
-                        <Droplets size={22} className="relative z-10" />
-                    </motion.div>
-                </Link>
-                <div className="flex flex-col justify-center gap-0.5">
-                    <h1 className="text-white font-black text-[13px] leading-none tracking-tight">
-                        REEFMAKER™ <span className="text-slate-600 font-light px-1">by</span> CoralFi<span className="logo-dotted-l">l</span>
-                    </h1>
-                    <div className="flex items-center gap-1.5">
-                        <span className="text-[8px] text-[#00D9C0] font-black tracking-[0.4em] uppercase">Intelligence Interface</span>
-                        <div className="w-1 h-1 rounded-full bg-[#00D9C0]/40 animate-pulse"></div>
+                <Link href="/" className="flex items-center gap-3 group cursor-pointer">
+                    <img
+                        src="/favicon.svg"
+                        alt="CoralFil Logo"
+                        className="w-10 h-10 group-hover:rotate-12 transition-transform duration-500"
+                    />
+                    <div className="flex flex-col justify-center gap-0.5">
+                        <h1 className="text-white font-black text-[13px] leading-none tracking-tight">
+                            REEFMAKER™ <span className="text-slate-600 font-light px-1">by</span> CoralFi<span className="logo-dotted-l">l</span>
+                        </h1>
+                        <div className="flex items-center gap-1.5">
+                            <span className="text-[8px] text-[#00D9C0] font-black tracking-[0.4em] uppercase">Intelligence Interface</span>
+                            <div className="w-1 h-1 rounded-full bg-[#00D9C0]/40 animate-pulse"></div>
+                        </div>
                     </div>
-                </div>
+                </Link>
             </div>
 
             {/* Center: Environment Mode Selector (Premium Style) */}

@@ -12,13 +12,13 @@ export function Header() {
             <div className="glass-panel border-b border-white/5">
                 <div className="max-w-7xl 2xl:max-w-screen-2xl mx-auto px-6 h-16 flex items-center justify-between">
                     {/* Logo */}
-                    <Link href="/" className="flex items-center gap-2 group cursor-pointer">
-                        <div className="relative flex items-center justify-center size-7 rounded-sm bg-gradient-to-tr from-primary/20 to-transparent">
-                            <svg width="14" height="14" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-primary">
-                                <polygon points="9,1 16.5,5 16.5,13 9,17 1.5,13 1.5,5" stroke="currentColor" strokeWidth="2" fill="none" strokeLinejoin="round" />
-                            </svg>
-                        </div>
-                        <span className="text-white text-lg font-bold tracking-tight">
+                    <Link href="/" className="flex items-center gap-3 group cursor-pointer">
+                        <img
+                            src="/favicon.svg"
+                            alt="CoralFil Logo"
+                            className="w-8 h-8 group-hover:rotate-12 transition-transform duration-500"
+                        />
+                        <span className="text-white text-xl font-bold tracking-tight">
                             CoralFi<span className="logo-dotted-l">l</span>
                         </span>
                     </Link>
