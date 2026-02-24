@@ -1,72 +1,78 @@
 "use client";
 
-import { Droplets, Edit2, Bell, Settings } from "lucide-react";
+import { Droplets, Bell, Settings, HelpCircle, User } from "lucide-react";
 import { motion } from "@/components/motion-client";
+import Link from "next/link";
 
-export function TopNav() {
+interface TopNavProps {
+    onHelpClick: () => void;
+}
+
+export function TopNav({ onHelpClick }: TopNavProps) {
     return (
-        <header className="h-16 bg-[#02060c] border-b border-white/10 flex items-center justify-between px-6 z-20 shrink-0 relative">
+        <header className="h-16 bg-[#010307] border-b border-white/5 flex items-center justify-between px-6 z-20 shrink-0 relative">
             {/* Left: Branding */}
             <div className="flex items-center gap-4 min-w-[240px]">
-                <motion.div
-                    whileHover={{ scale: 1.05, rotate: 5 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="w-10 h-10 bg-gradient-to-tr from-primary to-primary-dark rounded-xl flex items-center justify-center text-black shadow-[0_0_30px_rgba(0,217,192,0.3)] border border-primary/20 group cursor-pointer overflow-hidden relative"
-                >
-                    <div className="absolute inset-0 bg-white/20 translate-y-12 group-hover:translate-y-0 transition-transform duration-500"></div>
-                    <Droplets size={24} className="fill-current relative z-10" />
-                </motion.div>
+                <Link href="/">
+                    <motion.div
+                        whileHover={{ scale: 1.05 }}
+                        className="w-10 h-10 bg-white/[0.03] border border-white/10 rounded-lg flex items-center justify-center text-[#00D9C0] shadow-2xl group cursor-pointer"
+                    >
+                        <Droplets size={22} className="relative z-10" />
+                    </motion.div>
+                </Link>
                 <div className="flex flex-col justify-center gap-0.5">
-                    <h1 className="text-white font-black text-[13px] leading-none tracking-[-0.02em]">REEFMAKER™ <span className="text-primary">CORE</span></h1>
+                    <h1 className="text-white font-black text-[13px] leading-none tracking-tight">
+                        REEFMAKER™ <span className="text-slate-600 font-light px-1">by</span> CoralFi<span className="logo-dotted-l">l</span>
+                    </h1>
                     <div className="flex items-center gap-1.5">
-                        <span className="text-[9px] text-primary/60 font-black tracking-[0.3em] uppercase">NEURAL HUD</span>
-                        <div className="w-1 h-1 rounded-full bg-primary/40 animate-pulse"></div>
-                        <span className="text-[8px] text-slate-500 font-mono">v2.0.0-PRO</span>
+                        <span className="text-[8px] text-[#00D9C0] font-black tracking-[0.4em] uppercase">Intelligence Interface</span>
+                        <div className="w-1 h-1 rounded-full bg-[#00D9C0]/40 animate-pulse"></div>
                     </div>
                 </div>
             </div>
 
-            {/* Center: Environment Mode Selector */}
+            {/* Center: Environment Mode Selector (Premium Style) */}
             <div className="flex-1 flex justify-center">
-                <div className="flex items-center gap-1 bg-black/40 p-1 rounded-full border border-white/10 shadow-inner relative">
-                    <motion.button
-                        whileHover={{ backgroundColor: "rgba(0, 217, 192, 1)" }}
-                        className="px-5 py-1.5 rounded-full bg-primary text-black font-black text-[10px] uppercase tracking-widest shadow-lg shadow-primary/20 transition-all"
+                <div className="flex items-center gap-1 bg-white/[0.02] p-1 rounded-lg border border-white/5 shadow-inner">
+                    <button
+                        className="px-6 py-1.5 rounded-md bg-[#00D9C0] text-black font-black text-[9px] uppercase tracking-widest shadow-lg shadow-[#00D9C0]/20 transition-all"
                     >
                         Planning
-                    </motion.button>
-                    <motion.button
-                        whileHover={{ color: "white" }}
-                        className="px-5 py-1.5 rounded-full text-slate-500 hover:text-slate-300 font-black text-[10px] uppercase tracking-widest transition-all"
+                    </button>
+                    <button
+                        className="px-6 py-1.5 rounded-md text-slate-500 hover:text-slate-200 font-black text-[9px] uppercase tracking-widest transition-all"
                     >
                         Simulation
-                    </motion.button>
+                    </button>
                 </div>
             </div>
 
-            {/* Right: Project Context & Utilities */}
+            {/* Right: Utilities */}
             <div className="flex items-center gap-6 min-w-[240px] justify-end">
-                <div className="hidden xl:flex flex-col items-end gap-0.5">
-                    <h2 className="text-slate-300 font-black text-[11px] uppercase tracking-widest">Great Barrier Reef</h2>
-                    <span className="text-[9px] text-slate-500 font-mono uppercase tracking-tighter">Sector A // GBR-2024-X4</span>
-                </div>
-
-                <div className="h-8 w-[1px] bg-white/10"></div>
-
                 <div className="flex items-center gap-4">
-                    <button className="relative text-slate-400 hover:text-primary transition-all group p-1">
-                        <Bell size={18} />
-                        <span className="absolute top-0.5 right-0.5 w-1.5 h-1.5 bg-secondary rounded-full border border-[#02060c] shadow-[0_0_8px_rgb(255,107,107)] group-hover:scale-125 transition-transform"></span>
+                    <button
+                        onClick={onHelpClick}
+                        className="text-slate-500 hover:text-white transition-all p-1 flex items-center gap-2 group"
+                        title="Manual & Help"
+                    >
+                        <HelpCircle size={18} className="group-hover:text-[#00D9C0]" />
+                        <span className="text-[9px] font-black uppercase tracking-widest hidden xl:inline">Help</span>
                     </button>
-                    <button className="text-slate-400 hover:text-primary transition-all p-1">
+
+                    <div className="h-6 w-[1px] bg-white/10"></div>
+
+                    <button className="relative text-slate-500 hover:text-white transition-all p-1 group">
+                        <Bell size={18} />
+                        <span className="absolute top-1 right-1 w-1.5 h-1.5 bg-[#FF6B6B] rounded-full border border-[#010307]"></span>
+                    </button>
+
+                    <button className="text-slate-500 hover:text-white transition-all p-1">
                         <Settings size={18} />
                     </button>
-                    <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-white/10 to-white/5 p-[1px] overflow-hidden border border-white/10 hover:border-primary/50 transition-all cursor-pointer group">
-                        <img
-                            alt="User Avatar"
-                            className="w-full h-full object-cover rounded-[10px] opacity-80 group-hover:opacity-100 transition-opacity"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAq42gVa6_vzTKzwwTRbZm_tRkLCWSoYZvC3BwAZlOWvHm6A0oMjkJJ6fktABdH6M3CS_JbVmit3JYz2DhfnyLg0SO2TiYX3qp5-i4EEeWR8KVx6364Ny0G7xJc2I-l_3knSp31B_A2XB37eSUrbY5WmmF5Tx8qnOhb9-zg9PUvx6gEaD4UYBXypLyXV7p0BAyv5j10RBWQQgPOaZ4OM3yJGgXEykEFj0_27lbdTyg7YMebz5lEAaGjCb7jdkis7Fo0gCDccGymSTo"
-                        />
+
+                    <div className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:border-[#00D9C0]/50 transition-all cursor-pointer group overflow-hidden">
+                        <User size={18} className="text-slate-600 group-hover:text-white transition-colors" />
                     </div>
                 </div>
             </div>

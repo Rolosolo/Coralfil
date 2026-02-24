@@ -23,95 +23,132 @@ export default function NewProjectPage() {
     };
 
     return (
-        <div className="p-8 max-w-4xl mx-auto">
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="mb-8"
-            >
-                <h1 className="text-3xl font-bold text-white mb-2 uppercase tracking-tight">Initialize Restoration Vector</h1>
-                <p className="text-slate-400 font-light">Define the site parameters to begin deep-sea neural analysis.</p>
-            </motion.div>
-
-            <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.2 }}
-                className="glass-panel p-8 rounded-[32px] border border-white/10 relative overflow-hidden"
-            >
-                <div className="grid gap-8 relative z-10">
-                    {/* Project Name */}
-                    <div className="space-y-3">
-                        <label className="text-[10px] font-black text-primary uppercase tracking-widest">Project Internal Codename</label>
-                        <input
-                            type="text"
-                            placeholder="e.g. Blue Horizon Alpha"
-                            value={projectName}
-                            onChange={(e) => setProjectName(e.target.value)}
-                            className="w-full bg-[#02060c]/60 border border-white/10 rounded-2xl p-4 text-white focus:outline-none focus:border-primary/50 transition-all font-mono"
-                        />
+        <div className="min-h-screen bg-[#010307] p-8 md:p-12 lg:p-20">
+            <div className="max-w-4xl mx-auto">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="mb-12"
+                >
+                    <div className="flex items-center gap-3 mb-4">
+                        <div className="w-10 h-[1px] bg-[#00D9C0]"></div>
+                        <span className="text-[10px] font-black text-[#00D9C0] uppercase tracking-[0.4em]">Neural Vector Init</span>
                     </div>
+                    <h1 className="text-4xl md:text-5xl font-black text-white mb-4 uppercase tracking-tighter leading-none">
+                        Initialize Restoration <span className="text-[#00D9C0]">Vector</span>
+                    </h1>
+                    <p className="text-slate-500 font-bold uppercase tracking-widest text-[11px] max-w-xl leading-relaxed">
+                        Define parameters for the ReefMaker intelligence layers. Site analysis will commence upon synchronization.
+                    </p>
+                </motion.div>
 
-                    {/* Location */}
-                    <div className="space-y-3">
-                        <label className="text-[10px] font-black text-primary uppercase tracking-widest flex items-center gap-2">
-                            <MapPin size={14} /> Site Coordinates (GPS)
-                        </label>
-                        <div className="grid grid-cols-2 gap-4">
-                            <input type="text" placeholder="Latitude: -14.672" className="w-full bg-[#02060c]/60 border border-white/10 rounded-2xl p-4 text-white focus:outline-none focus:border-primary/50 transition-all font-mono" />
-                            <input type="text" placeholder="Longitude: 145.421" className="w-full bg-[#02060c]/60 border border-white/10 rounded-2xl p-4 text-white focus:outline-none focus:border-primary/50 transition-all font-mono" />
-                        </div>
-                    </div>
-
-                    {/* Client & Species */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div className="space-y-3">
-                            <label className="text-[10px] font-black text-primary uppercase tracking-widest flex items-center gap-2">
-                                <Users size={14} /> Stakeholder Affinity
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.98 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.2 }}
+                    className="glass-panel p-10 md:p-16 rounded-[2rem] border border-white/5 relative overflow-hidden bg-white/[0.01]"
+                >
+                    <div className="grid gap-12 relative z-10">
+                        {/* Project Name */}
+                        <div className="space-y-4">
+                            <label className="text-[9px] font-black text-slate-500 uppercase tracking-[0.3em] flex items-center gap-2">
+                                <span className="w-1 h-1 rounded-full bg-[#00D9C0]"></span> Project Internal Codename
                             </label>
-                            <select className="w-full bg-[#02060c]/60 border border-white/10 rounded-2xl p-4 text-white focus:outline-none focus:border-primary/50 transition-all appearance-none cursor-pointer">
-                                <option>Select Client...</option>
-                                <option>Marine Conservation Society</option>
-                                <option>Six Senses Resorts</option>
-                                <option>Government of Maldives</option>
-                            </select>
+                            <input
+                                type="text"
+                                placeholder="E.G. PROJECT_HELIX_ALPHA"
+                                value={projectName}
+                                onChange={(e) => setProjectName(e.target.value)}
+                                className="w-full bg-white/[0.02] border border-white/5 rounded-xl p-6 text-white focus:outline-none focus:border-[#00D9C0]/30 transition-all font-mono text-lg tracking-wider placeholder:text-slate-800"
+                            />
                         </div>
-                        <div className="space-y-3">
-                            <label className="text-[10px] font-black text-primary uppercase tracking-widest flex items-center gap-2">
-                                <Target size={14} /> Primary Cultivar
+
+                        {/* Location */}
+                        <div className="space-y-4">
+                            <label className="text-[9px] font-black text-slate-500 uppercase tracking-[0.3em] flex items-center gap-2">
+                                <MapPin size={12} className="text-[#00D9C0]" /> Site Coordinates (GPS)
                             </label>
-                            <select className="w-full bg-[#02060c]/60 border border-white/10 rounded-2xl p-4 text-white focus:outline-none focus:border-primary/50 transition-all appearance-none cursor-pointer">
-                                <option>Acropora cervicornis (Staghorn)</option>
-                                <option>Acropora palmata (Elkhorn)</option>
-                                <option>Orbicella annularis (Boulder)</option>
-                            </select>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div className="relative">
+                                    <input type="text" placeholder="LAT: -14.672" className="w-full bg-white/[0.02] border border-white/5 rounded-xl p-6 text-white focus:outline-none focus:border-[#00D9C0]/30 transition-all font-mono tracking-wider placeholder:text-slate-800" />
+                                </div>
+                                <div className="relative">
+                                    <input type="text" placeholder="LON: 145.421" className="w-full bg-white/[0.02] border border-white/5 rounded-xl p-6 text-white focus:outline-none focus:border-[#00D9C0]/30 transition-all font-mono tracking-wider placeholder:text-slate-800" />
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Client & Species */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                            <div className="space-y-4">
+                                <label className="text-[9px] font-black text-slate-500 uppercase tracking-[0.3em] flex items-center gap-2">
+                                    <Users size={12} className="text-[#00D9C0]" /> Stakeholder Affinity
+                                </label>
+                                <div className="relative group">
+                                    <select className="w-full bg-white/[0.02] border border-white/5 rounded-xl p-6 text-white focus:outline-none focus:border-[#00D9C0]/30 transition-all appearance-none cursor-pointer font-bold uppercase tracking-widest text-[10px]">
+                                        <option>Select Client...</option>
+                                        <option>Marine Conservation Society</option>
+                                        <option>Six Senses Resorts</option>
+                                        <option>Government of Maldives</option>
+                                    </select>
+                                    <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none text-slate-600 group-hover:text-[#00D9C0] transition-colors">
+                                        <ArrowRight size={14} className="rotate-90" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="space-y-4">
+                                <label className="text-[9px] font-black text-slate-500 uppercase tracking-[0.3em] flex items-center gap-2">
+                                    <Target size={12} className="text-[#00D9C0]" /> Primary Cultivar
+                                </label>
+                                <div className="relative group">
+                                    <select className="w-full bg-white/[0.02] border border-white/5 rounded-xl p-6 text-white focus:outline-none focus:border-[#00D9C0]/30 transition-all appearance-none cursor-pointer font-bold uppercase tracking-widest text-[10px]">
+                                        <option>Acropora cervicornis</option>
+                                        <option>Acropora palmata</option>
+                                        <option>Orbicella annularis</option>
+                                    </select>
+                                    <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none text-slate-600 group-hover:text-[#00D9C0] transition-colors">
+                                        <ArrowRight size={14} className="rotate-90" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="pt-10 flex justify-end">
+                            <button
+                                disabled={isInitializing}
+                                onClick={handleInitialize}
+                                className="w-full md:w-auto bg-[#00D9C0] hover:bg-[#00f2ff] text-black px-12 py-6 rounded-xl font-black text-[10px] uppercase tracking-[0.3em] flex items-center justify-center gap-4 transition-all hover:scale-[1.02] active:scale-[0.98] shadow-[0_20px_40px_rgba(0,217,192,0.15)] disabled:opacity-50"
+                            >
+                                {isInitializing ? (
+                                    <>
+                                        <Loader2 className="w-4 h-4 animate-spin" />
+                                        Synchronizing Data...
+                                    </>
+                                ) : (
+                                    <>
+                                        Begin Neural Analysis
+                                        <ArrowRight size={18} />
+                                    </>
+                                )}
+                            </button>
                         </div>
                     </div>
 
-                    <div className="pt-6 flex justify-end">
-                        <button
-                            disabled={isInitializing}
-                            onClick={handleInitialize}
-                            className="btn-premium bg-primary text-[#02060c] px-10 py-4 rounded-2xl font-black text-xs uppercase tracking-[0.2em] flex items-center gap-3 hover:scale-105 transition-all shadow-[0_20px_40px_rgba(0,217,192,0.2)] disabled:opacity-50"
-                        >
-                            {isInitializing ? (
-                                <>
-                                    <Loader2 className="w-5 h-5 animate-spin" />
-                                    Synchronizing...
-                                </>
-                            ) : (
-                                <>
-                                    Initialize Neural Scan
-                                    <ArrowRight size={20} />
-                                </>
-                            )}
-                        </button>
+                    {/* Background Decoration */}
+                    <div className="absolute top-0 right-0 w-96 h-96 bg-[#00D9C0]/5 blur-[120px] rounded-full pointer-events-none translate-x-1/2 -translate-y-1/2"></div>
+                    <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/[0.02] blur-[80px] rounded-full pointer-events-none -translate-x-1/2 translate-y-1/2"></div>
+                </motion.div>
+
+                <div className="mt-12 flex justify-center">
+                    <div className="flex items-center gap-6 px-8 py-3 rounded-full border border-white/5 bg-white/[0.01]">
+                        <span className="text-[8px] font-black text-slate-700 uppercase tracking-[0.4em]">Security Layer</span>
+                        <div className="w-1 h-1 rounded-full bg-slate-800"></div>
+                        <span className="text-[8px] font-black text-slate-700 uppercase tracking-[0.4em]">End-to-End Encryption</span>
+                        <div className="w-1 h-1 rounded-full bg-slate-800"></div>
+                        <span className="text-[8px] font-black text-[#00D9C0]/40 uppercase tracking-[0.4em]">Verified Science Protocol</span>
                     </div>
                 </div>
-
-                {/* Background Decoration */}
-                <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 blur-[80px] rounded-full pointer-events-none"></div>
-            </motion.div>
+            </div>
         </div>
     );
 }

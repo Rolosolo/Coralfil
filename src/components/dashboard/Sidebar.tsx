@@ -6,11 +6,11 @@ import { motion } from "@/components/motion-client";
 
 export function Sidebar() {
     const steps = [
-        { number: 1, label: "New Project", status: "completed", href: "/dashboard/project/new" },
-        { number: 2, label: "Site Analysis", status: "active", href: "/dashboard/project/123/design" },
-        { number: 3, label: "Species Target", status: "pending", href: "/dashboard/slider-demo" },
-        { number: 4, label: "C-Brick Design", status: "pending", href: "/dashboard/project/123/design" },
-        { number: 5, label: "Proposal", status: "pending", href: "/dashboard/quote" },
+        { number: 1, label: "Initialization", status: "completed", href: "/dashboard/project/new" },
+        { number: 2, label: "Neural Parameters", status: "active", href: "/dashboard" },
+        { number: 3, label: "Species Matrix", status: "pending", href: "/dashboard" },
+        { number: 4, label: "Synthesis Engine", status: "pending", href: "/dashboard" },
+        { number: 5, label: "Stakeholder Inquiry", status: "pending", href: "/dashboard" },
     ];
 
     return (

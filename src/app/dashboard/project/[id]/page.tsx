@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { dataService } from '@/lib/data-service';
 import { ArrowRight, Globe, Shield, Activity, Share2 } from 'lucide-react';
 import Link from 'next/link';
+import { motion } from "@/components/motion-client";
 
 interface Props {
     params: { id: string };
@@ -36,24 +37,26 @@ export default async function ProjectPage({ params }: Props) {
     if (!project) return <div>Project not found.</div>;
 
     return (
-        <div className="flex flex-col gap-12 p-12 max-w-7xl mx-auto">
+        <div className="flex flex-col gap-12 p-8 md:p-12 max-w-7xl mx-auto min-h-screen bg-[#010307]">
             {/* Hero Header */}
-            <div className="flex flex-col gap-4">
-                <div className="flex items-center gap-3">
-                    <div className="px-3 py-1 bg-primary/10 border border-primary/20 rounded-full">
-                        <span className="text-[10px] font-black text-primary uppercase tracking-widest leading-none">Active Project</span>
+            <div className="flex flex-col gap-6">
+                <div className="flex items-center gap-4">
+                    <div className="px-4 py-1.5 bg-white/[0.02] border border-white/5 rounded-xl">
+                        <span className="text-[9px] font-black text-[#00D9C0] uppercase tracking-[0.3em] leading-none">Active Restoration Vector</span>
                     </div>
-                    <span className="text-[10px] font-mono text-slate-500 uppercase tracking-widest">{project.id}</span>
+                    <span className="text-[10px] font-mono text-slate-700 uppercase tracking-[0.4em]">UUID: {project.id.toUpperCase()}</span>
                 </div>
-                <h1 className="text-5xl font-black text-white uppercase tracking-tight">{project.name}</h1>
-                <div className="flex items-center gap-6 mt-2">
-                    <div className="flex items-center gap-2 text-slate-400">
-                        <Globe size={16} className="text-primary" />
-                        <span className="text-sm font-medium">{project.location}</span>
+                <h1 className="text-5xl md:text-6xl font-black text-white uppercase tracking-tighter leading-tight drop-shadow-2xl">
+                    {project.name}
+                </h1>
+                <div className="flex flex-wrap items-center gap-8 mt-2">
+                    <div className="flex items-center gap-3 text-slate-500">
+                        <Globe size={16} className="text-[#00D9C0]" />
+                        <span className="text-[11px] font-bold uppercase tracking-widest">{project.location}</span>
                     </div>
-                    <div className="flex items-center gap-2 text-slate-400">
-                        <Shield size={16} className="text-secondary" />
-                        <span className="text-sm font-medium">{project.client}</span>
+                    <div className="flex items-center gap-3 text-slate-500">
+                        <Shield size={16} className="text-slate-700" />
+                        <span className="text-[11px] font-bold uppercase tracking-widest">{project.client}</span>
                     </div>
                 </div>
             </div>
@@ -61,56 +64,69 @@ export default async function ProjectPage({ params }: Props) {
             {/* Grid Layout */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {/* Progress Card */}
-                <div className="p-8 bg-white/[0.03] rounded-[48px] border border-white/10 flex flex-col gap-6">
+                <div className="p-10 bg-white/[0.01] rounded-[2rem] border border-white/5 flex flex-col gap-8 backdrop-blur-3xl">
                     <div className="flex items-center justify-between">
-                        <span className="text-xs font-black text-white uppercase tracking-widest">Project Phase</span>
-                        <span className="text-xs font-mono text-primary font-bold uppercase">{project.status}</span>
+                        <span className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em]">Project Phase</span>
+                        <div className="flex items-center gap-2">
+                            <div className="w-1.5 h-1.5 rounded-full bg-[#00D9C0] animate-pulse"></div>
+                            <span className="text-[10px] font-mono text-[#00D9C0] font-black uppercase tracking-widest">{project.status}</span>
+                        </div>
                     </div>
-                    <div className="relative h-4 bg-white/5 rounded-full overflow-hidden border border-white/5">
-                        <div
-                            className="absolute inset-y-0 left-0 bg-gradient-to-r from-primary to-primary-dark transition-all duration-1000"
-                            style={{ width: `${project.progress}%` }}
-                        ></div>
+                    <div className="relative h-2 bg-white/5 rounded-full overflow-hidden p-[1px]">
+                        <motion.div
+                            initial={{ width: 0 }}
+                            animate={{ width: `${project.progress}%` }}
+                            transition={{ duration: 1.5, ease: "easeOut" }}
+                            className="h-full bg-gradient-to-r from-[#00D9C0]/30 to-[#00D9C0] rounded-full shadow-[0_0_15px_rgba(0,217,192,0.4)]"
+                        ></motion.div>
                     </div>
                     <div className="flex justify-between items-end">
-                        <span className="text-4xl font-mono font-black text-white">{project.progress}%</span>
-                        <span className="text-[10px] text-slate-500 font-bold uppercase mb-1">Completion Matrix</span>
+                        <span className="text-5xl font-mono font-black text-white tracking-tighter">{project.progress}%</span>
+                        <span className="text-[9px] text-slate-700 font-black uppercase tracking-[0.2em] mb-2 font-mono">Neural Sync Confidence</span>
                     </div>
                 </div>
 
                 {/* Action Card */}
-                <div className="md:col-span-2 p-8 bg-primary rounded-[48px] flex flex-col justify-between items-start group relative overflow-hidden">
-                    <div className="absolute top-0 right-0 p-12 opacity-10 group-hover:scale-110 transition-transform">
-                        <Activity size={120} className="text-black" />
+                <div className="md:col-span-2 p-10 bg-white/[0.01] border border-white/5 rounded-[2.5rem] flex flex-col justify-between items-start group relative overflow-hidden backdrop-blur-3xl shadow-2xl">
+                    <div className="absolute top-0 right-0 p-12 opacity-5 group-hover:opacity-10 transition-opacity pointer-events-none">
+                        <Activity size={180} className="text-[#00D9C0]" />
                     </div>
-                    <div className="flex flex-col gap-4 relative z-10">
-                        <h2 className="text-3xl font-black text-black uppercase tracking-tight">Open Synthesis HUD</h2>
-                        <p className="text-black/70 font-medium max-w-md">Access the Coralfill Brain to tune substrate chemistry and biopolymer ratios for this specific environment.</p>
+                    <div className="flex flex-col gap-5 relative z-10">
+                        <div className="w-10 h-1 bg-[#00D9C0]"></div>
+                        <h2 className="text-4xl font-black text-white uppercase tracking-tighter">Open Synthesis HUD</h2>
+                        <p className="text-slate-500 font-bold uppercase tracking-widest text-[11px] max-w-md leading-relaxed">
+                            Access the CoralFil intelligence stack to refine substrate geometry and optimize biopolymer dispersal patterns.
+                        </p>
                     </div>
                     <Link
                         href={`/dashboard/project/${project.id}/design`}
-                        className="mt-8 px-8 py-4 bg-black text-white rounded-full flex items-center gap-3 hover:scale-105 transition-all font-black uppercase tracking-widest text-xs"
+                        className="mt-12 px-10 py-5 bg-[#00D9C0] hover:bg-[#00f2ff] text-black rounded-xl flex items-center gap-4 hover:scale-[1.02] active:scale-[0.98] transition-all font-black uppercase tracking-[0.2em] text-[10px] shadow-[0_20px_40px_rgba(0,217,192,0.1)]"
                     >
-                        Launch Designer
-                        <ArrowRight size={16} />
+                        Initialize HUD Designer
+                        <ArrowRight size={18} />
                     </Link>
                 </div>
             </div>
 
             {/* Diversity Overview */}
-            <div className="p-10 bg-white/[0.03] rounded-[48px] border border-white/10 flex flex-col gap-8">
+            <div className="p-12 bg-white/[0.01] rounded-[2.5rem] border border-white/5 flex flex-col gap-10 backdrop-blur-3xl shadow-2xl">
                 <div className="flex items-center justify-between">
-                    <h3 className="text-xl font-black text-white uppercase tracking-tight">Target Species Matrix</h3>
-                    <button className="flex items-center gap-2 text-[10px] font-black text-slate-500 uppercase tracking-widest hover:text-white transition-colors">
+                    <div className="flex flex-col gap-2">
+                        <h3 className="text-2xl font-black text-white uppercase tracking-tight">Integrity Matrix</h3>
+                        <p className="text-[10px] text-slate-600 font-black uppercase tracking-[0.3em]">Targeted bio-restoration cultivars</p>
+                    </div>
+                    <button className="flex items-center gap-3 px-6 py-3 rounded-xl bg-white/[0.02] border border-white/5 text-[9px] font-black text-slate-500 uppercase tracking-widest hover:text-white hover:bg-white/5 transition-all">
                         <Share2 size={14} />
-                        Share Project
+                        Proprietary Snapshot
                     </button>
                 </div>
                 <div className="flex flex-wrap gap-4">
                     {project.targetSpecies.map(s => (
-                        <div key={s} className="px-6 py-3 bg-white/5 border border-white/10 rounded-2xl flex items-center gap-3">
-                            <div className="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
-                            <span className="text-xs font-black text-slate-300 uppercase tracking-widest">{s.replace('sp_', '').replace('_', ' ')}</span>
+                        <div key={s} className="px-8 py-4 bg-white/[0.02] border border-white/5 rounded-2xl flex items-center gap-4 group hover:border-[#00D9C0]/30 transition-all">
+                            <div className="w-1.5 h-1.5 rounded-full bg-[#00D9C0] shadow-[0_0_8px_rgba(0,217,192,0.4)] group-hover:scale-125 transition-transform"></div>
+                            <span className="text-[10px] font-black text-slate-400 group-hover:text-white transition-colors uppercase tracking-[0.2em]">
+                                {s.replace('sp_', '').replace('_', ' ')}
+                            </span>
                         </div>
                     ))}
                 </div>

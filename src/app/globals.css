@@ -7,23 +7,23 @@
   --color-navy: #02060c;
   --color-navy-light: #0c1629;
 
-  --color-background: #02060c;
-  --color-surface: #0c1629;
+  --color-background: #010307;
+  --color-surface: #040914;
 
-  /* Theme Tokens */
-  --env-bg: #02060c;
+  /* Theme Tokens - Brighter, Sharper */
+  --env-bg: #010307;
   --env-accent: #00D9C0;
-  --env-glow: rgba(0, 217, 192, 0.4);
-  --env-surface: rgba(255, 255, 255, 0.03);
+  --env-glow: rgba(0, 217, 192, 0.25);
+  --env-surface: rgba(255, 255, 255, 0.02);
 
   --font-display: var(--font-space-grotesk);
   --font-heading: var(--font-poppins);
 
-  --animate-float: float 6s ease-in-out infinite;
-  --animate-glow: pulse-glow 3s ease-in-out infinite;
-  --animate-scan: scan 2s linear infinite;
-  --animate-spin-slow: spin 8s linear infinite;
-  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-float: float 12s ease-in-out infinite;
+  --animate-glow: pulse-glow 4s ease-in-out infinite;
+  --animate-scan: scan 3s linear infinite;
+  --animate-spin-slow: spin 15s linear infinite;
+  --animate-pulse-slow: pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 [data-theme='midday'] {
@@ -160,26 +160,44 @@
   }
 
   .glass-panel {
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
   }
 
   .glass-card {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 1rem;
+    /* Sharper edges as requested */
   }
 
   .btn-premium {
-    @apply relative transition-all duration-300;
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1), 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    @apply relative transition-all duration-500 overflow-hidden;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
   }
 
   .btn-premium:hover {
     @apply -translate-y-0.5;
-    box-shadow: inset 0 0 12px rgba(0, 242, 255, 0.3), 0 15px 40px -10px rgba(0, 242, 255, 0.2);
+    box-shadow: inset 0 0 20px rgba(0, 217, 192, 0.15), 0 20px 40px -20px rgba(0, 217, 192, 0.3);
+  }
+
+  .logo-dotted-l {
+    @apply relative inline-block;
+    color: transparent;
+    -webkit-text-stroke: 1px #00D9C0;
+    text-stroke: 1px #00D9C0;
+  }
+
+  .logo-dotted-l::before {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    background-image: radial-gradient(#00D9C0 0.8px, transparent 0.8px);
+    background-size: 3px 3px;
+    opacity: 0.8;
   }
 }
 

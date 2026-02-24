@@ -2,18 +2,19 @@
 
 import React from "react";
 import { JsonLd } from "@/components/JsonLd";
-import { Anchor, Users, Globe, Shield, Zap, ArrowRight, Github, Linkedin, Twitter, Brain, CheckCircle } from "lucide-react";
+import { motion } from "@/components/motion-client";
+import { Anchor, Globe, Shield, Zap, ArrowRight, Github, Linkedin, Twitter, Brain, Activity, Target } from "lucide-react";
 
 export function CompanyClient() {
     return (
-        <main className="min-h-screen bg-[#02060c] pt-24 pb-20">
+        <main className="min-h-screen bg-[#010307] pt-24 pb-20 overflow-x-hidden">
             <JsonLd data={{
                 "@context": "https://schema.org",
                 "@type": "AboutPage",
                 "mainEntity": {
                     "@type": "Organization",
                     "name": "CoralFil",
-                    "description": "Providing the advanced 'glue' and 'architecture' necessary for successful, large-scale marine restoration.",
+                    "description": "Foundational intelligence and structural biometrics for large-scale marine restoration.",
                     "founder": [
                         { "@type": "Person", "name": "Roland Poulin" },
                         { "@type": "Person", "name": "Alex Andrei" }
@@ -21,189 +22,233 @@ export function CompanyClient() {
                 }
             }} />
 
-            <div className="container mx-auto px-6 max-w-7xl 2xl:max-w-screen-2xl">
+            <div className="container mx-auto px-6 max-w-7xl">
                 {/* Hero Section */}
-                <div className="max-w-4xl mb-24">
-                    <div className="inline-block px-3 py-1 mb-6 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest border border-primary/20">
-                        Our Vision
-                    </div>
-                    <h1 className="text-5xl md:text-7xl font-bold text-white mb-8 tracking-tight italic">
+                <div className="max-w-4xl mb-32">
+                    <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        className="inline-block px-4 py-1.5 mb-8 rounded-lg bg-[#00D9C0]/10 text-[#00D9C0] text-[10px] font-bold uppercase tracking-[0.4em] border border-[#00D9C0]/20"
+                    >
+                        Foundational Logic
+                    </motion.div>
+                    <motion.h1
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8 }}
+                        className="text-6xl md:text-8xl font-bold text-white mb-10 tracking-tighter leading-[0.9]"
+                    >
                         "Brick by Brick"<br />
-                        <span className="text-glow-gradient not-italic">Rebuilding the Oceans.</span>
-                    </h1>
-                    <p className="text-xl text-slate-300 leading-relaxed max-w-2xl font-light">
+                        <span className="text-glow-gradient">Rebuilding Oceans.</span>
+                    </motion.h1>
+                    <motion.p
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 0.8 }}
+                        transition={{ delay: 0.4 }}
+                        className="text-xl text-slate-400 leading-relaxed max-w-2xl font-light"
+                    >
                         Passion alone cannot reverse the coral crisis. We need scalable, realistic, and highly traceable solutions.
-                        Coralfill is building the structural and chemical foundation for 100,000+ hectares of reef restoration by 2035.
-                    </p>
+                        CoralFi<span className="logo-dotted-l prose-none">l</span> is building the structural and chemical foundation for 100,000+ hectares of reef restoration.
+                    </motion.p>
                 </div>
 
-                {/* The "Why" Section */}
-                <div className="grid md:grid-cols-2 gap-16 mb-32 items-center">
-                    <div className="space-y-6">
-                        <h2 className="text-4xl font-bold text-white tracking-tight">Realizing the Blue Economy.</h2>
-                        <p className="text-slate-400 leading-relaxed">
-                            Coral reefs provide $375 billion annually in ecosystem services, yet 90% are critically threatened by 2030.
-                            Traditional restoration methods are manual, low-nutrient, and cannot scale.
-                        </p>
-                        <p className="text-slate-400 leading-relaxed">
+                {/* The "Why" Section with Helix Animation */}
+                <div className="grid md:grid-cols-2 gap-24 mb-48 items-center">
+                    <motion.div
+                        initial={{ opacity: 0, x: -30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        className="space-y-8"
+                    >
+                        <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tighter leading-none">The OS for the<br /><span className="text-gray-700">Blue Economy.</span></h2>
+                        <p className="text-slate-400 leading-relaxed font-light text-lg">
                             We operate at the "IP and Materials" layer, bypassing heavy logistics to provide the essential
-                            building blocks for reef recovery. Our solution is deep-tech, high-margin, and scientifically validated.
+                            building blocks for reef recovery. Our solution is deep-tech, high-margin, and biologically imperative.
                         </p>
-                        <div className="flex gap-4 pt-4">
+
+                        <div className="grid grid-cols-2 gap-8 pt-6">
                             <div className="flex flex-col">
-                                <span className="text-3xl font-bold text-white">100k+</span>
-                                <span className="text-xs text-primary font-bold uppercase tracking-wider">Hectares Target</span>
+                                <span className="text-4xl font-bold text-white mb-2 tracking-tighter">100k+</span>
+                                <span className="text-[10px] text-[#00D9C0] font-black uppercase tracking-[0.2em]">Hectares Target</span>
                             </div>
-                            <div className="w-px h-12 bg-white/10 mx-4"></div>
                             <div className="flex flex-col">
-                                <span className="text-3xl font-bold text-white">70-85%</span>
-                                <span className="text-xs text-primary font-bold uppercase tracking-wider">Retention Rate</span>
+                                <span className="text-4xl font-bold text-white mb-2 tracking-tighter">85%</span>
+                                <span className="text-[10px] text-[#00D9C0] font-black uppercase tracking-[0.2em]">Larvae Retention</span>
                             </div>
                         </div>
-                    </div>
-                    <div className="relative aspect-square rounded-[48px] overflow-hidden border border-white/10 group">
-                        <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent z-10"></div>
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            <div className="w-64 h-64 bg-primary/5 rounded-full blur-3xl animate-pulse"></div>
+                    </motion.div>
+
+                    {/* Animated Helix Graphic Replacement */}
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        className="relative aspect-square flex items-center justify-center"
+                    >
+                        <div className="absolute inset-0 bg-[#00D9C0]/5 blur-[120px] rounded-full"></div>
+
+                        {/* Animated 3D-ish Helix SVG */}
+                        <svg width="400" height="400" viewBox="0 0 400 400" className="relative z-10 overflow-visible">
+                            <defs>
+                                <linearGradient id="helixGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stopColor="#00D9C0" />
+                                    <stop offset="100%" stopColor="#0077BE" />
+                                </linearGradient>
+                            </defs>
+                            {[...Array(20)].map((_, i) => (
+                                <motion.circle
+                                    key={`c1-${i}`}
+                                    cx={200 + Math.sin(i * 0.5) * 80}
+                                    cy={50 + i * 15}
+                                    r={4 + Math.cos(i * 0.5) * 2}
+                                    fill="url(#helixGrad)"
+                                    animate={{
+                                        cx: [200 + Math.sin(i * 0.5) * 80, 200 + Math.sin(i * 0.5 + Math.PI) * 80, 200 + Math.sin(i * 0.5) * 80],
+                                        opacity: [0.3, 1, 0.3],
+                                        scale: [0.8, 1.2, 0.8]
+                                    }}
+                                    transition={{
+                                        duration: 4,
+                                        repeat: Infinity,
+                                        ease: "linear",
+                                        delay: i * 0.1
+                                    }}
+                                />
+                            ))}
+                            {[...Array(20)].map((_, i) => (
+                                <motion.circle
+                                    key={`c2-${i}`}
+                                    cx={200 + Math.sin(i * 0.5 + Math.PI) * 80}
+                                    cy={50 + i * 15}
+                                    r={4 + Math.cos(i * 0.5 + Math.PI) * 2}
+                                    fill="#FFFFFF"
+                                    animate={{
+                                        cx: [200 + Math.sin(i * 0.5 + Math.PI) * 80, 200 + Math.sin(i * 0.5) * 80, 200 + Math.sin(i * 0.5 + Math.PI) * 80],
+                                        opacity: [1, 0.3, 1],
+                                        scale: [1.2, 0.8, 1.2]
+                                    }}
+                                    transition={{
+                                        duration: 4,
+                                        repeat: Infinity,
+                                        ease: "linear",
+                                        delay: i * 0.1
+                                    }}
+                                />
+                            ))}
+                        </svg>
+
+                        <div className="absolute -bottom-10 right-0 glass-card p-6 border-white/5 backdrop-blur-3xl">
+                            <p className="text-white text-xs font-bold italic opacity-80 mb-2">"We are not tech entrepreneurs guessing at the ocean;"</p>
+                            <p className="text-[#00D9C0] text-sm font-black uppercase tracking-widest">"We are ocean professionals doing tech."</p>
                         </div>
-                        <div className="absolute bottom-10 left-10 z-20">
-                            <div className="bg-black/60 backdrop-blur-xl p-6 rounded-3xl border border-white/10">
-                                <p className="text-white font-bold italic">"We are not tech entrepreneurs guessing at the ocean; we are ocean professionals doing tech."</p>
-                            </div>
-                        </div>
-                    </div>
+                    </motion.div>
                 </div>
 
-                {/* Founders Section */}
-                <div className="mb-32">
-                    <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+                {/* Legacy-Free Leadership Section */}
+                <div className="mb-48">
+                    <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-20">
                         <div>
-                            <h2 className="text-4xl font-bold text-white tracking-tight">The Founding Team</h2>
-                            <p className="text-slate-400 mt-2">Marine logistics meets material science.</p>
+                            <span className="text-[#FF6B6B] font-bold tracking-[0.4em] text-[10px] uppercase mb-4 block">Founding Council</span>
+                            <h2 className="text-5xl md:text-7xl font-bold text-white tracking-tighter">The Visionaries.</h2>
                         </div>
                     </div>
 
-                    <div className="grid md:grid-cols-3 gap-8">
+                    <div className="grid md:grid-cols-2 gap-12 max-w-5xl">
                         {/* Roland Poulin */}
-                        <div className="glass-panel p-8 rounded-[40px] border border-white/10 group hover:border-primary/50 transition-colors">
-                            <div className="w-full aspect-[4/5] bg-white/5 rounded-3xl mb-8 overflow-hidden relative">
-                                <div className="absolute inset-0 flex items-center justify-center text-slate-700">
-                                    <Users size={64} />
-                                </div>
-                                <div className="absolute top-4 right-4 px-3 py-1 bg-primary text-black text-[10px] font-black uppercase tracking-widest rounded-full">
-                                    CEO
-                                </div>
+                        <motion.div
+                            whileHover={{ y: -10 }}
+                            className="glass-panel p-12 rounded-[2.5rem] border border-white/5 relative overflow-hidden group"
+                        >
+                            <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
+                                <Target size={120} className="text-white" />
                             </div>
-                            <h3 className="text-2xl font-bold text-white mb-1">Roland Poulin</h3>
-                            <p className="text-primary text-xs font-bold uppercase tracking-widest mb-4">Co-Founder & CEO</p>
-                            <p className="text-sm text-slate-400 leading-relaxed mb-6">
-                                SVOP Captain and former commercial crab deckhand with authentic maritime credibility.
-                                Proven entrepreneur with a background in building and exiting successful technology firms.
-                                Leading strategy and partnerships.
+                            <div className="flex items-center gap-4 mb-8">
+                                <div className="size-3 rounded-full bg-[#00D9C0] animate-glow"></div>
+                                <span className="text-[10px] font-bold text-[#00D9C0] uppercase tracking-[0.4em]">Active Status: CEO</span>
+                            </div>
+                            <h3 className="text-4xl font-bold text-white mb-2 tracking-tight">Roland Poulin</h3>
+                            <p className="text-slate-400 leading-relaxed font-light mb-8 text-lg">
+                                SVOP Captain and maritime entrepreneur. Roland bridges the gap between commercial ocean operations
+                                and venture-scalable material science.
                             </p>
                             <div className="flex gap-4">
-                                <Linkedin className="w-5 h-5 text-slate-500 hover:text-white cursor-pointer transition-colors" />
-                                <Twitter className="w-5 h-5 text-slate-500 hover:text-white cursor-pointer transition-colors" />
+                                <Linkedin className="w-5 h-5 text-slate-600 hover:text-white transition-colors cursor-pointer" />
+                                <Twitter className="w-5 h-5 text-slate-600 hover:text-white transition-colors cursor-pointer" />
                             </div>
-                        </div>
+                        </motion.div>
 
                         {/* Alex Andrei */}
-                        <div className="glass-panel p-8 rounded-[40px] border border-white/10 group hover:border-[#0077BE]/50 transition-colors">
-                            <div className="w-full aspect-[4/5] bg-white/5 rounded-3xl mb-8 overflow-hidden relative">
-                                <div className="absolute inset-0 flex items-center justify-center text-slate-700">
-                                    <Users size={64} />
-                                </div>
-                                <div className="absolute top-4 right-4 px-3 py-1 bg-[#0077BE] text-white text-[10px] font-black uppercase tracking-widest rounded-full">
-                                    COO
-                                </div>
+                        <motion.div
+                            whileHover={{ y: -10 }}
+                            className="glass-panel p-12 rounded-[2.5rem] border border-white/5 relative overflow-hidden group"
+                        >
+                            <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
+                                <Activity size={120} className="text-white" />
                             </div>
-                            <h3 className="text-2xl font-bold text-white mb-1">Alex Andrei</h3>
-                            <p className="text-[#0077BE] text-xs font-bold uppercase tracking-widest mb-4">Co-Founder & COO</p>
-                            <p className="text-sm text-slate-400 leading-relaxed mb-6">
-                                PADI Certified Diver and SVOP Captain. Alex brings decades of operational excellence
-                                and marine logistics expertise in BC waters. Leading supply chains, manufacturing,
-                                and field validation.
+                            <div className="flex items-center gap-4 mb-8">
+                                <div className="size-3 rounded-full bg-[#0077BE] animate-glow"></div>
+                                <span className="text-[10px] font-bold text-[#0077BE] uppercase tracking-[0.4em]">Active Status: COO</span>
+                            </div>
+                            <h3 className="text-4xl font-bold text-white mb-2 tracking-tight">Alex Andrei</h3>
+                            <p className="text-slate-400 leading-relaxed font-light mb-8 text-lg">
+                                Deep-sea operations and logistics lead. Alex oversees the global supply chain for C-Brick™ deployment
+                                and robotic manufacturing protocols.
                             </p>
                             <div className="flex gap-4">
-                                <Linkedin className="w-5 h-5 text-slate-500 hover:text-white cursor-pointer transition-colors" />
-                                <Globe className="w-5 h-5 text-slate-500 hover:text-white cursor-pointer transition-colors" />
+                                <Linkedin className="w-5 h-5 text-slate-600 hover:text-white transition-colors cursor-pointer" />
+                                <Globe className="w-5 h-5 text-slate-600 hover:text-white transition-colors cursor-pointer" />
                             </div>
-                        </div>
-
-                        {/* Biswajit */}
-                        <div className="glass-panel p-8 rounded-[40px] border border-white/10 group hover:border-[#FF6B6B]/50 transition-colors">
-                            <div className="w-full aspect-[4/5] bg-white/5 rounded-3xl mb-8 overflow-hidden relative">
-                                <div className="absolute inset-0 flex items-center justify-center text-slate-700">
-                                    <Users size={64} />
-                                </div>
-                                <div className="absolute top-4 right-4 px-3 py-1 bg-[#FF6B6B] text-white text-[10px] font-black uppercase tracking-widest rounded-full">
-                                    Science
-                                </div>
-                            </div>
-                            <h3 className="text-2xl font-bold text-white mb-1">Biswajit</h3>
-                            <p className="text-[#FF6B6B] text-xs font-bold uppercase tracking-widest mb-4">Scientific Advisor</p>
-                            <p className="text-sm text-slate-400 leading-relaxed mb-6">
-                                Leading Cold-Water Coral Expert with 40+ years experience. Former DFO scientist leveraging
-                                deep regulatory relationships to navigate pathways and oversee peer-reviewed outputs.
-                            </p>
-                            <div className="flex gap-4">
-                                <Linkedin className="w-5 h-5 text-slate-500 hover:text-white cursor-pointer transition-colors" />
-                            </div>
-                        </div>
+                        </motion.div>
                     </div>
                 </div>
 
                 {/* Values Section */}
-                <div className="grid md:grid-cols-3 gap-12 py-24 border-t border-white/5">
-                    <div>
-                        <Shield className="w-10 h-10 text-primary mb-6" />
-                        <h4 className="text-xl font-bold text-white mb-3">Co-Stewardship</h4>
-                        <p className="text-sm text-slate-400 leading-relaxed">
+                <div className="grid md:grid-cols-3 gap-16 py-32 border-t border-white/5">
+                    <motion.div whileHover={{ scale: 1.02 }}>
+                        <Shield className="w-10 h-10 text-[#00D9C0] mb-8" />
+                        <h4 className="text-2xl font-bold text-white mb-4 tracking-tight">Co-Stewardship</h4>
+                        <p className="text-slate-500 leading-relaxed font-light">
                             Indigenous partnership is in our DNA. We mandate FPIC for all operations and integrate
                             traditional knowledge into our scientific priorities.
                         </p>
-                    </div>
-                    <div>
-                        <Zap className="w-10 h-10 text-primary mb-6" />
-                        <h4 className="text-xl font-bold text-white mb-3">IP-First Scale</h4>
-                        <p className="text-sm text-slate-400 leading-relaxed">
+                    </motion.div>
+                    <motion.div whileHover={{ scale: 1.02 }}>
+                        <Zap className="w-10 h-10 text-[#00D9C0] mb-8" />
+                        <h4 className="text-2xl font-bold text-white mb-4 tracking-tight">IP-First Scale</h4>
+                        <p className="text-slate-500 leading-relaxed font-light">
                             By focusing on high-margin materials and AI-driven software, we enable global
-                            restoration without the constraints of heavy logistics.
+                            restoration without the constraints of legacy logistics.
                         </p>
-                    </div>
-                    <div>
-                        <Globe className="w-10 h-10 text-primary mb-6" />
-                        <h4 className="text-xl font-bold text-white mb-3">Verified Impact</h4>
-                        <p className="text-sm text-slate-400 leading-relaxed">
+                    </motion.div>
+                    <motion.div whileHover={{ scale: 1.02 }}>
+                        <Globe className="w-10 h-10 text-[#00D9C0] mb-8" />
+                        <h4 className="text-2xl font-bold text-white mb-4 tracking-tight">Verified Impact</h4>
+                        <p className="text-slate-500 leading-relaxed font-light">
                             Traceable blue carbon sequestration and measurable biodiversity co-benefits are built
-                            into our ReefMaker AI performance tracking.
+                            into our ReefMaker™ AI tracking.
                         </p>
-                    </div>
+                    </motion.div>
                 </div>
 
-                {/* Science Wiki CTA */}
-                <div className="py-24 border-t border-white/5">
-                    <div className="glass-panel p-12 rounded-[48px] border border-[#00D9C0]/20 bg-[#00D9C0]/5 relative overflow-hidden group">
-                        <div className="absolute top-0 right-0 p-12 opacity-5 group-hover:scale-110 transition-transform">
-                            <Brain size={160} className="text-[#00D9C0]" />
-                        </div>
-                        <div className="relative z-10 max-w-2xl">
-                            <div className="inline-block px-3 py-1 mb-6 rounded-full bg-[#00D9C0]/10 text-[#00D9C0] text-[10px] font-black uppercase tracking-[0.2em] border border-[#00D9C0]/20">
-                                Open Intelligence
-                            </div>
-                            <h2 className="text-4xl font-bold text-white mb-6">Explore the Science Wiki.</h2>
-                            <p className="text-lg text-slate-300 mb-8 font-light">
-                                We believe in radical transparency. Every biomimetic profile and chemical ratio recommended by
-                                the ReefMaker Brain is backed by verified peer-reviewed research from Google Scholar and PubMed.
+                {/* Verification CTA */}
+                <div className="py-24">
+                    <div className="glass-panel p-16 rounded-[3rem] border border-white/5 bg-white/[0.01] relative overflow-hidden group text-center">
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 blur-[100px] size-[400px] bg-[#00D9C0]/5 rounded-full pointer-events-none"></div>
+                        <div className="relative z-10 max-w-3xl mx-auto">
+                            <span className="text-[#00D9C0] font-bold tracking-[0.5em] text-[10px] uppercase mb-10 block">Scientific Integrity</span>
+                            <h2 className="text-5xl md:text-7xl font-bold text-white mb-10 tracking-tighter leading-none">Open Source<br />Restoration Logic.</h2>
+                            <p className="text-xl text-slate-400 mb-12 font-light leading-relaxed">
+                                We believe in radical transparency. Every biomimetic profile recommended by
+                                the ReefMaker™ Brain is backed by verified peer-reviewed research.
                             </p>
                             <a
                                 href="https://github.com/Rolosolo/Coralfill/tree/main/docs/science-wiki"
                                 target="_blank"
-                                className="inline-flex items-center gap-3 px-8 py-4 bg-[#00D9C0] text-black rounded-full font-black uppercase tracking-widest text-xs hover:scale-105 transition-all"
+                                className="inline-flex items-center gap-4 px-12 py-6 bg-white text-black rounded-lg font-black uppercase tracking-widest text-xs hover:bg-[#00D9C0] transition-all"
                             >
-                                <Github size={16} />
-                                Verify Scientific Sources
-                                <ArrowRight size={16} />
+                                <Github size={18} />
+                                Verify Research
+                                <ArrowRight size={18} />
                             </a>
                         </div>
                     </div>

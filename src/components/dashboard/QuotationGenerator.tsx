@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { Download, DollarSign, FileText, Shield, Package, CheckCircle } from "lucide-react";
+import { Send, DollarSign, FileText, Shield, User, Mail, MessageSquare, CheckCircle, Info, Activity } from "lucide-react";
+import { motion, AnimatePresence } from "@/components/motion-client";
 import { regulatoryDocs } from "@/lib/regulatory-docs";
 
 interface QuotationData {
@@ -35,10 +36,18 @@ export function QuotationGenerator({
     const [brickCount, setBrickCount] = useState(500);
     const [coralStickKg, setCoralStickKg] = useState(25);
     const [tier, setTier] = useState<'research' | 'pilot' | 'commercial'>('pilot');
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isSubmitted, setIsSubmitted] = useState(false);
+
+    // Form States
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        note: ""
+    });
 
     const calculateQuote = (): QuotationData => {
-        // Pricing logic (simplified for prototype)
-        const brickUnitPrice = tier === 'research' ? 45 : tier === 'pilot' ? 38 : 32;
+        const brickUnitPrice = tier === 'research' ? 120 : tier === 'pilot' ? 95 : 75;
         const coralStickPricePerKg = tier === 'research' ? 180 : tier === 'pilot' ? 150 : 125;
 
         const bricksCost = brickCount * brickUnitPrice;
@@ -62,28 +71,28 @@ export function QuotationGenerator({
 
     const quote = calculateQuote();
 
-    const handleExportQuote = () => {
-        const quoteData = {
-            ...quote,
-            projectId,
-            brickType,
-            mixRatio,
-            ionicStrength,
-            uvFilterLevel,
-            selectedConsortium,
-            generatedAt: new Date().toISOString()
-        };
-        const blob = new Blob([JSON.stringify(quoteData, null, 2)], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `coralfill-quotation-${projectId}.json`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-    };
+    const handleSubmitInquiry = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsSubmitting(true);
 
+        // Simulate API call
+        await new Promise(resolve => setTimeout(resolve, 1500));
+
+        console.log("Inquiry Submitted to hello@coralfil.com", {
+            ...formData,
+            projectSpecs: {
+                projectId,
+                brickType,
+                brickCount,
+                coralStickKg,
+                tier,
+                estimatedValue: quote.totalCost
+            }
+        });
+
+        setIsSubmitting(false);
+        setIsSubmitted(true);
+    };
 
     const handleExportFactSheet = () => {
         const factSheet = regulatoryDocs.generateFactSheet(projectId, brickCount, coralStickKg);
@@ -92,202 +101,199 @@ export function QuotationGenerator({
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `coralfill-regulatory-factsheet-${projectId}.md`;
+        a.download = `coralfill-technical-specs-${projectId}.md`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
     };
 
+    const wordCount = formData.note.trim().split(/\s+/).filter(Boolean).length;
+
     return (
         <div className="space-y-6">
-            <div className="glass-panel p-8 rounded-[32px] border border-white/10 space-y-6">
-                <div className="flex items-center justify-between">
+            <div className="glass-panel p-8 rounded-[2rem] border border-white/10 space-y-8 relative overflow-hidden">
+                <div className="absolute top-0 right-0 p-8 opacity-5 pointer-events-none">
+                    <Shield size={120} className="text-[#00D9C0]" />
+                </div>
+
+                <div className="flex items-center justify-between relative z-10">
                     <div>
-                        <h3 className="text-lg font-black text-white uppercase tracking-tight flex items-center gap-2">
-                            <DollarSign size={20} className="text-primary" />
-                            Project Quotation
+                        <h3 className="text-xl font-black text-white uppercase tracking-tight flex items-center gap-2">
+                            <Activity size={20} className="text-[#00D9C0]" />
+                            Configuration Inquiry
                         </h3>
-                        <p className="text-xs text-slate-500 mt-1">Complete cost estimation</p>
+                        <p className="text-xs text-slate-500 mt-1 uppercase tracking-widest font-bold">Request Early Access & Technical Vetting</p>
                     </div>
                 </div>
 
-                {/* Tier Selection */}
-                <div className="space-y-3">
-                    <div className="text-xs font-black text-slate-400 uppercase tracking-widest">Pricing Tier</div>
-                    <div className="grid grid-cols-3 gap-3">
-                        {(['research', 'pilot', 'commercial'] as const).map((t) => (
-                            <button
-                                key={t}
-                                onClick={() => setTier(t)}
-                                className={`p-4 rounded-2xl border-2 transition-all ${tier === t
-                                    ? 'border-primary bg-primary/10 text-primary'
-                                    : 'border-white/10 bg-white/5 text-slate-400 hover:border-white/20'
-                                    }`}
-                            >
-                                <div className="text-xs font-black uppercase tracking-widest">{t}</div>
-                            </button>
-                        ))}
-                    </div>
-                </div>
-
-                {/* Quantity Controls */}
-                <div className="space-y-4">
-                    <div className="space-y-2">
-                        <div className="flex justify-between items-center">
-                            <label className="text-xs text-slate-400">C-Brick Quantity</label>
-                            <span className="text-xs font-mono text-white">{brickCount} units</span>
-                        </div>
-                        <input
-                            type="range"
-                            min="100"
-                            max="5000"
-                            step="100"
-                            value={brickCount}
-                            onChange={(e) => setBrickCount(parseInt(e.target.value))}
-                            className="w-full h-2 bg-white/10 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-primary"
-                        />
-                    </div>
-
-                    <div className="space-y-2">
-                        <div className="flex justify-between items-center">
-                            <label className="text-xs text-slate-400">CoralStick™ Weight</label>
-                            <span className="text-xs font-mono text-white">{coralStickKg} kg</span>
-                        </div>
-                        <input
-                            type="range"
-                            min="5"
-                            max="200"
-                            step="5"
-                            value={coralStickKg}
-                            onChange={(e) => setCoralStickKg(parseInt(e.target.value))}
-                            className="w-full h-2 bg-white/10 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-secondary"
-                        />
-                    </div>
-                </div>
-
-                {/* Cost Breakdown */}
-                <div className="bg-[#02060c] rounded-2xl p-6 border border-white/5 space-y-3">
-                    <div className="text-xs font-black text-primary uppercase tracking-widest">Cost Breakdown</div>
-                    <div className="space-y-2 text-sm">
-                        <div className="flex justify-between text-slate-300">
-                            <span>C-Bricks ({brickCount} units)</span>
-                            <span className="font-mono">${quote.breakdown.bricks.toLocaleString()}</span>
-                        </div>
-                        <div className="flex justify-between text-slate-300">
-                            <span>CoralStick™ ({coralStickKg} kg)</span>
-                            <span className="font-mono">${quote.breakdown.coralStick.toLocaleString()}</span>
-                        </div>
-                        <div className="flex justify-between text-slate-300">
-                            <span>Shipping & Handling</span>
-                            <span className="font-mono">${quote.breakdown.shipping.toLocaleString()}</span>
-                        </div>
-                        {quote.breakdown.regulatory > 0 && (
-                            <div className="flex justify-between text-slate-300">
-                                <span>Regulatory Documentation</span>
-                                <span className="font-mono">${quote.breakdown.regulatory.toLocaleString()}</span>
-                            </div>
-                        )}
-                        <div className="h-px bg-white/10 my-3"></div>
-                        <div className="flex justify-between text-white font-black text-lg">
-                            <span>Total Project Cost</span>
-                            <span className="font-mono text-primary">${quote.totalCost.toLocaleString()}</span>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Export Buttons */}
-                <div className="grid grid-cols-2 gap-3">
-                    <button
-                        onClick={handleExportQuote}
-                        className="bg-primary hover:bg-primary/90 text-black font-black py-4 rounded-2xl transition-all flex items-center justify-center gap-2 shadow-xl shadow-primary/20"
-                    >
-                        <Download size={18} />
-                        <span className="text-xs">Export Quote</span>
-                    </button>
-                    <button
-                        onClick={handleExportFactSheet}
-                        className="bg-secondary hover:bg-secondary/90 text-black font-black py-4 rounded-2xl transition-all flex items-center justify-center gap-2 shadow-xl shadow-secondary/20"
-                    >
-                        <Shield size={18} />
-                        <span className="text-xs">Fact Sheet</span>
-                    </button>
-                </div>
-
-                {/* Donation Checkout (Small Orders) */}
-                {quote.totalCost < 50000 && (
-                    <div className="pt-4 border-t border-white/5 space-y-4">
-                        <div className="flex items-center justify-between">
-                            <h4 className="text-xs font-black text-white uppercase tracking-widest">Rapid Fulfillment</h4>
-                            <div className="px-2 py-0.5 bg-green-500/20 text-green-400 text-[8px] font-black uppercase tracking-tighter rounded border border-green-500/20">
-                                Direct Checkout Available
-                            </div>
-                        </div>
-                        <button
-                            className="w-full bg-white text-black font-black py-4 rounded-2xl transition-all flex items-center justify-center gap-2 hover:bg-primary hover:text-black shadow-lg"
+                <AnimatePresence mode="wait">
+                    {!isSubmitted ? (
+                        <motion.div
+                            key="form"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className="space-y-8 relative z-10"
                         >
-                            <Package size={18} />
-                            <span className="text-xs">Complete Order (Credit/Debit)</span>
-                        </button>
-                        <p className="text-[10px] text-slate-500 text-center italic">
-                            For orders under $50k, we support immediate card processing and 14-day global shipping.
-                        </p>
-                    </div>
-                )}
+                            {/* Tier Selection */}
+                            <div className="space-y-4">
+                                <div className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em]">Restoration Intensity</div>
+                                <div className="grid grid-cols-3 gap-3">
+                                    {(['research', 'pilot', 'commercial'] as const).map((t) => (
+                                        <button
+                                            key={t}
+                                            onClick={() => setTier(t)}
+                                            className={`py-3 rounded-lg border transition-all text-[10px] font-black uppercase tracking-widest ${tier === t
+                                                ? 'border-[#00D9C0] bg-[#00D9C0]/10 text-[#00D9C0] shadow-[0_0_20px_rgba(0,217,192,0.1)]'
+                                                : 'border-white/5 bg-white/[0.02] text-slate-500 hover:border-white/20'
+                                                }`}
+                                        >
+                                            {t === 'research' ? 'R&D' : t === 'pilot' ? 'PROKARYOTE' : 'INDUSTRIAL'}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Quantity Controls */}
+                            <div className="space-y-6">
+                                <div className="space-y-3">
+                                    <div className="flex justify-between items-center text-[10px] uppercase tracking-widest font-black">
+                                        <label className="text-slate-500">Structural Vector Volume</label>
+                                        <span className="text-white">{brickCount} <span className="text-slate-600">UNITS</span></span>
+                                    </div>
+                                    <input
+                                        type="range"
+                                        min="100"
+                                        max="5000"
+                                        step="100"
+                                        value={brickCount}
+                                        onChange={(e) => setBrickCount(parseInt(e.target.value))}
+                                        className="w-full h-1 bg-white/5 rounded-full appearance-none cursor-pointer accent-[#00D9C0]"
+                                    />
+                                </div>
+
+                                <div className="space-y-3">
+                                    <div className="flex justify-between items-center text-[10px] uppercase tracking-widest font-black">
+                                        <label className="text-slate-500">Biopolymer Dispersion Load</label>
+                                        <span className="text-white">{coralStickKg} <span className="text-slate-600">KG</span></span>
+                                    </div>
+                                    <input
+                                        type="range"
+                                        min="5"
+                                        max="200"
+                                        step="5"
+                                        value={coralStickKg}
+                                        onChange={(e) => setCoralStickKg(parseInt(e.target.value))}
+                                        className="w-full h-1 bg-white/5 rounded-full appearance-none cursor-pointer accent-[#FF6B6B]"
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Inquiry Form */}
+                            <form onSubmit={handleSubmitInquiry} className="pt-6 border-t border-white/5 space-y-4">
+                                <div className="grid md:grid-cols-2 gap-4">
+                                    <div className="relative">
+                                        <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-600" />
+                                        <input
+                                            required
+                                            type="text"
+                                            placeholder="FULL NAME"
+                                            value={formData.name}
+                                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                            className="w-full bg-white/[0.02] border border-white/5 rounded-lg py-4 pl-12 pr-4 text-[10px] font-bold text-white uppercase tracking-widest focus:outline-none focus:border-[#00D9C0]/50 transition-all placeholder:text-slate-700"
+                                        />
+                                    </div>
+                                    <div className="relative">
+                                        <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-600" />
+                                        <input
+                                            required
+                                            type="email"
+                                            placeholder="EMAIL ADDRESS"
+                                            value={formData.email}
+                                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                            className="w-full bg-white/[0.02] border border-white/5 rounded-lg py-4 pl-12 pr-4 text-[10px] font-bold text-white uppercase tracking-widest focus:outline-none focus:border-[#00D9C0]/50 transition-all placeholder:text-slate-700"
+                                        />
+                                    </div>
+                                </div>
+                                <div className="relative">
+                                    <MessageSquare className="absolute left-4 top-6 w-4 h-4 text-slate-600" />
+                                    <textarea
+                                        required
+                                        rows={3}
+                                        placeholder="PROJECT NOTES (MAX 30 WORDS)"
+                                        value={formData.note}
+                                        onChange={(e) => setFormData({ ...formData, note: e.target.value })}
+                                        className="w-full bg-white/[0.02] border border-white/5 rounded-lg py-5 pl-12 pr-4 text-[10px] font-bold text-white uppercase tracking-widest focus:outline-none focus:border-[#00D9C0]/50 transition-all placeholder:text-slate-700 resize-none"
+                                    />
+                                    <div className={`absolute bottom-3 right-4 text-[8px] font-black tracking-widest ${wordCount > 30 ? 'text-[#FF6B6B]' : 'text-slate-600'}`}>
+                                        {wordCount}/30 WORDS
+                                    </div>
+                                </div>
+
+                                <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                                    <button
+                                        type="submit"
+                                        disabled={isSubmitting || wordCount > 30}
+                                        className="flex-1 bg-[#00D9C0] hover:bg-[#00f2ff] disabled:opacity-50 disabled:hover:bg-[#00D9C0] text-black font-black py-4 rounded-lg transition-all flex items-center justify-center gap-3 shadow-xl shadow-[#00D9C0]/20 uppercase tracking-widest text-[10px]"
+                                    >
+                                        {isSubmitting ? (
+                                            <div className="w-4 h-4 border-2 border-black/20 border-t-black rounded-full animate-spin"></div>
+                                        ) : (
+                                            <Send size={16} />
+                                        )}
+                                        {isSubmitting ? "Processing..." : "Submit Inquiry"}
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={handleExportFactSheet}
+                                        className="px-8 py-4 bg-white/5 border border-white/10 text-white hover:bg-white/10 rounded-lg font-black uppercase tracking-widest text-[10px] transition-all flex items-center justify-center gap-3"
+                                    >
+                                        <FileText size={16} />
+                                        Specs
+                                    </button>
+                                </div>
+                                <p className="text-[9px] text-slate-600 text-center italic tracking-tight">
+                                    All inquiries are sent to <span className="text-white">hello@coralfil.com</span> for technical vetting.
+                                </p>
+                            </form>
+                        </motion.div>
+                    ) : (
+                        <motion.div
+                            key="success"
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            className="py-12 flex flex-col items-center text-center space-y-6"
+                        >
+                            <div className="w-20 h-20 rounded-full bg-[#00D9C0]/10 border border-[#00D9C0]/20 flex items-center justify-center text-[#00D9C0] mb-2 animate-bounce">
+                                <CheckCircle size={40} />
+                            </div>
+                            <div>
+                                <h4 className="text-2xl font-black text-white uppercase tracking-tighter mb-2">Inquiry Received</h4>
+                                <p className="text-slate-500 text-xs font-light max-w-sm mx-auto leading-relaxed">
+                                    Our biological engineering team has received your project parameters. A technical prospectus will be sent to <span className="text-white">{formData.email}</span> within 24 hours.
+                                </p>
+                            </div>
+                            <button
+                                onClick={() => setIsSubmitted(false)}
+                                className="text-[#00D9C0] text-[10px] font-black uppercase tracking-[0.3em] hover:text-white transition-colors"
+                            >
+                                Send Another Request
+                            </button>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </div>
 
-            {/* Logistics & Timeline */}
-            <div className="glass-panel p-6 rounded-2xl border border-white/10 space-y-4">
-                <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                        <Package size={16} className="text-secondary" />
-                        <h4 className="text-sm font-black text-white uppercase tracking-widest">Logistics Timeline</h4>
-                    </div>
-                    <span className="text-[10px] font-mono text-secondary font-bold uppercase tracking-widest">Priority Beta</span>
+            {/* Compliance Note */}
+            <div className="glass-panel p-6 rounded-xl border border-white/5 flex items-start gap-4 bg-white/[0.01]">
+                <Info size={18} className="text-[#00D9C0] shrink-0 mt-1" />
+                <div>
+                    <h5 className="text-[10px] font-black text-white uppercase tracking-widest mb-1">R&D Deployment Status</h5>
+                    <p className="text-[10px] text-slate-500 leading-relaxed font-light italic">
+                        The ReefMaker™ platform is currently in closed beta. High-volume C-Brick™ deployment requires regional DFO/NOAA authorization. Our team assists with regulatory filing as part of the early access program.
+                    </p>
                 </div>
-
-                <div className="grid grid-cols-2 gap-4">
-                    <div className="bg-black/20 p-4 rounded-xl border border-white/5">
-                        <div className="text-[10px] text-slate-500 uppercase font-black mb-1">Order to Ship</div>
-                        <div className="text-xl font-mono font-black text-white">12-18 <span className="text-xs">DAYS</span></div>
-                    </div>
-                    <div className="bg-black/20 p-4 rounded-xl border border-white/5">
-                        <div className="text-[10px] text-slate-500 uppercase font-black mb-1">Transit ETA</div>
-                        <div className="text-xl font-mono font-black text-white">4-6 <span className="text-xs">DAYS</span></div>
-                    </div>
-                </div>
-
-                <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden">
-                    <div className="h-full bg-secondary w-3/4 animate-pulse"></div>
-                </div>
-                <p className="text-[10px] text-slate-500 leading-relaxed italic">
-                    Manufacturing window based on current throughput of 850 units/day. Global shipping estimates are VAT inclusive for DFO/NOAA designated zones.
-                </p>
-            </div>
-
-            {/* Regulatory Info */}
-            <div className="glass-panel p-6 rounded-2xl border border-white/10 space-y-4">
-                <div className="flex items-center gap-2">
-                    <CheckCircle size={16} className="text-primary" />
-                    <h4 className="text-sm font-black text-white uppercase tracking-widest">Regulatory Compliance</h4>
-                </div>
-                <div className="space-y-2 text-xs text-slate-400">
-                    <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 rounded-full bg-primary"></div>
-                        <span>EPA Approved - Non-Hazardous Marine Material</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 rounded-full bg-primary"></div>
-                        <span>NOAA Coral Reef Conservation Program Compliant</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 rounded-full bg-primary"></div>
-                        <span>ICRI Best Practices Framework Certified</span>
-                    </div>
-                </div>
-                <p className="text-[10px] text-slate-500 leading-relaxed">
-                    The regulatory fact sheet includes material safety data, environmental certifications, compliance statements, and installation guidelines for your restoration team.
-                </p>
             </div>
         </div>
     );

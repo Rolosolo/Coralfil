@@ -539,22 +539,15 @@ export default function DesignPage({ params }: { params: { id: string } }) {
 
                     {/* Footer Export Section */}
                     <div className="p-8 bg-black/60 border-t border-white/10 backdrop-blur-3xl">
-                        <div className="flex items-center justify-between mb-8">
-                            <div className="flex flex-col">
-                                <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest leading-none mb-2">Estimated Unit Cost</span>
-                                <span className="text-4xl font-black text-white tracking-tighter">$45.00 <span className="text-lg text-slate-500">USD</span></span>
-                            </div>
-                            <div className="p-4 rounded-2xl bg-primary/10 border border-primary/20 flex flex-col items-center">
-                                <span className="text-[10px] font-black text-primary uppercase tracking-widest leading-none mb-1">CO2 IMPACT</span>
-                                <span className="text-lg font-mono font-black text-white">+12.4kg</span>
-                            </div>
-                        </div>
                         <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                            <Link href="/dashboard/quote" className="w-full flex items-center justify-center gap-4 py-5 rounded-[24px] bg-primary text-[#02060c] font-black text-xs uppercase tracking-[0.2em] shadow-[0_20px_40px_rgba(0,217,192,0.3)] transition-all duration-300">
-                                <FileCheck size={20} strokeWidth={3} />
-                                Generate Pro-Spec Proposal
+                            <Link href="/dashboard" className="w-full flex items-center justify-center gap-4 py-6 rounded-[24px] bg-[#00D9C0] text-black font-black text-xs uppercase tracking-[0.2em] shadow-[0_20px_40px_rgba(0,217,192,0.15)] transition-all duration-300">
+                                <FileCheck size={20} className="text-black" />
+                                Synchronize Design to Neural Stack
                             </Link>
                         </motion.div>
+                        <p className="mt-4 text-center text-[9px] text-slate-700 font-black uppercase tracking-[0.3em]">
+                            Proprietary reefmaker™ intelligence layer v2.4
+                        </p>
                     </div>
                 </div>
             </motion.div>

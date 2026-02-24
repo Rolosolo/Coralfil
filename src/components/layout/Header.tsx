@@ -12,15 +12,15 @@ export function Header() {
             <div className="glass-panel border-b border-white/5">
                 <div className="max-w-7xl 2xl:max-w-screen-2xl mx-auto px-6 h-16 flex items-center justify-between">
                     {/* Logo */}
-                    <Link href="/" className="flex items-center gap-3 group cursor-pointer">
-                        <div className="relative flex items-center justify-center size-8 rounded-full bg-gradient-to-tr from-primary/20 to-primary/5">
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-primary">
-                                <polygon points="9,1 16.5,5 16.5,13 9,17 1.5,13 1.5,5" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinejoin="round" />
-                                <circle cx="9" cy="9" r="2.5" fill="currentColor" opacity="0.8" />
+                    <Link href="/" className="flex items-center gap-2 group cursor-pointer">
+                        <div className="relative flex items-center justify-center size-7 rounded-sm bg-gradient-to-tr from-primary/20 to-transparent">
+                            <svg width="14" height="14" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-primary">
+                                <polygon points="9,1 16.5,5 16.5,13 9,17 1.5,13 1.5,5" stroke="currentColor" strokeWidth="2" fill="none" strokeLinejoin="round" />
                             </svg>
-                            <div className="absolute inset-0 rounded-full border border-primary/30 group-hover:border-primary/60 transition-colors"></div>
                         </div>
-                        <span className="text-white text-lg font-bold tracking-tight">CoralFil</span>
+                        <span className="text-white text-lg font-bold tracking-tight">
+                            CoralFi<span className="logo-dotted-l">l</span>
+                        </span>
                     </Link>
 
                     {/* Nav Links (Desktop) */}
@@ -33,11 +33,11 @@ export function Header() {
 
                     {/* CTA */}
                     <div className="flex items-center gap-4">
-                        <Link href="/dashboard" className="hidden sm:flex items-center justify-center h-9 px-4 rounded-full bg-white/5 hover:bg-white/10 text-xs font-medium text-white border border-white/10 transition-colors">
+                        <Link href="/dashboard" className="hidden sm:flex items-center justify-center h-9 px-4 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-medium text-white border border-white/10 transition-all">
                             Log In
                         </Link>
-                        <Link href="/#philanthropy" className="flex items-center justify-center h-9 px-5 rounded-full bg-primary text-background-dark text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors">
-                            Donate
+                        <Link href="/dashboard" className="flex items-center justify-center h-9 px-5 rounded-lg bg-primary text-black text-xs font-bold uppercase tracking-wider hover:bg-white transition-all shadow-lg shadow-primary/10">
+                            View Demo
                         </Link>
 
                         {/* Mobile Menu Toggle */}

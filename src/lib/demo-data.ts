@@ -215,28 +215,28 @@ export const REGIONAL_DISEASE_RISK: Record<string, { disease: string; risk: "low
 
 export const C_BRICK_TYPES: CBrickType[] = [
     {
-        id: "cb_hex_v4",
-        name: "Hex-Lattice v4",
-        description: "High surface area reticulated structure optimized for branching corals.",
-        suitability: ["sp_acropora", "sp_elkhorn", "sp_mesa"],
-        costPerUnit: 45,
-        co2Sequestration: 18.5
+        id: "cb_helix_v1",
+        name: "Helix Pyramid™",
+        description: "Biomimetic double-helix pyramid designed for multi-species settlement and high thermal mass.",
+        suitability: ["sp_acropora", "sp_elkhorn", "sp_glass_sponge", "sp_cold_water_coral"],
+        costPerUnit: 120,
+        co2Sequestration: 45.0
     },
     {
-        id: "cb_dome_v2",
-        name: "Bio-Dome v2",
-        description: "Solid base structure with micro-crevices for massive coral recruitment.",
+        id: "cb_reef_lattice",
+        name: "Lattice Matrix",
+        description: "Complex structural framework optimized for deep-sea cloud sponge colonization.",
+        suitability: ["sp_glass_sponge", "sp_cold_water_coral"],
+        costPerUnit: 180,
+        co2Sequestration: 38.5
+    },
+    {
+        id: "cb_boulder_core",
+        name: "Boulder Core™",
+        description: "High-density substrate optimized for foundational Caribbean brain corals.",
         suitability: ["sp_boulder", "sp_brain"],
-        costPerUnit: 60,
-        co2Sequestration: 24.0
-    },
-    {
-        id: "cb_reef_shield",
-        name: "ReefShield Max",
-        description: "Industrial grade modular protective unit with high thermal mass.",
-        suitability: ["sp_boulder", "sp_porites"],
-        costPerUnit: 85,
-        co2Sequestration: 32.2
+        costPerUnit: 95,
+        co2Sequestration: 28.2
     }
 ];
 
