@@ -25,8 +25,8 @@ Coralfill is developing a revolutionary biomimetic substrate system for coral re
 - **Nutrient Channel Design**: Optimize diameter (3.0-4.5mm) and distribution for controlled CoralStick™ release
 
 **Expected Outcomes**:
-- Production capacity: 500-1000 units/day per printer
-- Unit cost reduction: $45 → $28 (commercial scale)
+- Significant production capacity scaling
+- Industrial-scale unit cost optimization
 - Defect rate: <2%
 
 #### 1.2 CoralStick™ Ionic Pellet Production
@@ -39,8 +39,8 @@ Coralfill is developing a revolutionary biomimetic substrate system for coral re
 - **Packaging Optimization**: Extend shelf life to 18-24 months
 
 **Expected Outcomes**:
-- Production capacity: 50-100 kg/day
-- Cost per kg: $180 → $110 (commercial scale)
+- High-volume production scaling
+- Efficiency-driven unit economics
 - Batch consistency: >98%
 
 ---
@@ -150,17 +150,15 @@ Our methodology is grounded in peer-reviewed coral restoration science:
 
 ---
 
-## Investment Opportunity
+## Strategic Allocation
 
-**Total R&D Budget**: $2.8M over 24 months
+Our R&D roadmap is structured to prioritize high-impact manufacturing and biological validation.
 
-**Allocation**:
-- Manufacturing development: $1.2M (43%)
-- Confirmation trials: $1.0M (36%)
-- Personnel & facilities: $0.4M (14%)
-- Regulatory & compliance: $0.2M (7%)
-
-**Expected ROI**: Commercial production capacity of 365,000 units/year with unit economics of $32 COGS and $85 market price.
+**Resources Allocation**:
+- **Manufacturing Development**: Core focus on scaling 3D-printing and material synthesis.
+- **Confirmation Trials**: Laboratory and field validation across multiple oceanic sectors.
+- **Personnel & Facilities**: Specialist oceanographic and material science expertise.
+- **Regulatory & Compliance**: Global marine environmental standard alignment.
 
 ---
 

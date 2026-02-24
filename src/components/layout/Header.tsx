@@ -28,7 +28,6 @@ export function Header() {
                         <Link href="/#technology" className="text-sm font-medium text-slate-400 hover:text-white transition-colors">Technology</Link>
                         <Link href="/company" className="text-sm font-medium text-slate-400 hover:text-white transition-colors">Company</Link>
                         <Link href="/investors" className="text-sm font-medium text-slate-400 hover:text-white transition-colors">Investors</Link>
-                        <Link href="/#philanthropy" className="text-sm font-medium text-slate-400 hover:text-white transition-colors">Partners</Link>
                     </nav>
 
                     {/* CTA */}
@@ -55,7 +54,6 @@ export function Header() {
                         <Link href="/#technology" className="text-sm font-medium text-slate-400 hover:text-white transition-colors">Technology</Link>
                         <Link href="/company" className="text-sm font-medium text-slate-400 hover:text-white transition-colors">Company</Link>
                         <Link href="/investors" className="text-sm font-medium text-slate-400 hover:text-white transition-colors">Investors</Link>
-                        <Link href="/#philanthropy" className="text-sm font-medium text-slate-400 hover:text-white transition-colors">Partners</Link>
                     </nav>
                 </div>
             )}
