@@ -27,12 +27,17 @@ export const noaaService = {
             // Simulate network latency
             await new Promise(resolve => setTimeout(resolve, 800));
 
-            // Realistic mock data derived from current GBR / Tropical averages
+            // Realistic mock data derived from current averages for the region
+            const isPacificCold = lat > 40;
+            const sst = isPacificCold ? 8.2 + (Math.random() * 1.5) : 28.4 + (Math.random() * 0.8);
+            const dhw = isPacificCold ? 0.0 : 4.2 + (Math.random() * 0.3);
+            const bleaching_risk = isPacificCold ? "Cold Water Optimal" : "Alert Level 1";
+
             const metrics: NOAAData = {
-                sst: 28.4 + (Math.random() * 0.5),
-                sst_anomaly: 0.82 + (Math.random() * 0.1),
-                dhw: 4.2 + (Math.random() * 0.3),
-                bleaching_risk: "Alert Level 1",
+                sst,
+                sst_anomaly: isPacificCold ? 0.15 + (Math.random() * 0.05) : 0.82 + (Math.random() * 0.1),
+                dhw,
+                bleaching_risk,
                 lastUpdated: new Date().toISOString()
             };
 

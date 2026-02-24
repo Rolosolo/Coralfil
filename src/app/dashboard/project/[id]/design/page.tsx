@@ -77,11 +77,13 @@ export default function DesignPage({ params }: { params: { id: string } }) {
                 setSelectedSpecies(pData.targetSpecies);
             }
 
-            // Auto-populate NOAA data based on project location (or defaults for specific sectors)
-            // GBR Sector A-4: LAT: -14.672 | LON: 145.421
+            // Auto-populate NOAA data based on project location
+            const lat = pData?.coordinates?.[0] ?? 48.8333; // Default to Barkley Sound, BC
+            const lon = pData?.coordinates?.[1] ?? -125.1333;
+
             const [nData, aData] = await Promise.all([
-                noaaService.getCoralMetrics(-14.672, 145.421),
-                allenAtlasService.getSpatialIntelligence(-14.672, 145.421)
+                noaaService.getCoralMetrics(lat, lon),
+                allenAtlasService.getSpatialIntelligence(lat, lon)
             ]);
             setNoaaData(nData);
             setAtlasData(aData);

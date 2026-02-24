@@ -28,13 +28,15 @@ export const allenAtlasService = {
 
             // Determine zone characteristics based on nominal coordinates
             // Simulated Benthic/Geomorphic response logic
-            const isDeep = lat < -15;
+            // Determine zone characteristics based on regional context
+            const isPacific = lat > 40;
+            const isDeep = lat < -15 || isPacific;
 
             const data: AllenAtlasData = {
-                geomorphicZone: isDeep ? "Sloping Shelf" : "Inner Reef Flat",
-                benthicHabitat: Math.random() > 0.3 ? "Coral/Algae" : "Rock",
-                bathymetry: isDeep ? -12.5 : -4.2,
-                confidence: 0.89 + (Math.random() * 0.05),
+                geomorphicZone: isPacific ? "Submerged Ridge" : (isDeep ? "Sloping Shelf" : "Inner Reef Flat"),
+                benthicHabitat: isPacific ? "Glass Sponge Reef / Glacial Till" : (Math.random() > 0.3 ? "Coral/Algae" : "Rock"),
+                bathymetry: isPacific ? -85.0 : (isDeep ? -12.5 : -4.2),
+                confidence: 0.92 + (Math.random() * 0.04),
                 lastUpdated: new Date().toISOString()
             };
 

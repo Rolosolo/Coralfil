@@ -47,51 +47,51 @@ export interface CBrickType {
 export const MOCK_PROJECTS: Project[] = [
     {
         id: "proj_001",
-        name: "Great Barrier Reef North - Sector A",
-        location: "Queensland, Australia",
-        client: "Marine Conservation Society",
-        status: "designing",
-        progress: 45,
+        name: "Barkley Sound Sponge Reefs",
+        location: "British Columbia, Canada",
+        client: "Pacific Marine Science Institute",
+        status: "analyzing",
+        progress: 32,
         lastUpdated: "2 mins ago",
-        coordinates: [-16.5003, 145.6338],
-        targetSpecies: ["sp_acropora", "sp_pocillopora"],
-        environmentType: "shallow_tropical"
+        coordinates: [48.8333, -125.1333],
+        targetSpecies: ["sp_glass_sponge", "sp_cold_water_coral"],
+        environmentType: "cold_nutrient_rich"
     },
     {
         id: "proj_002",
-        name: "Maldives Resort Restoration",
-        location: "Baa Atoll, Maldives",
-        client: "Six Senses Laamu",
-        status: "monitoring",
-        progress: 92,
+        name: "Exuma Cays Foundation",
+        location: "Exuma, Bahamas",
+        client: "Bahamas National Trust",
+        status: "designing",
+        progress: 68,
         lastUpdated: "4 hours ago",
-        coordinates: [5.3333, 73.0000],
-        targetSpecies: ["sp_porites"],
+        coordinates: [23.5000, -75.8333],
+        targetSpecies: ["sp_acropora", "sp_elkhorn"],
         environmentType: "shallow_tropical"
     },
     {
         id: "proj_003",
-        name: "Florida Keys Rehabilitation",
-        location: "Key Largo, FL, USA",
-        client: "NOAA",
-        status: "analyzing",
-        progress: 15,
+        name: "Hecate Strait Restoration",
+        location: "Haida Gwaii, BC, Canada",
+        client: "Parks Canada / Haida Nation",
+        status: "monitoring",
+        progress: 95,
         lastUpdated: "1 day ago",
-        coordinates: [25.0865, -80.4473],
-        targetSpecies: ["sp_acropora_cerv"],
-        environmentType: "turbid_inshore"
+        coordinates: [52.8333, -131.0000],
+        targetSpecies: ["sp_glass_sponge"],
+        environmentType: "deep_shelf"
     },
     {
         id: "proj_004",
-        name: "Red Sea Resilience Project",
-        location: "Sharm El-Sheikh, Egypt",
-        client: "HEPCA",
+        name: "Maldives Resort Restoration",
+        location: "Baa Atoll, Maldives",
+        client: "Six Senses Laamu",
         status: "planning",
-        progress: 5,
+        progress: 15,
         lastUpdated: "Just now",
-        coordinates: [27.9158, 34.3299],
-        targetSpecies: ["sp_stylophora", "sp_platygyra"],
-        environmentType: "high_salinity_tropical"
+        coordinates: [5.3333, 73.0000],
+        targetSpecies: ["sp_porites"],
+        environmentType: "shallow_tropical"
     }
 ];
 
@@ -156,6 +156,30 @@ export const SPECIES_DB: SpeciesProfile[] = [
         imageUrl: "https://images.unsplash.com/photo-1516682858273-063372fdeced?auto=format&fit=crop&q=80&w=800",
         diseaseVulnerability: [
             { diseaseName: "Coral Bleaching", riskLevel: "high" }
+        ]
+    },
+    {
+        id: "sp_glass_sponge",
+        commonName: "Cloud Sponge",
+        scientificName: "Aphrocallistes vastus",
+        growthRate: 2,
+        preferredDepth: [20, 200],
+        resilienceScore: 95,
+        imageUrl: "https://images.unsplash.com/photo-1583212292454-1fe6229603b7?auto=format&fit=crop&q=80&w=800",
+        diseaseVulnerability: [
+            { diseaseName: "Mechanical Damage", riskLevel: "high" }
+        ]
+    },
+    {
+        id: "sp_cold_water_coral",
+        commonName: "Red Tree Coral",
+        scientificName: "Primnoa pacifica",
+        growthRate: 0.5,
+        preferredDepth: [15, 800],
+        resilienceScore: 80,
+        imageUrl: "https://images.unsplash.com/photo-1621244290451-872f23f66318?auto=format&fit=crop&q=80&w=800",
+        diseaseVulnerability: [
+            { diseaseName: "Bottom Trawling", riskLevel: "critical" }
         ]
     }
 ];
