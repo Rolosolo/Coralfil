@@ -1,3 +1,5 @@
+"use client";
+
 import { ArrowRight, MapPin, Target, Users, Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "@/components/motion-client";
 import { useState } from "react";
