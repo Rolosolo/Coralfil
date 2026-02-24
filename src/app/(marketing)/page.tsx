@@ -16,8 +16,8 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "CoralFil - 24/7 Automated Marine Restoration Solutions",
-  description: "Restoring the Ocean's operating system with AI-driven coral synthesis. Sustainable, scalable, and venture-backed marine restoration.",
+  title: "CoralFil - Pacific & Bahamas Marine Restoration Intelligence",
+  description: "AI-driven restoration for Pacific glass sponge reefs and Caribbean coral ecosystems. ReefMaker™ v2.0 empowers a resilient blue economy.",
   alternates: {
     canonical: './',
   },
@@ -89,7 +89,7 @@ export default function Home() {
             transition={{ duration: 1, delay: 0.4 }}
             className="text-xl md:text-2xl text-gray-300 font-light mb-12 max-w-2xl mx-auto leading-relaxed"
           >
-            A mystical synthesis of marine biology and machine intelligence. Rebuilding ocean ecosystems with suspended precision.
+            A mystical synthesis of marine biology and machine intelligence. Engineering resilience for Pacific Glass Sponges and Caribbean Reefs.
           </motion.p>
 
           <motion.div

@@ -23,7 +23,7 @@ export interface SpeciesProfile {
     imageUrl: string;
     diseaseVulnerability: {
         diseaseName: string;
-        riskLevel: "low" | "medium" | "high";
+        riskLevel: "low" | "medium" | "high" | "critical";
         recommendedStrain?: string;
     }[];
 }
