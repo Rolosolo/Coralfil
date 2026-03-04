@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, PauseCircle } from "lucide-react";
+import { Check, PauseCircle, Dna, FlaskConical, Grid2X2, Globe } from "lucide-react";
 import Link from "next/link";
 import { motion } from "@/components/motion-client";
 
@@ -8,7 +8,7 @@ export function Sidebar() {
     const steps = [
         { number: 1, label: "Initialization", status: "completed", href: "/dashboard/project/new" },
         { number: 2, label: "Neural Parameters", status: "active", href: "/dashboard" },
-        { number: 3, label: "Species Matrix", status: "pending", href: "/dashboard" },
+        { number: 3, label: "Intelligence Matrix", status: "pending", href: "/dashboard/intelligence" },
         { number: 4, label: "Synthesis Engine", status: "pending", href: "/dashboard" },
         { number: 5, label: "Stakeholder Inquiry", status: "pending", href: "/dashboard" },
     ];
@@ -85,6 +85,28 @@ export function Sidebar() {
                         </motion.div>
                     ))}
                 </nav>
+
+                {/* Intelligence Matrix Tools */}
+                <div className="mt-10 px-2">
+                    <p className="text-[9px] font-black text-slate-500 uppercase tracking-[0.25em] mb-4 px-2">Intelligence Matrix</p>
+                    <div className="grid grid-cols-2 gap-2">
+                        {[
+                            { label: "Graph", icon: Dna, href: "/dashboard/intelligence/knowledge-tree" },
+                            { label: "Matrix", icon: FlaskConical, href: "/dashboard/intelligence/formulation-matrix" },
+                            { label: "Library", icon: Grid2X2, href: "/dashboard/intelligence/ingestion" },
+                            { label: "Atlas", icon: Globe, href: "/dashboard/intelligence/global-map" },
+                        ].map((tool) => (
+                            <Link
+                                key={tool.label}
+                                href={tool.href}
+                                className="flex flex-col items-center justify-center p-3 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-primary/30 transition-all group"
+                            >
+                                <tool.icon size={16} className="text-slate-500 group-hover:text-primary transition-colors mb-2" />
+                                <span className="text-[8px] font-bold text-slate-500 group-hover:text-white uppercase tracking-widest">{tool.label}</span>
+                            </Link>
+                        ))}
+                    </div>
+                </div>
 
                 {/* Sub-Metadata Area */}
                 <div className="mt-12 px-2 py-6 border-t border-white/5 space-y-4">

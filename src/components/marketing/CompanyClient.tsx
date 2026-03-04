@@ -168,8 +168,8 @@ export function CompanyClient() {
                             </div>
                             <h3 className="text-4xl font-bold text-white mb-2 tracking-tight">Roland Poulin</h3>
                             <p className="text-slate-400 leading-relaxed font-light mb-8 text-lg">
-                                SVOP Captain and maritime entrepreneur. Roland bridges the gap between commercial ocean operations
-                                and venture-scalable material science.
+                                Half a decade commercial fishing. Finding coral up Nootka Arm is what sparked the idea for Coralfil.
+                                Roland bridges the gap between commercial ocean operations and venture-scalable material science.
                             </p>
                             <div className="flex gap-4">
                                 <Linkedin className="w-5 h-5 text-slate-600 hover:text-white transition-colors cursor-pointer" />
@@ -242,11 +242,11 @@ export function CompanyClient() {
                                 the ReefMaker™ Brain is backed by verified peer-reviewed research.
                             </p>
                             <a
-                                href="https://github.com/Rolosolo/Coralfill/tree/main/docs/science-wiki"
+                                href="https://drive.google.com/drive/folders/1dIWLAQwr6pqvnSQKcMKBYTQCJ3YfVR_1?usp=drive_link"
                                 target="_blank"
                                 className="inline-flex items-center gap-4 px-12 py-6 bg-white text-black rounded-lg font-black uppercase tracking-widest text-xs hover:bg-[#00D9C0] transition-all"
                             >
-                                <Github size={18} />
+                                <Globe size={18} />
                                 Verify Research
                                 <ArrowRight size={18} />
                             </a>
