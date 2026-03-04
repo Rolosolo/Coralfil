@@ -1,0 +1,33 @@
+name: Vercel Check
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  check-status:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: notify vercel
+        uses: vercel/repository-dispatch/actions/status@v1
+
+
+      - name: Stage changes
+        run: git add .
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -m "Update"
+
+      - name: Push changes
+        run: git push origin main
+
+
+      - name: add remote
+        run: git remote add origin https://github.com/Rolosolo/Coralfil   
