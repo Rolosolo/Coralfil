@@ -1,0 +1,66 @@
+name: Data Room Vitals & CI
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Node Dependencies
+        run: npm ci
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          cache: 'pip'
+
+      - name: Install Python Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas great_expectations openai
+
+      # - name: Run Data Validation (Python)
+      #   run: python validate_data.py || echo "Validation script not found or failed"
+
+      # - name: Run Species Ingestion (Python)
+      #   run: python ingest_species_data.py || echo "Ingestion script not found or failed"
+
+      # - name: Verify PDF Ingestion Script (TS)
+      #   run: |
+      #     # We check if the script compiles
+      #     npx tsc scripts/ingestion/pdf-ingestion-pipeline.ts --noEmit --esModuleInterop --skipLibCheck --module esnext --target es2017 --moduleResolution bundler || echo "TS parsing failed but proceeding"
+
+      - name: Install dependencies
+        run: npm install
+      
+      # - name: Data Validation
+      #   run: |
+      #     python scripts/data_validation.py
+      # - name: Species Inoculation Ingestion
+      #   run: |
+      #     python scripts/species_ingestion.py
+      
+      # - name: Check TypeScript Ingestion
+      #   run: npx ts-node scripts/check-ingestion.ts
+
+      - name: Next.js Production Build
+        run: npm run build
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          UPSTASH_VECTOR_REST_URL: ${{ secrets.UPSTASH_VECTOR_REST_URL }}
+          UPSTASH_VECTOR_REST_TOKEN: ${{ secrets.UPSTASH_VECTOR_REST_TOKEN }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
