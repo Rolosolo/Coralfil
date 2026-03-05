@@ -1,0 +1,137 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "last_updated": "2026-03-01",
+    "purpose": "GenAI Nutrient Pellet Formulation & Health Scoring",
+    "regions_covered": ["Caribbean", "BC_Pacific"]
+  },
+  "species_data": [
+    {
+      "species_id": "CAR_001",
+      "scientific_name": "Acropora cervicornis",
+      "common_name": "Staghorn Coral",
+      "region": "Caribbean",
+      "taxonomy": {
+        "family": "Acroporidae",
+        "order": "Scleractinia",
+        "class": "Anthozoa"
+      },
+      "physiology": {
+        "growth_form": "Branching",
+        "growth_rate_mm_year": 150,
+        "skeleton_composition": "Calcium Carbonate (Aragonite)",
+        "symbiont_type": "Zooxanthellate",
+        "thermal_threshold_c": 30,
+        "optimal_temp_c": 26,
+        "depth_range_m": [1, 30]
+      },
+      "nutrient_profile": {
+        "energy_strategy": "High photosynthesis reliance (90%)",
+        "macronutrients": {
+          "protein_requirement": "Moderate",
+          "lipid_requirement": "High (for energy reserves during stress)",
+          "carbohydrate_requirement": "Low"
+        },
+        "micronutrients": {
+          "calcium": "Critical (fast calcification)",
+          "magnesium": "High (skeleton integrity)",
+          "strontium": "Moderate",
+          "iodine": "Moderate"
+        },
+        "biochemical_markers": {
+          "lipid_class": "Wax esters, Triglycerides",
+          "antioxidants": "High requirement during thermal stress",
+          "amino_acids": ["Glycine", "Alanine", "Glutamine"]
+        }
+      },
+      "formulation_logic": {
+        "base_pellet": {
+          "protein_source": "Marine zooplankton meal",
+          "lipid_source": "Copepod oil (High Omega-3)",
+          "binder": "Alginate (slow release)"
+        },
+        "stress_modifiers": [
+          {
+            "trigger": "temperature > 29°C",
+            "action": "increase_antioxidants",
+            "ingredients": ["Vitamin E", "Mycosporine-like amino acids (MAAs)"]
+          },
+          {
+            "trigger": "growth_phase",
+            "action": "increase_calcification_support",
+            "ingredients": ["Calcium Chloride", "Magnesium Sulfate"]
+          }
+        ]
+      },
+      "threats": ["White Band Disease", "Bleaching", "Storm Damage"],
+      "image_url": "https://kimi-web-img.moonshot.cn/img/upload.wikimedia.org/0fca35f20d803e745d95eac57c1acdb79bdeb98f.jpg"
+    },
+    {
+      "species_id": "BC_002",
+      "scientific_name": "Aphrocallistes vastus",
+      "common_name": "Cloud Sponge",
+      "region": "BC_Pacific",
+      "taxonomy": {
+        "family": "Aphrocallistidae",
+        "class": "Hexactinellida",
+        "phylum": "Porifera"
+      },
+      "physiology": {
+        "growth_form": "Massive Cloud",
+        "growth_rate_mm_year": 15,
+        "skeleton_composition": "Silica (SiO2)",
+        "symbiont_type": "Azooxanthellate",
+        "thermal_threshold_c": null,
+        "optimal_temp_c": 7,
+        "depth_range_m": [22, 300]
+      },
+      "nutrient_profile": {
+        "energy_strategy": "Filter feeding (Bacteria/Detritus)",
+        "macronutrients": {
+          "protein_requirement": "High (structural growth)",
+          "lipid_requirement": "Moderate (membrane fluidity in cold)",
+          "carbohydrate_requirement": "Low"
+        },
+        "micronutrients": {
+          "silica": "Critical (spicule formation)",
+          "calcium": "Low",
+          "magnesium": "Low"
+        },
+        "biochemical_markers": {
+          "lipid_class": "Phospholipids (cold adaptation)",
+          "antioxidants": "Moderate",
+          "amino_acids": ["Collagen-like proteins", "Silicateins"]
+        }
+      },
+      "formulation_logic": {
+        "base_pellet": {
+          "protein_source": "Bacterial meal / Yeast extract",
+          "lipid_source": "Fish oil (EPA/DHA for cold water)",
+          "binder": "Silica gel matrix (mimics natural structure)"
+        },
+        "stress_modifiers": [
+          {
+            "trigger": "sedimentation_high",
+            "action": "increase_energy_density",
+            "ingredients": ["High lipid concentration", "Mucus stimulants"]
+          },
+          {
+            "trigger": "repair_phase",
+            "action": "support_spicule_growth",
+            "ingredients": ["Soluble Silicates", "Amino Acid complex"]
+          }
+        ]
+      },
+      "threats": ["Bottom Trawling", "Sedimentation"],
+      "image_url": "https://kimi-web-img.moonshot.cn/img/upload.wikimedia.org/39036d7d09c02a8cd9d571cb57e58d0b4bfdff6c.jpg"
+    }
+  ],
+  "global_formulation_constants": {
+    "pellet_sizes": ["Micro (50-100um)", "Meso (200-500um)", "Macro (1mm+)"],
+    "release_profiles": ["Immediate", "Slow (24h)", "Extended (7d)"],
+    "safety_limits": {
+      "max_ammonia_release": "0.01 ppm",
+      "max_phosphate_release": "0.05 ppm"
+    }
+  }
+}
