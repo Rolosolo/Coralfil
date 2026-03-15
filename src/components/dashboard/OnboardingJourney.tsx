@@ -6,7 +6,7 @@ import { ChevronRight, ChevronLeft, X, Play, Globe, Box, Zap, Heart } from "luci
 
 const STEPS = [
     {
-        title: "Welcome to ReefMaker AI",
+        title: "Welcome to Reefmaker AI",
         description: "Our neural simulation engine is designed to architect resilient coral ecosystems. Let's walk through your localized restoration environment.",
         icon: <Play className="text-[#00D9C0]" size={32} />,
         target: "welcome"
@@ -25,7 +25,7 @@ const STEPS = [
     },
     {
         title: "Neural Simulation",
-        description: "Run growth simulations and stress tests before physically deploying C-Bricks. Predict success rates over a 10-year horizon.",
+        description: "Run growth simulations and stress tests before physically deploying Coraltex Sea Bricks (C-Bricks)™. Predict success rates over a 10-year horizon.",
         icon: <Zap className="text-[#00D9C0]" size={32} />,
         target: "simulate"
     },

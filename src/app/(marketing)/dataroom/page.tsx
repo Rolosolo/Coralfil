@@ -132,7 +132,7 @@ export default function DataRoom() {
                     <h1 className="text-5xl font-bold text-white mb-6 tracking-tighter">Secure Data Room</h1>
                     <p className="text-slate-400 mb-12 text-lg leading-relaxed font-light">
                         Access to <span className="text-[#00D9C0] font-medium">Coralfil's Confidential Master Plan (v1.0)</span>.
-                        Authorization is required to view proprietary Reefmaker AI logic and ionic biopolymer specifications.
+                        Authorization is required to view proprietary Reefmaker AI™ logic and ionic biopolymer specifications.
                     </p>
                     <button
                         onClick={() => setHasAccepted(true)}
@@ -271,7 +271,7 @@ export default function DataRoom() {
                                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00D9C0] to-[#FF6B6B]">Specification.</span>
                                 </h1>
                                 <p className="text-2xl text-slate-400 font-light max-w-2xl leading-relaxed italic">
-                                    "Powered by Reefmaker AI — The molecular roadmap for intelligent reef restoration."
+                                    "Powered by Reefmaker AI™ — The roadmap for intelligent reef restoration."
                                 </p>
                             </motion.div>
                         </div>
@@ -389,7 +389,7 @@ export default function DataRoom() {
                                 <div className="grid lg:grid-cols-2 gap-20 items-center">
                                     <div className="space-y-10">
                                         <div className="inline-block px-5 py-2 rounded-xl bg-[#00D9C0]/10 border border-[#00D9C0]/20 text-[#00D9C0] text-[10px] font-black uppercase tracking-widest">Flagship Product / Phase 2</div>
-                                        <h3 className="text-6xl font-bold tracking-tighter">Coralstick™ Pellets</h3>
+                                        <h3 className="text-6xl font-bold tracking-tighter">Coralstick Smart Pellet™</h3>
                                         <p className="text-xl text-slate-400 font-light leading-relaxed">
                                             Ionic biopolymer pellets engineered for diver deployment. Designed to attract and retain coral larvae through <span className="text-white font-medium">electrostatic and chemical signaling</span>.
                                         </p>
@@ -443,7 +443,7 @@ export default function DataRoom() {
                                     <div className="relative z-10">
                                         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-10 mb-16">
                                             <div>
-                                                <h3 className="text-4xl font-bold tracking-tighter mb-3 italic underline decoration-[#FF6B6B]/30 underline-offset-8">Cortex Bricks (C-Brick)</h3>
+                                                <h3 className="text-4xl font-bold tracking-tighter mb-3 italic underline decoration-[#FF6B6B]/30 underline-offset-8">Coraltex Sea Bricks (C-Bricks)</h3>
                                                 <p className="text-slate-500 text-lg font-light">Biofilm Scent Technology & Biomimetic Geometry</p>
                                             </div>
                                             <div className="px-8 py-3 rounded-full border border-[#FF6B6B]/30 bg-[#FF6B6B]/5 text-[#FF6B6B] text-[10px] font-black uppercase tracking-widest">
@@ -534,7 +534,7 @@ export default function DataRoom() {
                                         <div className="w-20 h-20 rounded-[2rem] bg-[#00D9C0]/10 flex items-center justify-center border border-[#00D9C0]/20 text-[#00D9C0] mb-8">
                                             <Database size={40} />
                                         </div>
-                                        <h3 className="text-5xl font-bold tracking-tighter italic">Reefmaker AI Platform</h3>
+                                        <h3 className="text-5xl font-bold tracking-tighter italic">Reefmaker AI™ Platform</h3>
                                         <p className="text-xl text-slate-400 font-light leading-relaxed">
                                             The formulation engine for Coralstick. We bridge environmental telemetry with molecular synthesis through the <span className="text-white font-medium">NVIDIA BioNeMo</span> processing layer.
                                         </p>

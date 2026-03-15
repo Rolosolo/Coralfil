@@ -43,7 +43,7 @@ export default function StatusLog() {
             <div className="px-4 py-2 border-b border-white/10 flex items-center justify-between bg-white/5">
                 <div className="flex items-center gap-2">
                     <Terminal size={12} className="text-primary" />
-                    <span className="text-[10px] font-bold text-white uppercase tracking-widest">ReefMaker AI :: Log</span>
+                    <span className="text-[10px] font-bold text-white uppercase tracking-widest">Reefmaker AI :: Log</span>
                 </div>
                 <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></div>
             </div>

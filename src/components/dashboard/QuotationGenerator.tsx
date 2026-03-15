@@ -138,7 +138,7 @@ export function QuotationGenerator({
                         >
                             {/* Tier Selection */}
                             <div className="space-y-4">
-                                <div className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em]">Restoration Intensity</div>
+                                <div className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em]">Project Scale</div>
                                 <div className="grid grid-cols-3 gap-3">
                                     {(['research', 'pilot', 'commercial'] as const).map((t) => (
                                         <button
@@ -149,7 +149,7 @@ export function QuotationGenerator({
                                                 : 'border-white/5 bg-white/[0.02] text-slate-500 hover:border-white/20'
                                                 }`}
                                         >
-                                            {t === 'research' ? 'R&D' : t === 'pilot' ? 'PROKARYOTE' : 'INDUSTRIAL'}
+                                            {t === 'research' ? 'R&D' : t === 'pilot' ? 'PILOT' : 'FULL SCALE'}
                                         </button>
                                     ))}
                                 </div>
@@ -159,7 +159,7 @@ export function QuotationGenerator({
                             <div className="space-y-6">
                                 <div className="space-y-3">
                                     <div className="flex justify-between items-center text-[10px] uppercase tracking-widest font-black">
-                                        <label className="text-slate-500">Structural Vector Volume</label>
+                                        <label className="text-slate-500">Coraltex Sea Brick™ Volume</label>
                                         <span className="text-white">{brickCount} <span className="text-slate-600">UNITS</span></span>
                                     </div>
                                     <input
@@ -175,7 +175,7 @@ export function QuotationGenerator({
 
                                 <div className="space-y-3">
                                     <div className="flex justify-between items-center text-[10px] uppercase tracking-widest font-black">
-                                        <label className="text-slate-500">Biopolymer Dispersion Load</label>
+                                        <label className="text-slate-500">Coralstick Smart Pellet™ Amount</label>
                                         <span className="text-white">{coralStickKg} <span className="text-slate-600">KG</span></span>
                                     </div>
                                     <input
@@ -291,7 +291,7 @@ export function QuotationGenerator({
                 <div>
                     <h5 className="text-[10px] font-black text-white uppercase tracking-widest mb-1">R&D Deployment Status</h5>
                     <p className="text-[10px] text-slate-500 leading-relaxed font-light italic">
-                        The ReefMaker™ platform is currently in closed beta. High-volume C-Brick™ deployment requires regional DFO/NOAA authorization. Our team assists with regulatory filing as part of the early access program.
+                        The Reefmaker AI™ platform is currently in closed beta. High-volume Coraltex Sea Bricks™ deployment requires regional DFO/NOAA authorization. Our team assists with regulatory filing as part of the early access program.
                     </p>
                 </div>
             </div>

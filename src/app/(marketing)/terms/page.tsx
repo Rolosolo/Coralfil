@@ -10,12 +10,12 @@ export default function TermsPage() {
 
             <section className="prose prose-invert prose-slate max-w-none">
                 <p className="text-lg text-slate-300 leading-relaxed">
-                    Welcome to Coralfil. By accessing our platform, you agree to comply with the following terms and conditions, which are governed by the laws of <strong>British Columbia, Canada</strong>.
+                    Welcome to Coralfil Inc. By accessing our platform, you agree to comply with the following terms and conditions, which are governed by the laws of <strong>British Columbia, Canada</strong>.
                 </p>
 
                 <h2 className="text-xl font-bold text-white mt-12 mb-4">1. Use of Design Intellectual Property</h2>
                 <p>
-                    All designs generated within the ReefMaker™ platform, including C-Brick™ structural schematics and CoralStick™ ionic formulations, are the intellectual property of Coralfil Restoration Technologies Inc. unless otherwise specified in a separate manufacturing agreement.
+                    All designs generated within the Reefmaker AI™ platform, including Coraltex Sea Bricks (C-Bricks)™ structural schematics and Coralstick Smart Pellet™ ionic formulations, are the intellectual property of Coralfil Inc. unless otherwise specified in a separate manufacturing agreement.
                 </p>
 
                 <h2 className="text-xl font-bold text-white mt-12 mb-4">2. Spatial Data Integration</h2>
@@ -25,7 +25,7 @@ export default function TermsPage() {
 
                 <h2 className="text-xl font-bold text-white mt-12 mb-4">3. Limitation of Liability</h2>
                 <p>
-                    Coralfil provides design tools for ecological restoration. We are not liable for environmental outcomes, structural failures due to incorrect parameters, or regulatory changes in local maritime jurisdictions.
+                    Coralfil Inc. provides design tools for ecological restoration. We are not liable for environmental outcomes, structural failures due to incorrect parameters, or regulatory changes in local maritime jurisdictions.
                 </p>
 
                 <h2 className="text-xl font-bold text-white mt-12 mb-4">4. Governing Law</h2>

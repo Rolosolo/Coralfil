@@ -10,7 +10,7 @@ export default function PrivacyPage() {
 
             <section className="prose prose-invert prose-slate max-w-none">
                 <p className="text-lg text-slate-300 leading-relaxed">
-                    At Coralfil Restoration Technologies Inc. ("Coralfil"), we are committed to protecting the privacy and security of your personal information. As a company operating out of North Cowichan, British Columbia, we adhere to the <strong>Personal Information Protection Act (PIPA)</strong> of British Columbia.
+                    At Coralfil Inc. ("Coralfil"), we are committed to protecting the privacy and security of your personal information. As a company operating out of North Cowichan, British Columbia, we adhere to the <strong>Personal Information Protection Act (PIPA)</strong> of British Columbia.
                 </p>
 
                 <h2 className="text-xl font-bold text-white mt-12 mb-4">1. Information We Collect</h2>
@@ -25,7 +25,7 @@ export default function PrivacyPage() {
 
                 <h2 className="text-xl font-bold text-white mt-12 mb-4">2. Purpose of Collection</h2>
                 <p>
-                    We collect information to authenticate users for the Neural Stack design interface, fulfill C-Brick™ manufacturing orders, and ensure compliance with international maritime and restoration regulations.
+                    We collect information to authenticate users for the Reefmaker AI™ design interface, fulfill Coraltex Sea Bricks (C-Bricks)™ manufacturing orders, and ensure compliance with international maritime and restoration regulations.
                 </p>
 
                 <h2 className="text-xl font-bold text-white mt-12 mb-4">3. Consent</h2>
@@ -45,7 +45,7 @@ export default function PrivacyPage() {
 
                 <div className="mt-16 p-6 bg-white/5 border border-white/10 rounded-2xl">
                     <p className="text-sm text-slate-400 italic">
-                        Coralfil Restoration Technologies Inc. <br />
+                        Coralfil Inc. <br />
                         Attn: Privacy Officer <br />
                         North Cowichan, BC, Canada
                     </p>

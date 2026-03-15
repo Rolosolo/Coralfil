@@ -21,21 +21,21 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   metadataBase: new URL('https://coralfill.com'),
   title: {
-    template: '%s | CoralFil',
-    default: 'Marine Restoration Technology | CoralFil',
+    template: '%s | Coralfil',
+    default: 'Marine Restoration Technology | Coralfil',
   },
   description: 'Restoring reefs at the speed of nature. AI-driven coral synthesis and restoration technology.',
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: 'https://coralfill.com',
-    siteName: 'CoralFil',
+    siteName: 'Coralfil',
     images: [
       {
         url: '/og-image.jpg', // Placeholder, assuming public/og-image.jpg
         width: 1200,
         height: 630,
-        alt: 'CoralFil Marine Restoration',
+        alt: 'Coralfil Marine Restoration',
       },
     ],
   },
@@ -64,7 +64,7 @@ export default function RootLayout({
       {
         "@type": "Organization",
         "@id": "https://coralfill.com/#organization",
-        "name": "CoralFil",
+        "name": "Coralfil Inc.",
         "url": "https://coralfill.com",
         "logo": {
           "@type": "ImageObject",
@@ -84,7 +84,7 @@ export default function RootLayout({
         "@type": "WebSite",
         "@id": "https://coralfill.com/#website",
         "url": "https://coralfill.com",
-        "name": "CoralFil",
+        "name": "Coralfil Inc.",
         "description": "AI-driven coral synthesis at scale.",
         "publisher": {
           "@id": "https://coralfill.com/#organization"

@@ -118,10 +118,10 @@ export default function DesignPage({ params }: { params: { id: string } }) {
                 className="w-full xl:w-80 2xl:w-96 flex flex-col gap-6 shrink-0 z-20"
             >
                 <div className="p-6 bg-white/[0.03] rounded-[32px] border border-white/10 glass-panel">
-                    <div className="text-[10px] font-black text-primary uppercase tracking-[0.25em] mb-3">Project Vector</div>
+                    <div className="text-[10px] font-black text-primary uppercase tracking-[0.25em] mb-3">Project Site</div>
                     <div className="flex flex-col gap-1 mb-6">
-                        <h1 className="text-xl font-black text-white uppercase tracking-tight leading-none">{project?.name || "Sector A-4"}</h1>
-                        <p className="text-xs text-slate-500 font-mono italic">{project?.location || "Northern Great Barrier Reef"}</p>
+                        <h1 className="text-xl font-black text-white uppercase tracking-tight leading-none">{project?.name || "RESTORATION SITE"}</h1>
+                        <p className="text-xs text-slate-500 font-mono italic">{project?.location || "REGIONAL SECTOR"}</p>
                     </div>
 
                     <div className="space-y-6">
@@ -138,7 +138,7 @@ export default function DesignPage({ params }: { params: { id: string } }) {
                 >
                     <div className="flex items-center gap-2">
                         <div className="w-2 h-2 rounded-full bg-primary animate-pulse shadow-[0_0_10px_rgba(0,217,192,0.8)]"></div>
-                        <span className="text-[10px] font-black text-white uppercase tracking-widest">Neural Link Active</span>
+                        <span className="text-[10px] font-black text-white uppercase tracking-widest">System Active</span>
                     </div>
                     <AISynopsis
                         speciesCount={selectedSpecies.length}
@@ -147,9 +147,9 @@ export default function DesignPage({ params }: { params: { id: string } }) {
                     />
                 </motion.div>
 
-                {/* Dashboard Bridge */}
+                {/* Quick Navigation */}
                 <div className="p-6 bg-white/[0.03] rounded-[32px] border border-white/10 flex flex-col gap-3">
-                    <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Dashboard Bridge</span>
+                    <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Internal Navigation</span>
                     <nav className="flex flex-col gap-2">
                         <Link href="/dashboard" className="flex items-center gap-3 p-3 rounded-2xl hover:bg-white/5 text-slate-400 hover:text-white transition-all">
                             <LayoutDashboard size={16} />
@@ -191,7 +191,7 @@ export default function DesignPage({ params }: { params: { id: string } }) {
 
                 {/* HUD Viewport Metadata */}
                 <div className="absolute top-8 left-8 z-30 flex flex-col gap-1 pointer-events-none">
-                    <span className="text-[10px] font-black text-primary uppercase tracking-[0.3em]">Telemetry Preview</span>
+                    <span className="text-[10px] font-black text-primary uppercase tracking-[0.3em]">Site Preview</span>
                     <span className="text-xs font-mono text-white/40">LAT: -14.672 | LON: 145.421</span>
                     <a
                         href="https://github.com/Rolosolo/Coralfil/tree/main/docs/science-wiki"
@@ -199,7 +199,7 @@ export default function DesignPage({ params }: { params: { id: string } }) {
                         className="pointer-events-auto flex items-center gap-2 mt-2 text-[10px] text-primary/40 hover:text-primary transition-all uppercase font-bold tracking-widest"
                     >
                         <Brain size={12} />
-                        Verify Science
+                        Science Specs
                     </a>
                 </div>
 
@@ -494,8 +494,8 @@ export default function DesignPage({ params }: { params: { id: string } }) {
                                 {activeTab === 'species' && (
                                     <div className="flex flex-col gap-8">
                                         <div className="flex flex-col">
-                                            <h3 className="text-xl font-black text-white uppercase tracking-tight">Diversity Matrix</h3>
-                                            <p className="text-[10px] text-primary/60 font-black uppercase tracking-[0.2em] mt-1">Genetic Optimization Layer</p>
+                                            <h3 className="text-xl font-black text-white uppercase tracking-tight">Species Selection</h3>
+                                            <p className="text-[10px] text-primary/60 font-black uppercase tracking-[0.2em] mt-1">Select corals for this site</p>
                                         </div>
                                         <SpeciesMatrix
                                             species={species}
@@ -586,11 +586,11 @@ export default function DesignPage({ params }: { params: { id: string } }) {
                         <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                             <Link href="/dashboard" className="w-full flex items-center justify-center gap-4 py-6 rounded-[24px] bg-[#00D9C0] text-black font-black text-xs uppercase tracking-[0.2em] shadow-[0_20px_40px_rgba(0,217,192,0.15)] transition-all duration-300">
                                 <FileCheck size={20} className="text-black" />
-                                Synchronize Design to Neural Stack
+                                Save Project Design
                             </Link>
                         </motion.div>
                         <p className="mt-4 text-center text-[9px] text-slate-700 font-black uppercase tracking-[0.3em]">
-                            Proprietary reefmaker™ intelligence layer v2.4
+                            Proprietary ReefMaker™ Platform v2.4
                         </p>
                     </div>
                 </div>

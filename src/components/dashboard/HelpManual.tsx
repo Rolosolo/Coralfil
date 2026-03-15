@@ -39,7 +39,7 @@ export function HelpManual({ isOpen, onClose }: HelpManualProps) {
                                         <BookOpen size={20} />
                                     </div>
                                     <div>
-                                        <h3 className="text-xl font-black text-white uppercase tracking-tight">ReefMaker™ Manual</h3>
+                                        <h3 className="text-xl font-black text-white uppercase tracking-tight">Reefmaker AI™ Manual</h3>
                                         <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Operator Guidance v2.0</p>
                                     </div>
                                 </div>
@@ -58,7 +58,7 @@ export function HelpManual({ isOpen, onClose }: HelpManualProps) {
                                     The Mission
                                 </div>
                                 <p className="text-sm text-slate-400 font-light leading-relaxed">
-                                    ReefMaker AI is a strategic neural engine for biological reef restoration. Our goal is to shift reef architecture from static concrete blocks to dynamic, biomimetic "Helix Pyramids" that sequester carbon while fostering multi-species growth.
+                                    Reefmaker AI is a strategic neural engine for biological reef restoration. Our goal is to shift reef architecture from static concrete blocks to dynamic, biomimetic "Helix Pyramids" that foster multi-species growth.
                                 </p>
                             </div>
 

@@ -25,13 +25,13 @@ export function Footer() {
                             Restoring the ocean's foundation through high-fidelity cellular biopolymers and precision spatial intelligence. 
                         </p>
                         <div className="flex items-center gap-4">
-                            <a href="#" className="p-2 bg-white/5 rounded-lg text-slate-400 hover:text-primary transition-all duration-300">
+                            <a href="https://linkedin.com/company/coralfil" target="_blank" rel="noopener noreferrer" className="p-2 bg-white/5 rounded-lg text-slate-400 hover:text-primary transition-all duration-300">
                                 <Linkedin size={18} />
                             </a>
                             <a href="#" className="p-2 bg-white/5 rounded-lg text-slate-400 hover:text-primary transition-all duration-300">
                                 <Twitter size={18} />
                             </a>
-                            <a href="#" className="p-2 bg-white/5 rounded-lg text-slate-400 hover:text-primary transition-all duration-300">
+                            <a href="https://github.com/Rolosolo/Coralfil" target="_blank" rel="noopener noreferrer" className="p-2 bg-white/5 rounded-lg text-slate-400 hover:text-primary transition-all duration-300">
                                 <Github size={18} />
                             </a>
                         </div>
@@ -41,8 +41,8 @@ export function Footer() {
                     <div className="space-y-6">
                         <h4 className="text-[10px] font-black text-white uppercase tracking-[0.25em]">Technology</h4>
                         <ul className="space-y-4">
-                            <li><Link href="/#technology" className="text-sm text-slate-500 hover:text-primary transition-colors">C-Bricks™</Link></li>
-                            <li><Link href="/#technology" className="text-sm text-slate-500 hover:text-primary transition-colors">CoralStick™</Link></li>
+                            <li><Link href="/#technology" className="text-sm text-slate-500 hover:text-primary transition-colors">Coraltex Sea Bricks (C-Bricks)™</Link></li>
+                            <li><Link href="/#technology" className="text-sm text-slate-500 hover:text-primary transition-colors">Coralstick Smart Pellet™</Link></li>
                             <li><Link href="/#technology" className="text-sm text-slate-500 hover:text-primary transition-colors">Spatial Atlas</Link></li>
                             <li><Link href="/#technology" className="text-sm text-slate-500 hover:text-primary transition-colors">Neural Stack</Link></li>
                         </ul>
@@ -87,7 +87,7 @@ export function Footer() {
                 <div className="flex flex-col md:flex-row items-center justify-between pt-12 border-t border-white/5 gap-6">
                     <div className="flex items-center gap-6">
                         <p className="text-[10px] font-black text-slate-700 uppercase tracking-[0.3em]">
-                            © 2026 CORALFIL RESTORATION TECHNOLOGIES INC.
+                            © 2026 CORALFIL INC.
                         </p>
                         <div className="hidden md:flex items-center gap-2 px-2 py-1 bg-white/5 border border-white/10 rounded text-[8px] font-bold text-slate-500 uppercase tracking-widest">
                             <Globe size={10} /> HQ: NORTH COWICHAN, BC, CANADA

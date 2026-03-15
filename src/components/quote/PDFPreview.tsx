@@ -15,8 +15,8 @@ export function PDFPreview() {
                                 <Droplets size={24} className="fill-current" />
                             </div>
                             <div>
-                                <span className="font-heading font-bold text-xl tracking-tight text-slate-900">CoralFil</span>
-                                <span className="block text-[10px] font-bold tracking-widest text-primary uppercase leading-none">Restoration</span>
+                                <span className="font-heading font-bold text-xl tracking-tight text-slate-900">Coralfil</span>
+                                <span className="block text-[10px] font-bold tracking-widest text-primary uppercase leading-none">Intelligence</span>
                             </div>
                         </div>
                     </div>
@@ -213,7 +213,7 @@ export function PDFPreview() {
                     </table>
                 </div>
                 <div className="mt-8 pt-6 border-t border-slate-200 flex flex-col items-center justify-center text-center">
-                    <p className="text-xs text-slate-400 mb-2">CoralFil Inc. • 1200 Ocean Drive, Miami FL • Science-Backed Restoration</p>
+                    <p className="text-xs text-slate-400 mb-2">Coralfil Inc. • North Cowichan, BC, Canada • Science-Backed Restoration</p>
                     <div className="flex items-center gap-2">
                         <Lock size={12} className="text-slate-300" />
                         <p className="text-[10px] text-slate-300">This document is confidential and proprietary.</p>

@@ -32,13 +32,13 @@ export default function NewProjectPage() {
                 >
                     <div className="flex items-center gap-3 mb-4">
                         <div className="w-10 h-[1px] bg-[#00D9C0]"></div>
-                        <span className="text-[10px] font-black text-[#00D9C0] uppercase tracking-[0.4em]">Neural Vector Init</span>
+                        <span className="text-[10px] font-black text-[#00D9C0] uppercase tracking-[0.4em]">Project Initialization</span>
                     </div>
                     <h1 className="text-4xl md:text-5xl font-black text-white mb-4 uppercase tracking-tighter leading-none">
-                        Initialize Restoration <span className="text-[#00D9C0]">Vector</span>
+                        Start New <span className="text-[#00D9C0]">Restoration</span>
                     </h1>
                     <p className="text-slate-500 font-bold uppercase tracking-widest text-[11px] max-w-xl leading-relaxed">
-                        Define parameters for the ReefMaker intelligence layers. Site analysis will commence upon synchronization.
+                        Define basic parameters for your restoration site. Detailed site analysis will be generated automatically.
                     </p>
                 </motion.div>
 
@@ -52,11 +52,11 @@ export default function NewProjectPage() {
                         {/* Project Name */}
                         <div className="space-y-4">
                             <label className="text-[9px] font-black text-slate-500 uppercase tracking-[0.3em] flex items-center gap-2">
-                                <span className="w-1 h-1 rounded-full bg-[#00D9C0]"></span> Project Internal Codename
+                                <span className="w-1 h-1 rounded-full bg-[#00D9C0]"></span> Project Name
                             </label>
                             <input
                                 type="text"
-                                placeholder="E.G. PROJECT_HELIX_ALPHA"
+                                placeholder="E.G. NORTH_REEF_RESTORE"
                                 value={projectName}
                                 onChange={(e) => setProjectName(e.target.value)}
                                 className="w-full bg-white/[0.02] border border-white/5 rounded-xl p-6 text-white focus:outline-none focus:border-[#00D9C0]/30 transition-all font-mono text-lg tracking-wider placeholder:text-slate-800"
@@ -66,14 +66,14 @@ export default function NewProjectPage() {
                         {/* Location */}
                         <div className="space-y-4">
                             <label className="text-[9px] font-black text-slate-500 uppercase tracking-[0.3em] flex items-center gap-2">
-                                <MapPin size={12} className="text-[#00D9C0]" /> Site Coordinates (GPS)
+                                <MapPin size={12} className="text-[#00D9C0]" /> Site Coordinates
                             </label>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div className="relative">
-                                    <input type="text" placeholder="LAT: -14.672" className="w-full bg-white/[0.02] border border-white/5 rounded-xl p-6 text-white focus:outline-none focus:border-[#00D9C0]/30 transition-all font-mono tracking-wider placeholder:text-slate-800" />
+                                    <input type="text" placeholder="LATITUDE (E.G. -14.672)" className="w-full bg-white/[0.02] border border-white/5 rounded-xl p-6 text-white focus:outline-none focus:border-[#00D9C0]/30 transition-all font-mono tracking-wider placeholder:text-slate-800" />
                                 </div>
                                 <div className="relative">
-                                    <input type="text" placeholder="LON: 145.421" className="w-full bg-white/[0.02] border border-white/5 rounded-xl p-6 text-white focus:outline-none focus:border-[#00D9C0]/30 transition-all font-mono tracking-wider placeholder:text-slate-800" />
+                                    <input type="text" placeholder="LONGITUDE (E.G. 145.421)" className="w-full bg-white/[0.02] border border-white/5 rounded-xl p-6 text-white focus:outline-none focus:border-[#00D9C0]/30 transition-all font-mono tracking-wider placeholder:text-slate-800" />
                                 </div>
                             </div>
                         </div>
@@ -82,14 +82,14 @@ export default function NewProjectPage() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                             <div className="space-y-4">
                                 <label className="text-[9px] font-black text-slate-500 uppercase tracking-[0.3em] flex items-center gap-2">
-                                    <Users size={12} className="text-[#00D9C0]" /> Stakeholder Affinity
+                                    <Users size={12} className="text-[#00D9C0]" /> Stakeholder / Partner
                                 </label>
                                 <div className="relative group">
                                     <select className="w-full bg-white/[0.02] border border-white/5 rounded-xl p-6 text-white focus:outline-none focus:border-[#00D9C0]/30 transition-all appearance-none cursor-pointer font-bold uppercase tracking-widest text-[10px]">
-                                        <option>Select Client...</option>
+                                        <option>Select Partner...</option>
                                         <option>Marine Conservation Society</option>
-                                        <option>Six Senses Resorts</option>
-                                        <option>Government of Maldives</option>
+                                        <option>Nature Conservancy</option>
+                                        <option>Governmental Body</option>
                                     </select>
                                     <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none text-slate-600 group-hover:text-[#00D9C0] transition-colors">
                                         <ArrowRight size={14} className="rotate-90" />
@@ -98,13 +98,13 @@ export default function NewProjectPage() {
                             </div>
                             <div className="space-y-4">
                                 <label className="text-[9px] font-black text-slate-500 uppercase tracking-[0.3em] flex items-center gap-2">
-                                    <Target size={12} className="text-[#00D9C0]" /> Primary Cultivar
+                                    <Target size={12} className="text-[#00D9C0]" /> Primary Coral Type
                                 </label>
                                 <div className="relative group">
                                     <select className="w-full bg-white/[0.02] border border-white/5 rounded-xl p-6 text-white focus:outline-none focus:border-[#00D9C0]/30 transition-all appearance-none cursor-pointer font-bold uppercase tracking-widest text-[10px]">
-                                        <option>Acropora cervicornis</option>
-                                        <option>Acropora palmata</option>
-                                        <option>Orbicella annularis</option>
+                                        <option>Acropora cervicornis (Staghorn)</option>
+                                        <option>Acropora palmata (Elkhorn)</option>
+                                        <option>Orbicella annularis (Star Coral)</option>
                                     </select>
                                     <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none text-slate-600 group-hover:text-[#00D9C0] transition-colors">
                                         <ArrowRight size={14} className="rotate-90" />
@@ -122,11 +122,11 @@ export default function NewProjectPage() {
                                 {isInitializing ? (
                                     <>
                                         <Loader2 className="w-4 h-4 animate-spin" />
-                                        Synchronizing Data...
+                                        Creating Project...
                                     </>
                                 ) : (
                                     <>
-                                        Begin Neural Analysis
+                                        Initialize Project
                                         <ArrowRight size={18} />
                                     </>
                                 )}
@@ -141,9 +141,9 @@ export default function NewProjectPage() {
 
                 <div className="mt-12 flex justify-center">
                     <div className="flex items-center gap-6 px-8 py-3 rounded-full border border-white/5 bg-white/[0.01]">
-                        <span className="text-[8px] font-black text-slate-700 uppercase tracking-[0.4em]">Security Layer</span>
+                        <span className="text-[8px] font-black text-slate-700 uppercase tracking-[0.4em]">Secure Platform</span>
                         <div className="w-1 h-1 rounded-full bg-slate-800"></div>
-                        <span className="text-[8px] font-black text-slate-700 uppercase tracking-[0.4em]">End-to-End Encryption</span>
+                        <span className="text-[8px] font-black text-slate-700 uppercase tracking-[0.4em]">Data Encryption</span>
                         <div className="w-1 h-1 rounded-full bg-slate-800"></div>
                         <span className="text-[8px] font-black text-[#00D9C0]/40 uppercase tracking-[0.4em]">Verified Science Protocol</span>
                     </div>

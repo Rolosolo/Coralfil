@@ -20,11 +20,11 @@ export default function SliderDemoPage() {
                 >
                     <div className="flex items-center gap-2 mb-2">
                         <div className="w-8 h-[1px] bg-[#00D9C0]/50"></div>
-                        <span className="text-[8px] font-black text-[#00D9C0] uppercase tracking-[0.4em]">Utility Components</span>
+                        <span className="text-[8px] font-black text-[#00D9C0] uppercase tracking-[0.4em]">Interactive Controls</span>
                     </div>
-                    <h1 className="text-3xl font-black text-white uppercase tracking-tight mb-2">CoralSlider Protocol</h1>
+                    <h1 className="text-3xl font-black text-white uppercase tracking-tight mb-2">Parameter Modeling</h1>
                     <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest leading-relaxed">
-                        Interface standards for interactive parameter modeling within the ReefMaker ecosystem.
+                        Interactive tools for adjusting reef environmental and growth factors.
                     </p>
                 </motion.div>
 

@@ -85,48 +85,49 @@ export default function DashboardPage() {
                         </div>
                     </div>
 
-                    {/* Floating Toolbar Bottom Center */}
-                    <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
-                        <div className="bg-black/60 backdrop-blur-xl p-2 rounded-2xl flex items-center gap-2 shadow-2xl border border-white/10">
-                            <button className="size-11 rounded-xl flex items-center justify-center text-slate-500 hover:bg-white/5 hover:text-[#00D9C0] transition-all">
-                                <Box size={20} />
-                            </button>
-                            <button className="size-11 rounded-xl flex items-center justify-center text-slate-500 hover:bg-white/5 hover:text-[#00D9C0] transition-all">
-                                <Hand size={20} />
-                            </button>
-                            <div className="w-px h-6 bg-white/10 mx-1"></div>
-                            <button className="size-11 rounded-xl flex items-center justify-center bg-[#00D9C0] text-black hover:bg-[#00f2ff] transition-all shadow-lg hover:scale-105">
-                                <Plus size={22} />
-                            </button>
-                            <div className="w-px h-6 bg-white/10 mx-1"></div>
-                            <button className="size-11 rounded-xl flex items-center justify-center text-slate-500 hover:bg-white/5 hover:text-[#00D9C0] transition-all">
-                                <PlusCircle size={20} />
-                            </button>
-                            <button className="size-11 rounded-xl flex items-center justify-center text-slate-500 hover:bg-white/5 hover:text-[#00D9C0] transition-all">
-                                <MinusCircle size={20} />
-                            </button>
-                        </div>
+                {/* Floating Toolbar Bottom Center */}
+                <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
+                    <div className="bg-black/60 backdrop-blur-xl p-2 rounded-2xl flex items-center gap-2 shadow-2xl border border-white/10">
+                        <button className="size-11 rounded-xl flex items-center justify-center text-slate-500 hover:bg-white/5 cursor-not-allowed opacity-50">
+                            <Box size={20} />
+                        </button>
+                        <button className="size-11 rounded-xl flex items-center justify-center text-slate-500 hover:bg-white/5 cursor-not-allowed opacity-50">
+                            <Hand size={20} />
+                        </button>
+                        <div className="w-px h-6 bg-white/10 mx-1"></div>
+                        <button className="size-11 rounded-xl flex items-center justify-center bg-[#00D9C0] text-black hover:bg-[#00f2ff] transition-all shadow-lg hover:scale-105" title="Start Session">
+                            <Plus size={22} />
+                        </button>
+                        <div className="w-px h-6 bg-white/10 mx-1"></div>
+                        <button className="size-11 rounded-xl flex items-center justify-center text-slate-500 hover:bg-white/5 cursor-not-allowed opacity-50">
+                            <PlusCircle size={20} />
+                        </button>
+                        <button className="size-11 rounded-xl flex items-center justify-center text-slate-500 hover:bg-white/5 cursor-not-allowed opacity-50">
+                            <MinusCircle size={20} />
+                        </button>
                     </div>
                 </div>
             </div>
+        </div>
 
-            {/* Right Panel: Data Analysis & Configuration */}
-            <aside className="w-[440px] flex flex-col gap-6 z-20 overflow-y-auto shrink-0 custom-scrollbar pr-2">
+        {/* Right Panel: Data Analysis & Configuration */}
+        <aside className="w-[440px] flex flex-col gap-6 z-20 overflow-y-auto shrink-0 custom-scrollbar pr-2">
                 <div className="sticky top-0 z-30 space-y-4">
                     <div className="glass-panel p-6 rounded-2xl border border-white/10 bg-black/40 backdrop-blur-xl">
                         <div className="flex items-center justify-between mb-4">
                             <div>
-                                <h3 className="text-sm font-black text-white uppercase tracking-[0.2em]">Neural Analytics</h3>
-                                <p className="text-[10px] text-slate-500 font-bold uppercase mt-0.5">Bahamas Shelf Sync</p>
+                                <h3 className="text-sm font-black text-white uppercase tracking-[0.2em]">Dashboard Analytics</h3>
+                                <p className="text-[10px] text-slate-500 font-bold uppercase mt-0.5">Live View</p>
                             </div>
                             <Activity size={18} className="text-[#00D9C0] animate-pulse" />
                         </div>
-                        <button className="w-full flex items-center justify-center gap-3 bg-[#00D9C0] text-black hover:bg-[#00f2ff] font-black py-4 px-4 rounded-xl transition-all shadow-[0_10px_30px_rgba(0,217,192,0.2)] text-[10px] uppercase tracking-widest group">
-                            <Play size={18} className="fill-current group-hover:scale-110 transition-transform" />
-                            Initialize Growth Matrix
+                        <button className="w-full flex items-center justify-center gap-3 bg-[#00D9C0]/10 text-[#00D9C0] border border-[#00D9C0]/30 font-black py-4 px-4 rounded-xl cursor-not-allowed text-[10px] uppercase tracking-widest">
+                            <Play size={18} className="fill-current" />
+                            Simulation Paused
                         </button>
                     </div>
                 </div>
+
 
                 {/* Lead-Gen Tool */}
                 <QuotationGenerator

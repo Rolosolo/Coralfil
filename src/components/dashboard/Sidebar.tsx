@@ -6,11 +6,11 @@ import { motion } from "@/components/motion-client";
 
 export function Sidebar() {
     const steps = [
-        { number: 1, label: "Initialization", status: "completed", href: "/dashboard/project/new" },
-        { number: 2, label: "Neural Parameters", status: "active", href: "/dashboard" },
-        { number: 3, label: "Intelligence Matrix", status: "pending", href: "/dashboard/intelligence" },
-        { number: 4, label: "Synthesis Engine", status: "pending", href: "/dashboard" },
-        { number: 5, label: "Stakeholder Inquiry", status: "pending", href: "/dashboard" },
+        { number: 1, label: "Set Up Project", status: "completed", href: "/dashboard/project/new" },
+        { number: 2, label: "Island Settings", status: "active", href: "/dashboard" },
+        { number: 3, label: "Brain Matrix", status: "pending", href: "#" },
+        { number: 4, label: "Growth Engine", status: "pending", href: "#" },
+        { number: 5, label: "Review & Deploy", status: "pending", href: "#" },
     ];
 
     return (
@@ -29,84 +29,91 @@ export function Sidebar() {
                 </div>
 
                 <nav className="flex flex-col gap-1.5">
-                    {steps.map((step, index) => (
-                        <motion.div
-                            key={step.number}
-                            initial={{ x: -20, opacity: 0 }}
-                            animate={{ x: 0, opacity: 1 }}
-                            transition={{ delay: index * 0.1 }}
-                            className="relative"
-                        >
-                            <Link
-                                href={step.href}
-                                className={`flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all duration-300 group border h-14 ${step.status === 'active'
-                                    ? 'bg-primary/15 border-primary/40 shadow-[inset_0_0_20px_rgba(0,217,192,0.1)]'
-                                    : step.status === 'completed'
-                                        ? 'border-transparent hover:bg-white/5 opacity-80 hover:opacity-100'
-                                        : 'border-transparent hover:bg-white/5 opacity-40 hover:opacity-100'
-                                    }`}
+                    {steps.map((step, index) => {
+                        const isPending = step.status === 'pending';
+                        return (
+                            <motion.div
+                                key={step.number}
+                                initial={{ x: -20, opacity: 0 }}
+                                animate={{ x: 0, opacity: 1 }}
+                                transition={{ delay: index * 0.1 }}
+                                className="relative"
                             >
-                                <motion.div
-                                    whileHover={{ scale: 1.1 }}
-                                    whileTap={{ scale: 0.95 }}
-                                    className={`flex-shrink-0 w-8 h-8 rounded-xl flex items-center justify-center transition-all duration-500 scale-100 group-hover:scale-110 ${step.status === 'active'
-                                        ? 'bg-primary text-black shadow-[0_0_25px_rgba(0,217,192,0.6)]' :
-                                        step.status === 'completed'
-                                            ? 'border border-primary/50 text-primary bg-primary/10' :
-                                            'border border-white/10 bg-black/40 text-slate-500'
-                                        }`}>
-                                    {step.status === 'completed' ? (
-                                        <Check size={16} strokeWidth={3} />
-                                    ) : (
-                                        <span className="text-xs font-black font-mono tracking-tighter">{step.number}</span>
-                                    )}
-                                </motion.div>
-                                <div className="flex flex-col">
-                                    <span className={`text-xs font-bold uppercase tracking-widest leading-none ${step.status === 'active' ? 'text-white' :
-                                        step.status === 'completed' ? 'text-slate-300' : 'text-slate-500'
-                                        }`}>
-                                        {step.label}
-                                    </span>
-                                    {step.status === 'active' && (
-                                        <motion.span
-                                            animate={{ opacity: [0.5, 1, 0.5] }}
-                                            transition={{ duration: 2, repeat: Infinity }}
-                                            className="text-[9px] text-primary/80 font-bold mt-1"
-                                        >
-                                            SYSTEM ONLINE
-                                        </motion.span>
-                                    )}
-                                </div>
-                            </Link>
+                                <Link
+                                    href={step.href}
+                                    onClick={(e) => isPending && e.preventDefault()}
+                                    className={`flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all duration-300 group border h-14 ${step.status === 'active'
+                                        ? 'bg-primary/15 border-primary/40 shadow-[inset_0_0_20px_rgba(0,217,192,0.1)]'
+                                        : step.status === 'completed'
+                                            ? 'border-transparent hover:bg-white/5 opacity-80 hover:opacity-100'
+                                            : 'border-transparent opacity-30 cursor-not-allowed'
+                                        }`}
+                                >
+                                    <motion.div
+                                        whileHover={!isPending ? { scale: 1.1 } : {}}
+                                        whileTap={!isPending ? { scale: 0.95 } : {}}
+                                        className={`flex-shrink-0 w-8 h-8 rounded-xl flex items-center justify-center transition-all duration-500 scale-100 group-hover:scale-110 ${step.status === 'active'
+                                            ? 'bg-primary text-black shadow-[0_0_25px_rgba(0,217,192,0.6)]' :
+                                            step.status === 'completed'
+                                                ? 'border border-primary/50 text-primary bg-primary/10' :
+                                                'border border-white/10 bg-black/40 text-slate-500'
+                                            }`}>
+                                        {step.status === 'completed' ? (
+                                            <Check size={16} strokeWidth={3} />
+                                        ) : (
+                                            <span className="text-xs font-black font-mono tracking-tighter">{step.number}</span>
+                                        )}
+                                    </motion.div>
+                                    <div className="flex flex-col">
+                                        <div className="flex items-center gap-2">
+                                            <span className={`text-xs font-bold uppercase tracking-widest leading-none ${step.status === 'active' ? 'text-white' :
+                                                step.status === 'completed' ? 'text-slate-300' : 'text-slate-500'
+                                                }`}>
+                                                {step.label}
+                                            </span>
+                                            {isPending && <span className="text-[7px] bg-white/10 px-1 py-0.5 rounded text-slate-600">SOON</span>}
+                                        </div>
+                                        {step.status === 'active' && (
+                                            <motion.span
+                                                animate={{ opacity: [0.5, 1, 0.5] }}
+                                                transition={{ duration: 2, repeat: Infinity }}
+                                                className="text-[9px] text-primary/80 font-bold mt-1"
+                                            >
+                                                SYSTEM ONLINE
+                                            </motion.span>
+                                        )}
+                                    </div>
+                                </Link>
 
-                            {index < steps.length - 1 && (
-                                <div className="ml-[1.5rem] h-4 w-[1px] bg-gradient-to-b from-white/10 to-transparent my-0.5"></div>
-                            )}
-                        </motion.div>
-                    ))}
+                                {index < steps.length - 1 && (
+                                    <div className="ml-[1.5rem] h-4 w-[1px] bg-gradient-to-b from-white/10 to-transparent my-0.5"></div>
+                                )}
+                            </motion.div>
+                        );
+                    })}
                 </nav>
 
                 {/* Intelligence Matrix Tools */}
-                <div className="mt-10 px-2">
-                    <p className="text-[9px] font-black text-slate-500 uppercase tracking-[0.25em] mb-4 px-2">Intelligence Matrix</p>
-                    <div className="grid grid-cols-2 gap-2">
+                <div className="mt-10 px-2 opacity-40">
+                    <p className="text-[9px] font-black text-slate-500 uppercase tracking-[0.25em] mb-4 px-2">Knowledge Tools (Locked)</p>
+                    <div className="grid grid-cols-2 gap-2 grayscale pointer-events-none">
                         {[
-                            { label: "Graph", icon: Dna, href: "/dashboard/intelligence/knowledge-tree" },
-                            { label: "Matrix", icon: FlaskConical, href: "/dashboard/intelligence/formulation-matrix" },
-                            { label: "Library", icon: Grid2X2, href: "/dashboard/intelligence/ingestion" },
-                            { label: "Atlas", icon: Globe, href: "/dashboard/intelligence/global-map" },
+                            { label: "Graph", icon: Dna, href: "#" },
+                            { label: "Matrix", icon: FlaskConical, href: "#" },
+                            { label: "Library", icon: Grid2X2, href: "#" },
+                            { label: "Atlas", icon: Globe, href: "#" },
                         ].map((tool) => (
-                            <Link
+                            <div
                                 key={tool.label}
-                                href={tool.href}
-                                className="flex flex-col items-center justify-center p-3 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-primary/30 transition-all group"
+                                className="flex flex-col items-center justify-center p-3 rounded-xl bg-white/5 border border-white/5"
                             >
-                                <tool.icon size={16} className="text-slate-500 group-hover:text-primary transition-colors mb-2" />
-                                <span className="text-[8px] font-bold text-slate-500 group-hover:text-white uppercase tracking-widest">{tool.label}</span>
-                            </Link>
+                                <tool.icon size={16} className="text-slate-500 mb-2" />
+                                <span className="text-[8px] font-bold text-slate-500 uppercase tracking-widest">{tool.label}</span>
+                            </div>
                         ))}
                     </div>
                 </div>
+
 
                 {/* Sub-Metadata Area */}
                 <div className="mt-12 px-2 py-6 border-t border-white/5 space-y-4">
