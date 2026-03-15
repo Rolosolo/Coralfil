@@ -39,6 +39,14 @@ interface ReefAssociation {
 
 const REEF_ASSOCIATION_LIBRARY: ReefAssociation[] = [
     {
+        id: "giant-clam",
+        name: "Giant Clam",
+        type: "positive",
+        description: "Very large shells that sit on the bottom.",
+        coralRelationship: "They drink lots of water and clean it. Clean water helps the sun reach the coral so it can grow big and strong.",
+        icon: "🐚"
+    },
+    {
         id: "parrotfish",
         name: "Parrotfish",
         type: "positive",
@@ -53,14 +61,6 @@ const REEF_ASSOCIATION_LIBRARY: ReefAssociation[] = [
         description: "Small orange fish that live in wavy anemones.",
         coralRelationship: "They keep the reef healthy by helping other creatures. If you see them, you know the reef is a happy home.",
         icon: "🐡"
-    },
-    {
-        id: "giant-clam",
-        name: "Giant Clam",
-        type: "positive",
-        description: "Very large shells that sit on the bottom.",
-        coralRelationship: "They drink lots of water and clean it. Clean water helps the sun reach the coral so it can grow big and strong.",
-        icon: "🐚"
     },
     {
         id: "sea-cucumber",

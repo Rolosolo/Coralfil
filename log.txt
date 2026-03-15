@@ -1,1 +1,23 @@
 STARTING PUSH 
+warning: in the working copy of 'src/app/(marketing)/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/dashboard/HelpManual.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/dashboard/OnboardingJourney.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/dashboard/QuotationGenerator.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/marketing/HomeClient.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'copy_image.bat', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'final_push.bat', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'public/test.txt', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'push_script.bat', LF will be replaced by CRLF the next time Git touches it
+ADDED 
+[main 57bf9f6] Final branding refinements and UI polish
+ 23 files changed, 425 insertions(+), 778 deletions(-)
+ create mode 100644 copy_image.bat
+ create mode 100644 final_push.bat
+ create mode 100644 log.txt
+ create mode 100644 public/test.txt
+ create mode 100644 push_script.bat
+COMMITTED 
+To https://github.com/Rolosolo/Coralfil
+   e92d877..57bf9f6  main -> main
+PUSHED 
+ENDING PUSH 
