@@ -1,7 +1,8 @@
 "use client";
 
-import { motion } from "@/components/motion-client";
+import { motion, AnimatePresence } from "@/components/motion-client";
 import Link from "next/link";
+import { useState } from "react";
 import {
     Rocket,
     ChevronDown,
@@ -12,10 +13,54 @@ import {
     CheckCircle,
     Activity,
     Zap,
-    Shield
+    Shield,
+    Info
 } from "lucide-react";
 
+interface Creature {
+    id: string;
+    name: string;
+    description: string;
+    importance: string;
+    x: string;
+    y: string;
+    icon: string;
+}
+
+const REEF_CREATURES: Creature[] = [
+    {
+        id: "parrotfish",
+        name: "Parrotfish",
+        description: "Vibrant grazers with beak-like teeth.",
+        importance: "The janitors of the reef. They consume algae that would otherwise smother corals and excrete fine white sand.",
+        x: "20%",
+        y: "65%",
+        icon: "🐠"
+    },
+    {
+        id: "clownfish",
+        name: "Clownfish",
+        description: "Small, colorful fish living in anemones.",
+        importance: "Indicators of healthy symbiotic relationships. They protect anemones from predators while receiving shelter in return.",
+        x: "75%",
+        y: "70%",
+        icon: "🐡"
+    },
+    {
+        id: "giant-clam",
+        name: "Giant Clam",
+        description: "The largest living bivalve mollusks.",
+        importance: "Massive water filters. A single clam can filter hundreds of liters of water per day, maintaining clarity for photosynthesizing corals.",
+        x: "45%",
+        y: "85%",
+        icon: "🐚"
+    }
+];
+
 export default function HomeClient() {
+    const [hoveredCreature, setHoveredCreature] = useState<string | null>(null);
+    const [activeCreature, setActiveCreature] = useState<string | null>(null);
+
     return (
         <div className="flex-grow bg-[#010307] relative overflow-x-hidden">
             {/* ------------------------------- */}
@@ -77,8 +122,8 @@ export default function HomeClient() {
                         transition={{ duration: 1.2, delay: 0.2 }}
                         className="text-7xl md:text-9xl font-bold tracking-tighter leading-[0.9] mb-10 text-white"
                     >
-                        Restoring Reefs at the<br />
-                        <span className="text-glow-gradient">Speed of Nature.</span>
+                        Scaling Resilience for<br />
+                        <span className="text-glow-gradient">Infinite Oceans.</span>
                     </motion.h1>
 
                     <motion.p
@@ -91,7 +136,7 @@ export default function HomeClient() {
                     </motion.p>
 
                     <div className="flex flex-col items-center gap-8 relative mt-12">
-                        {/* Central button removed per user request. Using the floating intelligence demo as the primary entry point. */}
+                        {/* 
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -102,6 +147,7 @@ export default function HomeClient() {
                                 <ArrowRight size={20} className="text-[#00D9C0] group-hover:translate-x-1 transition-transform" />
                             </Link>
                         </motion.div>
+                        */}
                     </div>
                 </div>
 
@@ -117,7 +163,88 @@ export default function HomeClient() {
             </section>
 
             {/* ------------------------------- */}
-            {/* 2. PRODUCT SHOWCASE             */}
+            {/* 2. THE PROBLEM & SOLUTION       */}
+            {/* ------------------------------- */}
+            <section className="py-32 bg-[#02060c] relative border-y border-white/5">
+                <div className="max-w-7xl mx-auto px-6">
+                    <div className="grid lg:grid-cols-2 gap-16 items-start">
+                        {/* The Problem */}
+                        <motion.div 
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            className="space-y-8"
+                        >
+                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/20">
+                                <span className="text-[10px] font-black text-red-500 uppercase tracking-widest">The Crisis</span>
+                            </div>
+                            <h2 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter leading-none">
+                                Marine Foundations <br />
+                                <span className="text-slate-600">Are Collapsing.</span>
+                            </h2>
+                            <p className="text-xl text-slate-400 font-light leading-relaxed">
+                                Traditional restoration methods are failing against rising thermal stress. Without site-specific intelligence and structural nourishment, <span className="text-white font-bold">90% of restored corals perish</span> within the first 12 months.
+                            </p>
+                            <div className="grid grid-cols-2 gap-4">
+                                <div className="p-4 bg-white/5 rounded-2xl border border-white/5">
+                                    <div className="text-3xl font-black text-red-500">70%</div>
+                                    <div className="text-[10px] text-slate-500 uppercase font-black mt-1">Reef Loss Globally</div>
+                                </div>
+                                <div className="p-4 bg-white/5 rounded-2xl border border-white/5">
+                                    <div className="text-3xl font-black text-red-500">&lt;10%</div>
+                                    <div className="text-[10px] text-slate-500 uppercase font-black mt-1">Nutrient Retention</div>
+                                </div>
+                            </div>
+                        </motion.div>
+
+                        {/* Our Solution */}
+                        <motion.div 
+                            initial={{ opacity: 0, x: 20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            className="bg-primary/5 p-12 rounded-[48px] border border-primary/20 relative overflow-hidden group"
+                        >
+                            <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-primary/10 blur-[80px] group-hover:bg-primary/20 transition-all duration-700"></div>
+                            
+                            <div className="space-y-8 relative z-10">
+                                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20">
+                                    <span className="text-[10px] font-black text-primary uppercase tracking-widest">Our Solution</span>
+                                </div>
+                                <h2 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter leading-none">
+                                    The High-Fidelity <br />
+                                    <span className="text-primary brightness-125">Neural Stack.</span>
+                                </h2>
+                                <p className="text-xl text-slate-400 font-light leading-relaxed">
+                                    We bridge the gap between AI and Biology. By synthesizing high-resolution spatial data with biomimetic substrates, we create a resilient foundation that outpaces environmental decay.
+                                </p>
+                                <div className="flex flex-col gap-6">
+                                    <div className="flex items-center gap-4">
+                                        <div className="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center shadow-[0_0_20px_rgba(0,217,192,0.4)]">
+                                            <Zap size={24} className="text-black" />
+                                        </div>
+                                        <div>
+                                            <h4 className="text-white font-black uppercase text-sm tracking-tight">8x Survival Velocity</h4>
+                                            <p className="text-xs text-slate-500">Accelerated growth through ionic nutrient delivery systems.</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-center gap-4">
+                                        <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center">
+                                            <Brain size={24} className="text-primary" />
+                                        </div>
+                                        <div>
+                                            <h4 className="text-white font-black uppercase text-sm tracking-tight">Autonomous Restoration</h4>
+                                            <p className="text-xs text-slate-500">AI-driven site analysis powered by the Allen Coral Atlas.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </div>
+                </div>
+            </section>
+
+            {/* ------------------------------- */}
+            {/* 3. PRODUCT SHOWCASE             */}
             {/* ------------------------------- */}
             <section className="py-40 bg-[#010307]" id="technology">
                 <div className="container mx-auto px-6 max-w-7xl">
@@ -222,10 +349,12 @@ export default function HomeClient() {
                                     &lt; 60 Seconds to Optimization
                                 </div>
                             </div>
+                            {/* 
                             <Link href="/dashboard" className="text-[#00D9C0] text-xs font-bold uppercase tracking-[0.2em] flex items-center gap-2 group-hover:gap-4 transition-all relative z-10">
                                 Initialize AI Search
                                 <ArrowRight size={14} />
                             </Link>
+                            */}
                         </div>
 
                         {/* Card 3: Probiotics */}
@@ -268,7 +397,29 @@ export default function HomeClient() {
                 </div>
             </section>
 
-            {/* 4. SEA FLOOR VISUALIZATION        */}
+            {/* ------------------------------- */}
+            {/* 4. CONTACT / ENGAGEMENT         */}
+            {/* ------------------------------- */}
+            <section className="py-32 bg-[#010307] border-t border-white/5" id="contact">
+                <div className="max-w-4xl mx-auto px-6 text-center">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-8">
+                        <span className="text-[10px] font-black text-primary uppercase tracking-widest">Connect</span>
+                    </div>
+                    <h2 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter mb-8">
+                        Engage the <br />
+                        <span className="text-primary brightness-125">Restoration Network.</span>
+                    </h2>
+                    <p className="text-xl text-slate-400 font-light mb-12">
+                        Whether you are a maritime regulator, a potential partner, or a steward of the sea, our network is open for integration.
+                    </p>
+                    <a href="mailto:info@coralfil.com" className="inline-flex items-center gap-4 px-12 py-6 bg-white/5 hover:bg-white/10 text-white border border-white/20 rounded-2xl transition-all group">
+                        <span className="text-lg font-bold">Initiate Connection</span>
+                        <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform text-primary" />
+                    </a>
+                </div>
+            </section>
+
+            {/* 5. SEA FLOOR VISUALIZATION        */}
             {/* ------------------------------- */}
             <section className="relative h-screen w-full overflow-hidden bg-[#010307]">
                 <div className="absolute inset-0">
@@ -313,7 +464,63 @@ export default function HomeClient() {
                     </div>
                 </div>
 
-                <div className="relative z-20 h-full flex items-center justify-center container mx-auto px-6">
+                {/* Interactive Reef Creatures */}
+                <div className="absolute inset-0 z-20 pointer-events-none">
+                    {REEF_CREATURES.map((creature) => (
+                        <div
+                            key={creature.id}
+                            className="absolute pointer-events-auto"
+                            style={{ left: creature.x, top: creature.y }}
+                            onMouseEnter={() => setHoveredCreature(creature.id)}
+                            onMouseLeave={() => setHoveredCreature(null)}
+                            onClick={() => setActiveCreature(activeCreature === creature.id ? null : creature.id)}
+                        >
+                            <motion.div
+                                animate={{
+                                    y: [0, -10, 0],
+                                    rotate: [0, 5, -5, 0]
+                                }}
+                                transition={{
+                                    duration: 4 + Math.random() * 2,
+                                    repeat: Infinity,
+                                    ease: "easeInOut"
+                                }}
+                                className="relative cursor-pointer group"
+                            >
+                                {/* Glowing orb behind icon */}
+                                <div className={`absolute inset-0 bg-primary/20 blur-xl rounded-full transition-opacity duration-300 ${hoveredCreature === creature.id || activeCreature === creature.id ? 'opacity-100 scale-150' : 'opacity-0'}`} />
+                                
+                                <span className={`text-4xl drop-shadow-[0_0_15px_rgba(0,217,192,0.8)] filter transition-all duration-300 ${hoveredCreature === creature.id || activeCreature === creature.id ? 'brightness-125 scale-110' : 'brightness-75'}`}>
+                                    {creature.icon}
+                                </span>
+
+                                {/* Tooltip */}
+                                <AnimatePresence>
+                                    {(hoveredCreature === creature.id || activeCreature === creature.id) && (
+                                        <motion.div
+                                            initial={{ opacity: 0, y: 10, scale: 0.9 }}
+                                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                                            exit={{ opacity: 0, scale: 0.9 }}
+                                            className="absolute top-12 left-1/2 -translate-x-1/2 w-64 glass-panel p-4 rounded-xl border border-primary/20 z-50 pointer-events-none"
+                                        >
+                                            <div className="flex items-center gap-2 mb-2">
+                                                <Info size={14} className="text-primary" />
+                                                <h4 className="text-white text-sm font-bold uppercase tracking-wider">{creature.name}</h4>
+                                            </div>
+                                            <p className="text-xs text-slate-300 mb-2">{creature.description}</p>
+                                            <div className="bg-primary/5 p-2 rounded border border-primary/10">
+                                                <span className="text-[9px] text-primary uppercase font-bold tracking-widest block mb-1">Ecosystem Role</span>
+                                                <p className="text-[10px] text-slate-400 leading-relaxed">{creature.importance}</p>
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            </motion.div>
+                        </div>
+                    ))}
+                </div>
+
+                <div className="relative z-30 h-full flex items-center justify-center container mx-auto px-6 pointer-events-none">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}

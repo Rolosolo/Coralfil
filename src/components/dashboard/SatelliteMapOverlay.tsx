@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Crosshair, Shield, Activity, Database, Radar } from "lucide-react";
+import { Crosshair, Shield, Activity, Database, Radar, Globe } from "lucide-react";
 
 export function SatelliteMapOverlay() {
     const [scanProgress, setScanProgress] = useState(0);
@@ -50,18 +50,57 @@ export function SatelliteMapOverlay() {
             <div className="absolute top-4 left-4 flex flex-col gap-2 z-10">
                 <div className="px-3 py-1.5 bg-black/60 backdrop-blur-md border border-white/10 rounded-xl flex items-center gap-2">
                     <Radar size={12} className="text-primary animate-spin" style={{ animationDuration: '3s' }} />
-                    <span className="text-[9px] font-mono text-white/70 uppercase">SAT-LNK: ACTIVE</span>
+                    <span className="text-[9px] font-mono text-white/70 uppercase tracking-widest leading-none">SAT-LNK: ACTIVE</span>
+                </div>
+                <div className="px-3 py-1.5 bg-black/60 backdrop-blur-md border border-white/10 rounded-xl flex items-center gap-2">
+                    <Globe size={12} className="text-primary" />
+                    <span className="text-[9px] font-mono text-white/70 uppercase tracking-widest leading-none">ACA-INTEGRATION: LIVE</span>
+                </div>
+            </div>
+
+            {/* ACA Legend Sidebar */}
+            <div className="absolute top-4 right-4 flex flex-col gap-4 z-10 items-end">
+                <div className="p-3 bg-black/60 backdrop-blur-md border border-white/10 rounded-2xl flex flex-col gap-3 min-w-[140px]">
+                    <div className="text-[8px] font-black text-primary uppercase tracking-[0.2em] mb-1">Geomorphic Zones</div>
+                    <div className="space-y-2">
+                        {[
+                            { label: 'Inner Reef Flat', color: 'bg-emerald-400' },
+                            { label: 'Outer Reef Flat', color: 'bg-emerald-600' },
+                            { label: 'Sloping Shelf', color: 'bg-blue-500' },
+                            { label: 'Back Reef Slope', color: 'bg-blue-800' }
+                        ].map(item => (
+                            <div key={item.label} className="flex items-center gap-2">
+                                <div className={`w-1.5 h-1.5 rounded-full ${item.color}`}></div>
+                                <span className="text-[8px] font-mono text-white/60 uppercase">{item.label}</span>
+                            </div>
+                        ))}
+                    </div>
+                    <div className="h-px bg-white/10 my-1"></div>
+                    <div className="text-[8px] font-black text-[#00ffca] uppercase tracking-[0.2em] mb-1">Benthic Habitats</div>
+                    <div className="space-y-2">
+                        {[
+                            { label: 'Coral/Algae', color: 'bg-pink-400' },
+                            { label: 'Sand', color: 'bg-yellow-200' },
+                            { label: 'Rock', color: 'bg-slate-500' },
+                            { label: 'Seagrass', color: 'bg-green-400' }
+                        ].map(item => (
+                            <div key={item.label} className="flex items-center gap-2">
+                                <div className={`w-1.5 h-1.5 rounded-sm ${item.color}`}></div>
+                                <span className="text-[8px] font-mono text-white/60 uppercase">{item.label}</span>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
 
             <div className="absolute bottom-4 right-4 flex flex-col gap-2 z-10 items-end">
-                <div className="px-3 py-1.5 bg-black/60 backdrop-blur-md border border-white/10 rounded-xl flex items-center gap-2">
+                <div className="px-3 py-1.5 bg-black/60 backdrop-blur-md border border-white/10 rounded-xl flex items-center gap-2 shadow-lg">
                     <Activity size={12} className="text-primary" />
-                    <span className="text-[9px] font-mono text-white/70">RESILIENCE: 84.2%</span>
+                    <span className="text-[9px] font-mono text-white/70 uppercase tracking-wider">RESILIENCE SCORE: 84.2%</span>
                 </div>
-                <div className="px-3 py-1.5 bg-black/60 backdrop-blur-md border border-white/10 rounded-xl flex items-center gap-2">
+                <div className="px-3 py-1.5 bg-black/60 backdrop-blur-md border border-white/10 rounded-xl flex items-center gap-2 shadow-lg">
                     <Database size={12} className="text-secondary" />
-                    <span className="text-[9px] font-mono text-white/70">ML-PREDICT: OPTIMAL</span>
+                    <span className="text-[9px] font-mono text-white/70 uppercase tracking-wider">ACA-ML CLASSIFICATION: OPTIMAL</span>
                 </div>
             </div>
 

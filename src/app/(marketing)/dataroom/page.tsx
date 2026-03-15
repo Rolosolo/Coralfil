@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
     ShieldCheck,
     Lock,
@@ -31,19 +31,19 @@ import {
     Microscope,
     Activity
 } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
+import { motion, AnimatePresence } from "@/components/motion-client";
+import Image from "next/image";
 
 const SECTIONS = [
     { id: "summary", label: "Executive Summary", icon: Target },
     { id: "portfolio", label: "Product Portfolio", icon: Layers },
+    { id: "partnerships", label: "Strategic Partnerships", icon: Globe },
     { id: "team", label: "Team & Org", icon: Users },
     { id: "tech", label: "Tech Architecture", icon: Cpu },
     { id: "funding", label: "Funding & Execution", icon: CreditCard },
-    { id: "production", label: "Production Strategy", icon: Factory },
     { id: "ops", label: "Field Operations", icon: Ship },
-    { id: "risk", label: "Risk Management", icon: AlertTriangle },
     { id: "finance", label: "Financial Projections", icon: TrendingUp },
-    { id: "milestones", label: "Milestones & KPIs", icon: Calendar },
     { id: "appendices", label: "Appendices", icon: FileText },
 ];
 
@@ -51,9 +51,69 @@ export default function DataRoom() {
     const [hasAccepted, setHasAccepted] = useState(false);
     const [activeSection, setActiveSection] = useState("summary");
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+    const particlesRef = useRef<{x:number;y:number;vx:number;vy:number;life:number;size:number}[]>([]);
+    const animFrameRef = useRef<number>(0);
 
     useEffect(() => {
         if (hasAccepted) window.scrollTo(0, 0);
+    }, [hasAccepted]);
+
+    // Hide the marketing layout Header on this full-page experience
+    useEffect(() => {
+        const header = document.querySelector('header') as HTMLElement | null;
+        if (header) header.style.display = 'none';
+        return () => {
+            const h = document.querySelector('header') as HTMLElement | null;
+            if (h) h.style.display = '';
+        };
+    }, []);
+
+    // Bioluminescent coral mouse-trail
+    useEffect(() => {
+        if (!hasAccepted) return;
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+        const resize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
+        resize();
+        window.addEventListener('resize', resize);
+        const onMove = (e: MouseEvent) => {
+            for (let i = 0; i < 5; i++) {
+                particlesRef.current.push({
+                    x: e.clientX + (Math.random() - 0.5) * 12,
+                    y: e.clientY + (Math.random() - 0.5) * 12,
+                    vx: (Math.random() - 0.5) * 1.8,
+                    vy: (Math.random() - 0.5) * 1.8 - 0.4,
+                    life: 1,
+                    size: 2 + Math.random() * 5,
+                });
+            }
+        };
+        window.addEventListener('mousemove', onMove);
+        const draw = () => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particlesRef.current = particlesRef.current.filter(p => p.life > 0);
+            for (const p of particlesRef.current) {
+                p.x += p.vx; p.y += p.vy; p.vy -= 0.018; p.life -= 0.022;
+                const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * 4);
+                g.addColorStop(0, `rgba(0,217,192,${p.life * 0.85})`);
+                g.addColorStop(0.35, `rgba(0,217,192,${p.life * 0.25})`);
+                g.addColorStop(1, 'rgba(0,217,192,0)');
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size * 4, 0, Math.PI * 2);
+                ctx.fillStyle = g;
+                ctx.fill();
+            }
+            animFrameRef.current = requestAnimationFrame(draw);
+        };
+        draw();
+        return () => {
+            window.removeEventListener('resize', resize);
+            window.removeEventListener('mousemove', onMove);
+            cancelAnimationFrame(animFrameRef.current);
+        };
     }, [hasAccepted]);
 
     if (!hasAccepted) {
@@ -91,6 +151,8 @@ export default function DataRoom() {
 
     return (
         <main className="min-h-screen bg-[#010307] text-white selection:bg-[#00D9C0] selection:text-black font-sans">
+            {/* Bioluminescent Mouse Trail */}
+            <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none z-[300]" style={{ mixBlendMode: 'screen' }} />
             {/* Animated Backdrop */}
             <div className="fixed inset-0 pointer-events-none opacity-20">
                 <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#00D9C0]/10 blur-[150px] rounded-full -mr-96 -mt-96"></div>
@@ -126,7 +188,7 @@ export default function DataRoom() {
                     <div className="h-full flex flex-col p-8 pt-12">
                         <div className="mb-12">
                             <div className="flex items-center gap-3 mb-8">
-                                <img src="/favicon.svg" alt="Coralfil Logo" className="w-10 h-10" />
+                                <Image src="/favicon.svg" alt="Coralfil Logo" width={40} height={40} className="w-10 h-10" />
                                 <span className="text-xl font-bold tracking-tight">CoralFil</span>
                             </div>
                             <div className="text-[10px] font-black text-[#00D9C0] uppercase tracking-[0.4em] mb-4">Confidential Data Room</div>
@@ -169,7 +231,7 @@ export default function DataRoom() {
                         <div className="mt-8 pt-8 border-t border-white/5">
                             <div className="p-6 rounded-3xl bg-white/5 border border-white/5 text-center">
                                 <p className="text-[9px] text-slate-500 uppercase tracking-widest font-black mb-1">Authorized Official</p>
-                                <p className="text-[11px] font-bold text-white">Roland - CEO/CTO</p>
+                                <p className="text-[11px] font-bold text-white">Roland Poulin — CEO/CTO</p>
                             </div>
                         </div>
                     </div>
@@ -180,10 +242,11 @@ export default function DataRoom() {
                     {/* Immersive Hero */}
                     <section className="relative h-[70vh] flex items-center px-12 md:px-24 overflow-hidden border-b border-white/5">
                         <div className="absolute inset-0 z-0">
-                            <img
+                            <Image
                                 src="/artifacts/dataroom_hero.png"
                                 alt="Data Room Hero"
-                                className="w-full h-full object-cover opacity-60"
+                                fill
+                                className="object-cover opacity-60"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-[#010307] via-[#010307]/20 to-[#010307]/90"></div>
                             <div className="absolute inset-0 bg-gradient-to-r from-[#010307] via-transparent to-transparent"></div>
@@ -291,8 +354,8 @@ export default function DataRoom() {
                                         <h4 className="text-sm font-bold uppercase tracking-widest mb-10 text-slate-500 relative">Strategy Roadmap</h4>
                                         <div className="space-y-10 relative">
                                             {[
-                                                { label: "Phase 1: Canada Grant", timeline: "Mar - May 2026", active: true },
-                                                { label: "Phase 2: Pilot Validation", timeline: "May - Dec 2026", active: false },
+                                                { label: "Phase 1: Grant Applications", timeline: "Q2 2026 — In Progress", active: true },
+                                                { label: "Phase 2: Pilot Validation", timeline: "H2 2026 (conditional)", active: false },
                                                 { label: "Phase 3: Series A / Scale", timeline: "Q1 2027+", active: false }
                                             ].map((item, i) => (
                                                 <div key={i} className="flex gap-6 items-start">
@@ -350,11 +413,12 @@ export default function DataRoom() {
                                     </div>
                                     <div className="relative group">
                                         <div className="absolute inset-0 bg-gradient-to-tr from-[#00D9C0]/20 to-transparent rounded-[4rem] group-hover:scale-105 transition-transform duration-1000"></div>
-                                        <div className="glass-panel p-2 rounded-[4rem] border border-white/10 relative overflow-hidden">
-                                            <img
+                                        <div className="glass-panel p-2 rounded-[4rem] border border-white/10 relative overflow-hidden aspect-[4/5] w-full">
+                                            <Image
                                                 src="/artifacts/growth_simulation_demo.png"
                                                 alt="Coralstick Simulation"
-                                                className="w-full aspect-[4/5] object-cover rounded-[3.8rem] opacity-80"
+                                                fill
+                                                className="object-cover rounded-[3.8rem] opacity-80"
                                             />
                                             <div className="absolute inset-0 bg-gradient-to-t from-[#010307] via-transparent to-transparent"></div>
                                             <div className="absolute bottom-12 left-12 right-12">
@@ -403,6 +467,54 @@ export default function DataRoom() {
                                                 </div>
                                             ))}
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* 3. Strategic Partnerships */}
+                        <section id="partnerships" className="scroll-mt-32">
+                            <div className="flex items-center gap-6 mb-16 px-4 py-2 rounded-full border border-white/5 bg-white/[0.02] w-fit">
+                                <Globe className="text-[#00D9C0]" size={24} />
+                                <h2 className="text-sm font-black uppercase tracking-[0.4em]">Section 03 / Strategic Partnerships</h2>
+                            </div>
+
+                            <div className="glass-panel p-16 rounded-[4rem] border border-[#00D9C0]/30 bg-[#00D9C0]/5 relative overflow-hidden group">
+                                <div className="absolute top-0 right-0 p-12 opacity-10">
+                                    <Activity size={120} className="text-[#00D9C0]" />
+                                </div>
+                                <div className="relative z-10 grid lg:grid-cols-2 gap-16 items-center">
+                                    <div className="space-y-8">
+                                        <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-[#00D9C0] text-black text-[10px] font-black uppercase tracking-widest">
+                                            Primary Beta Partner
+                                        </div>
+                                        <h3 className="text-5xl font-bold tracking-tighter">CoralVita x Coralfil</h3>
+                                        <p className="text-xl text-slate-300 font-light leading-relaxed">
+                                            "A force-multiplier for marine restoration." Combining CoralVita's land-based farming infrastructure with Coralfil's molecular intelligence and Red Algae Biofilm technology.
+                                        </p>
+                                        <div className="grid grid-cols-2 gap-6 pt-4">
+                                            <div className="space-y-2">
+                                                <p className="text-[10px] font-black text-[#00D9C0] uppercase tracking-widest">Revenue Model</p>
+                                                <p className="text-sm text-slate-400">Component supplier + Royalty on enhanced outplants</p>
+                                            </div>
+                                            <div className="space-y-2">
+                                                <p className="text-[10px] font-black text-[#00D9C0] uppercase tracking-widest">Initial Pilot</p>
+                                                <p className="text-sm text-slate-400">Bahamas (June 2026) - 100kg Coralstick deployment</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="p-10 rounded-[3rem] bg-black/40 border border-white/10 space-y-8">
+                                        <h4 className="text-sm font-bold uppercase tracking-widest text-slate-500">Resource Exchange</h4>
+                                        <ul className="space-y-6">
+                                            <li className="flex gap-4">
+                                                <CheckCircle className="text-[#00D9C0] shrink-0 mt-1" size={18} />
+                                                <p className="text-sm text-slate-300">CoralVita: Established sites, land-based labs, and market access</p>
+                                            </li>
+                                            <li className="flex gap-4">
+                                                <CheckCircle className="text-[#00D9C0] shrink-0 mt-1" size={18} />
+                                                <p className="text-sm text-slate-300">Coralfil: Ionic polymers, bioactive compounds, and AI optimization</p>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
@@ -464,6 +576,70 @@ export default function DataRoom() {
                             </div>
                         </section>
 
+                        {/* 7. Field Operations */}
+                        <section id="ops" className="scroll-mt-32">
+                            <div className="flex items-center gap-6 mb-16 px-4 py-2 rounded-full border border-white/5 bg-white/[0.02] w-fit">
+                                <Ship className="text-[#00D9C0]" size={24} />
+                                <h2 className="text-sm font-black uppercase tracking-[0.4em]">Section 07 / Field Operations</h2>
+                            </div>
+
+                            <div className="glass-panel p-1 rounded-[4rem] bg-gradient-to-br from-[#00D9C0]/20 via-transparent to-[#FF6B6B]/10 border border-white/10">
+                                <div className="bg-[#040914] rounded-[3.9rem] p-12 md:p-24 overflow-x-auto">
+                                    <table className="w-full">
+                                        <thead>
+                                            <tr className="border-b border-white/5">
+                                                <th className="text-left py-6 text-[10px] font-black uppercase tracking-widest text-[#00D9C0]">Regional Site</th>
+                                                <th className="text-left py-6 text-[10px] font-black uppercase tracking-widest text-[#00D9C0]">Product Matrix</th>
+                                                <th className="text-left py-6 text-[10px] font-black uppercase tracking-widest text-[#00D9C0]">Deployment</th>
+                                                <th className="text-right py-6 text-[10px] font-black uppercase tracking-widest text-[#00D9C0]">Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody className="divide-y divide-white/5">
+                                            <tr>
+                                                <td className="py-8">
+                                                    <div className="text-lg font-bold">Grand Bahama Sector</div>
+                                                    <div className="text-xs text-slate-500">Blue Action Lab (Grant Pending)</div>
+                                                </td>
+                                                <td className="py-8">
+                                                    <div className="text-sm">Coralstick-T + Biofilm</div>
+                                                </td>
+                                                <td className="py-8 text-sm text-slate-400">TBD 2026</td>
+                                                <td className="py-8 text-right">
+                                                    <span className="px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 text-[10px] font-black uppercase tracking-widest">Applied</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td className="py-8">
+                                                    <div className="text-lg font-bold">NEOM Red Sea Site</div>
+                                                    <div className="text-xs text-slate-500">KAUST Scientific Site A-4</div>
+                                                </td>
+                                                <td className="py-8">
+                                                    <div className="text-sm">High-Temp Probiotics</div>
+                                                </td>
+                                                <td className="py-8 text-sm text-slate-400">Sep 2026</td>
+                                                <td className="py-8 text-right">
+                                                    <span className="px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-[10px] font-black uppercase tracking-widest">In Design</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td className="py-8">
+                                                    <div className="text-lg font-bold">Florida Keys Sanctuary</div>
+                                                    <div className="text-xs text-slate-500">UMiami Restoration Hub</div>
+                                                </td>
+                                                <td className="py-8">
+                                                    <div className="text-sm">C-Bricks Pilot</div>
+                                                </td>
+                                                <td className="py-8 text-sm text-slate-400">Nov 2026</td>
+                                                <td className="py-8 text-right">
+                                                    <span className="px-3 py-1 rounded-full bg-white/5 text-slate-500 text-[10px] font-black uppercase tracking-widest">Phase 3</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </section>
+
                         {/* 9. Financial Projections */}
                         <section id="finance" className="scroll-mt-32">
                             <div className="flex items-center gap-6 mb-16 px-4 py-2 rounded-full border border-white/5 bg-white/[0.02] w-fit">
@@ -485,7 +661,7 @@ export default function DataRoom() {
                                         <tbody className="divide-y divide-white/5">
                                             {[
                                                 { seg: "Coralstick™ Sales", y1: "$150K", y2: "$600K", y3: "$2.0M" },
-                                                { seg: "C-Brick Pilot", y1: "$0", y2: "$50K", y3: "$500K" },
+                                                { seg: "C-Bricks Pilot", y1: "$0", y2: "$50K", y3: "$500K" },
                                                 { seg: "Bioactive IP / Additives", y1: "$0", y2: "$100K", y3: "$400K" },
                                                 { seg: "Reefmaker AI SaaS", y1: "$0", y2: "$50K", y3: "$200K" }
                                             ].map((row, i) => (
@@ -531,9 +707,9 @@ export default function DataRoom() {
 
                                 <div className="grid md:grid-cols-3 gap-8">
                                     {[
-                                        { name: "Roland", role: "CEO / CTO, Coralfil" },
+                                        { name: "Roland Poulin", role: "CEO / CTO, Coralfil" },
                                         { name: "Dr. Biswajit Biswas", role: "Chief Scientific Advisor" },
-                                        { name: "Alex", role: "Operations Lead" }
+                                        { name: "Alex Andrei", role: "Operations Lead" }
                                     ].map((signee, i) => (
                                         <div key={i} className="p-12 border border-dashed border-white/10 rounded-[2.5rem] bg-white/[0.01] hover:bg-white/[0.03] transition-colors">
                                             <div className="h-px bg-slate-800 w-full mb-8 relative">
@@ -546,10 +722,13 @@ export default function DataRoom() {
                                 </div>
 
                                 <div className="flex flex-col sm:flex-row gap-6 justify-center pt-20">
-                                    <button className="h-18 px-14 bg-white text-black text-[10px] font-black uppercase tracking-[0.2em] rounded-2xl hover:bg-[#00D9C0] transition-all flex items-center justify-center gap-4 group">
+                                    <Link
+                                        href="/docs/Coralfil_Master_Plan_v1.0.md"
+                                        className="h-18 px-14 bg-white text-black text-[10px] font-black uppercase tracking-[0.2em] rounded-2xl hover:bg-[#00D9C0] transition-all flex items-center justify-center gap-4 group"
+                                    >
                                         <Download size={16} className="group-hover:translate-y-0.5 transition-transform" />
                                         Download Technical Pack (v1.0)
-                                    </button>
+                                    </Link>
                                     <button className="h-18 px-14 border border-white/10 text-white text-[10px] font-black uppercase tracking-[0.2em] rounded-2xl hover:bg-white/5 transition-all flex items-center justify-center gap-4 group">
                                         <Share2 size={16} className="group-hover:scale-110 transition-transform" />
                                         Grant Secure Access

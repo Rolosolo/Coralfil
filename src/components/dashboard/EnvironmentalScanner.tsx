@@ -54,7 +54,7 @@ export default function EnvironmentalScanner({ noaaData, atlasData }: { noaaData
             ) : (
                 <div className="grid grid-cols-2 gap-3 animate-fade-in flex-grow">
                     {/* Metric 1: SST (NOAA) */}
-                    <div className="bg-[#02060c] p-3 rounded-xl border border-white/5 relative group overflow-hidden">
+                    <div className="bg-[#02060c] p-3 rounded-xl border border-white/5 relative group overflow-hidden flex flex-col justify-between">
                         <div className="text-slate-500 text-[10px] uppercase mb-1 flex items-center gap-2">
                             <Thermometer size={12} className="text-orange-400" /> SST (NOAA)
                         </div>
@@ -65,7 +65,7 @@ export default function EnvironmentalScanner({ noaaData, atlasData }: { noaaData
                     </div>
 
                     {/* Metric 2: DHW (NOAA) */}
-                    <div className="bg-[#02060c] p-3 rounded-xl border border-white/5 relative group overflow-hidden">
+                    <div className="bg-[#02060c] p-3 rounded-xl border border-white/5 relative group overflow-hidden flex flex-col justify-between">
                         <div className="text-slate-500 text-[10px] uppercase mb-1 flex items-center gap-2">
                             <ShieldAlert size={12} className="text-red-400" /> Heat Stress
                         </div>
@@ -74,21 +74,44 @@ export default function EnvironmentalScanner({ noaaData, atlasData }: { noaaData
                     </div>
 
                     {/* Metric 3: Geomorphic Zone (ACA) */}
-                    <div className="bg-[#02060c] p-3 rounded-xl border border-primary/10 relative group overflow-hidden">
+                    <div className="bg-[#02060c] p-3 rounded-xl border border-primary/10 relative group overflow-hidden flex flex-col justify-between">
                         <div className="text-primary/60 text-[10px] uppercase mb-1 flex items-center gap-2 font-black">
-                            <Map size={12} /> Geomorphic (ACA)
+                            <Map size={12} /> Geomorphic
                         </div>
-                        <div className="text-sm font-bold text-white uppercase tracking-tight truncate">{atlasData?.geomorphicZone || "Inner Reef Flat"}</div>
-                        <div className="absolute top-1 right-2 text-[8px] font-mono text-primary/40">{((atlasData?.confidence ?? 0.89) * 100).toFixed(0)}% CONF</div>
+                        <div className="text-[11px] font-bold text-white uppercase tracking-tight truncate">{atlasData?.geomorphicZone || "Inner Reef Flat"}</div>
+                        <div className="text-[8px] font-mono text-primary/40 mt-1">CONF: {((atlasData?.confidence ?? 0.89) * 100).toFixed(0)}%</div>
                     </div>
 
                     {/* Metric 4: Benthic Habitat (ACA) */}
-                    <div className="bg-[#02060c] p-3 rounded-xl border border-primary/10 relative group overflow-hidden">
+                    <div className="bg-[#02060c] p-3 rounded-xl border border-primary/10 relative group overflow-hidden flex flex-col justify-between">
                         <div className="text-primary/60 text-[10px] uppercase mb-1 flex items-center gap-2 font-black">
-                            <Globe size={12} /> Benthic (ACA)
+                            <Globe size={12} /> Benthic/Cover
                         </div>
-                        <div className="text-sm font-bold text-white uppercase tracking-tight">{atlasData?.benthicHabitat || "Coral/Algae"}</div>
-                        <div className="text-[9px] text-slate-500 font-mono mt-1 italic">DEPTH: {atlasData?.bathymetry || -4.2}m</div>
+                        <div className="flex items-baseline gap-1.5">
+                            <span className="text-xs font-bold text-white uppercase tracking-tight truncate">{atlasData?.benthicHabitat || "Coral/Algae"}</span>
+                            <span className="text-[10px] font-mono text-primary">({atlasData?.coralCover || 24}%)</span>
+                        </div>
+                        <div className="text-[8px] text-slate-500 font-mono mt-1 italic">DEPTH: {atlasData?.bathymetry || -4.2}m</div>
+                    </div>
+
+                    {/* Metric 5: Exposure (ACA) - Full width row */}
+                    <div className="col-span-2 bg-[#02060c] p-3 rounded-xl border border-white/5 relative group overflow-hidden flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                            <div className="text-slate-500 text-[10px] uppercase flex items-center gap-2 font-bold">
+                                <Waves size={12} className="text-sky-400" /> Wave Exposure
+                            </div>
+                            <div className="text-[10px] font-black text-white uppercase tracking-widest">{atlasData?.exposure || "Medium"}</div>
+                        </div>
+                        <div className="flex gap-1">
+                            {[1, 2, 3].map(i => (
+                                <div key={i} className={`w-3 h-1 rounded-full ${
+                                    (atlasData?.exposure === 'High') || 
+                                    (atlasData?.exposure === 'Medium' && i <= 2) || 
+                                    (atlasData?.exposure === 'Low' && i === 1) 
+                                    ? 'bg-sky-400' : 'bg-white/10'
+                                }`}></div>
+                            ))}
+                        </div>
                     </div>
                 </div>
             )}

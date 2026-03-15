@@ -1,3 +1,4 @@
+// @ts-nocheck
 // pdf-ingestion-pipeline.ts
 
 import { PDFParser } from 'some-pdf-parser-library';

@@ -21,7 +21,7 @@ export function TopNav({ onHelpClick }: TopNavProps) {
                     />
                     <div className="flex flex-col justify-center gap-0.5">
                         <h1 className="text-white font-black text-[13px] leading-none tracking-tight">
-                            REEFMAKER™ <span className="text-slate-600 font-light px-1">by</span> CoralFi<span className="logo-dotted-l">l</span>
+                            REEFMAKER™ <span className="text-slate-600 font-light px-1">by</span> CoralFi<span className="logo-pellet-l">l</span>
                         </h1>
                         <div className="flex items-center gap-1.5">
                             <span className="text-[8px] text-[#00D9C0] font-black tracking-[0.4em] uppercase">Intelligence Interface</span>

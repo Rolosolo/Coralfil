@@ -1,12 +1,53 @@
 "use client";
 
+import { useState } from "react";
 import { JsonLd } from "@/components/JsonLd";
-import { Download, ArrowRight, ShieldCheck, Globe, Activity, FileText } from "lucide-react";
+import { Download, ArrowRight, ShieldCheck, Globe, Activity, FileText, Send, CheckSquare, Square } from "lucide-react";
 import { investorPackService } from "@/lib/investor-pack";
 
 export function InvestorsClient() {
+    const [email, setEmail] = useState("");
+    const [company, setCompany] = useState("");
+    const [interests, setInterests] = useState({
+        investorPack: false,
+        techOverview: false,
+        scheduleCall: false,
+        partnerships: false
+    });
+    const [captcha, setCaptcha] = useState("");
+    const captchaExpected = "8"; // simple 5 + 3 = 8
+
     const handleDownloadRDPack = () => {
         investorPackService.downloadAsMarkdown();
+    };
+
+    const toggleInterest = (key: keyof typeof interests) => {
+        setInterests(prev => ({ ...prev, [key]: !prev[key] }));
+    };
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (captcha !== captchaExpected) {
+            alert("Captcha incorrect. Please try again.");
+            return;
+        }
+        
+        const selectedInterests = Object.entries(interests)
+            .filter(([_, isSelected]) => isSelected)
+            .map(([key, _]) => key)
+            .join(", ");
+
+        const body = `
+Company: ${company}
+Email: ${email}
+Interests: ${selectedInterests || "General Inquiry"}
+
+Please provide more information as requested above.
+        `.trim();
+
+        const encodedSubject = encodeURIComponent(`Investor Inquiry: ${company || email}`);
+        const encodedBody = encodeURIComponent(body);
+        window.location.href = `mailto:ir@coralfil.com?subject=${encodedSubject}&body=${encodedBody}`;
     };
 
     return (
@@ -71,29 +112,102 @@ export function InvestorsClient() {
                     </div>
                 </div>
 
-                {/* R&D Technical Overview CTA */}
-                <div className="bg-white/5 rounded-[3rem] p-12 md:p-20 border border-white/5 relative overflow-hidden text-center group">
+                {/* R&D Technical Overview CTA & Contact Form */}
+                <div className="bg-white/5 rounded-[3rem] p-12 md:p-20 border border-white/5 relative overflow-hidden group mb-16">
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,217,192,0.1)_0%,transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
-                    <div className="relative z-10 max-w-2xl mx-auto">
-                        <div className="inline-flex p-5 bg-[#00D9C0]/5 rounded-2xl border border-[#00D9C0]/20 text-[#00D9C0] mb-8">
-                            <FileText className="w-8 h-8" />
-                        </div>
-                        <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">R&D Technical Overview</h2>
-                        <p className="text-slate-400 mb-12 font-light text-lg">
-                            Access our comprehensive research roadmap, manufacturing methodologies, and hypothesized biological outcomes.
-                        </p>
-                        <div className="flex flex-col sm:flex-row gap-6 justify-center">
+                    
+                    <div className="grid lg:grid-cols-2 gap-16 relative z-10">
+                        {/* Left Side: Overview & Download */}
+                        <div>
+                            <div className="inline-flex p-5 bg-[#00D9C0]/5 rounded-2xl border border-[#00D9C0]/20 text-[#00D9C0] mb-8">
+                                <FileText className="w-8 h-8" />
+                            </div>
+                            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Technical Resource Center</h2>
+                            <p className="text-slate-400 mb-12 font-light text-lg">
+                                Access our comprehensive research roadmap, manufacturing methodologies, and hypothesized biological outcomes.
+                            </p>
                             <button
                                 onClick={handleDownloadRDPack}
-                                className="inline-flex items-center justify-center gap-3 px-10 py-5 bg-white text-black rounded-lg font-black uppercase tracking-widest text-xs hover:bg-[#00D9C0] transition-all shadow-xl shadow-white/5"
+                                className="inline-flex items-center justify-center gap-3 px-10 py-5 bg-white text-black rounded-lg font-black uppercase tracking-widest text-xs hover:bg-[#00D9C0] transition-all shadow-xl shadow-white/5 w-full sm:w-auto"
                             >
                                 <Download size={16} />
                                 Download Technical Brief
                             </button>
-                            <a href="mailto:ir@coralfill.com" className="inline-flex items-center justify-center gap-3 px-10 py-5 border border-white/10 text-white rounded-lg font-black uppercase tracking-widest text-xs hover:bg-white/5 transition-all">
-                                Request Access
-                                <ArrowRight size={16} />
-                            </a>
+                        </div>
+
+                        {/* Right Side: Investor Contact Form */}
+                        <div className="glass-card p-8 border-[#00D9C0]/20 bg-[#010307]/80 backdrop-blur-xl rounded-2xl">
+                            <h3 className="text-2xl font-bold text-white mb-6 uppercase tracking-tight">Request Intelligence</h3>
+                            <form onSubmit={handleSubmit} className="space-y-6">
+                                
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div className="space-y-2">
+                                        <label className="text-[10px] font-black uppercase tracking-[0.2em] text-[#00D9C0]">Company / Organization</label>
+                                        <input 
+                                            type="text" 
+                                            required
+                                            value={company}
+                                            onChange={(e) => setCompany(e.target.value)}
+                                            className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-[#00D9C0]/50 transition-colors"
+                                            placeholder="Neural Holdings" 
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-[10px] font-black uppercase tracking-[0.2em] text-[#00D9C0]">Professional Email</label>
+                                        <input 
+                                            type="email" 
+                                            required
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
+                                            className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-[#00D9C0]/50 transition-colors"
+                                            placeholder="partner@example.com" 
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className="space-y-3">
+                                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-[#00D9C0]">Select Modules (All that apply)</label>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                        {[
+                                            { id: 'investorPack', label: 'Investor Package' },
+                                            { id: 'techOverview', label: 'Technical Overview' },
+                                            { id: 'scheduleCall', label: 'Schedule a Call' },
+                                            { id: 'partnerships', label: 'Partnerships' }
+                                        ].map((opt) => (
+                                            <div 
+                                                key={opt.id}
+                                                className="flex items-center gap-3 cursor-pointer group"
+                                                onClick={() => toggleInterest(opt.id as keyof typeof interests)}
+                                            >
+                                                <div className="text-[#00D9C0]">
+                                                    {interests[opt.id as keyof typeof interests] ? <CheckSquare size={18} /> : <Square size={18} className="opacity-50 group-hover:opacity-100 transition-opacity" />}
+                                                </div>
+                                                <span className="text-sm text-slate-300 group-hover:text-white transition-colors">{opt.label}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <div className="space-y-2">
+                                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-[#00D9C0]">Security Verification: 5 + 3 = ?</label>
+                                    <input 
+                                        type="text" 
+                                        required
+                                        value={captcha}
+                                        onChange={(e) => setCaptcha(e.target.value)}
+                                        className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-[#00D9C0]/50 transition-colors"
+                                        placeholder="Enter number" 
+                                    />
+                                </div>
+
+                                <button 
+                                    type="submit"
+                                    className="w-full flex items-center justify-center gap-3 px-6 py-4 bg-[#00D9C0] text-black font-black uppercase tracking-widest text-xs rounded-lg hover:bg-white transition-all shadow-[0_0_20px_rgba(0,217,192,0.2)]"
+                                >
+                                    <Send size={16} />
+                                    Dispatch Request
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>

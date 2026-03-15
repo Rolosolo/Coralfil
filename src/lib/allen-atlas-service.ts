@@ -7,6 +7,8 @@ export interface AllenAtlasData {
     geomorphicZone: string;     // e.g., "Inner Reef Flat", "Sloping Shelf"
     benthicHabitat: string;    // e.g., "Coral/Algae", "Sand"
     bathymetry: number;        // Depth in meters (negative)
+    coralCover: number;        // Percentage of coral cover (0-100)
+    exposure: "High" | "Medium" | "Low"; // Wave exposure level
     confidence: number;        // Accuracy score (0-1)
     lastUpdated: string;
 }
@@ -24,19 +26,23 @@ export const allenAtlasService = {
             // For the ReefMaker prototype, we simulate the high-resolution spatial response
             // corresponding to the GBR / Tropical restoration corridors.
 
-            await new Promise(resolve => setTimeout(resolve, 1200)); // Simulate spatial query latency
+            await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate spatial query latency
 
             // Determine zone characteristics based on nominal coordinates
-            // Simulated Benthic/Geomorphic response logic
-            // Determine zone characteristics based on regional context
-            const isPacific = lat > 40;
-            const isDeep = lat < -15 || isPacific;
+            const isPacific = lat > -30 && lat < 30; // Tropical band
+            const isDeep = Math.abs(lat) > 20;
+
+            // Simulated response logic based on geographical "fingerprints"
+            const geomorphicZones = ["Inner Reef Flat", "Outer Reef Flat", "Sloping Shelf", "Back Reef Slope", "Terrestial High Island"];
+            const habitats = ["Coral/Algae", "Sand", "Rock", "Rubble", "Seagrass"];
 
             const data: AllenAtlasData = {
-                geomorphicZone: isPacific ? "Submerged Ridge" : (isDeep ? "Sloping Shelf" : "Inner Reef Flat"),
-                benthicHabitat: isPacific ? "Glass Sponge Reef / Glacial Till" : (Math.random() > 0.3 ? "Coral/Algae" : "Rock"),
-                bathymetry: isPacific ? -85.0 : (isDeep ? -12.5 : -4.2),
-                confidence: 0.92 + (Math.random() * 0.04),
+                geomorphicZone: geomorphicZones[Math.floor(Math.random() * geomorphicZones.length)],
+                benthicHabitat: habitats[Math.floor(Math.random() * habitats.length)],
+                bathymetry: -(Math.random() * 25 + 2).toFixed(1) as any,
+                coralCover: Math.floor(Math.random() * 60 + 5),
+                exposure: Math.random() > 0.6 ? "High" : (Math.random() > 0.3 ? "Medium" : "Low"),
+                confidence: 0.88 + (Math.random() * 0.1),
                 lastUpdated: new Date().toISOString()
             };
 

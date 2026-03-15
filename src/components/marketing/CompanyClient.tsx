@@ -48,7 +48,7 @@ export function CompanyClient() {
                         className="text-xl text-slate-400 leading-relaxed max-w-2xl font-light"
                     >
                         Passion alone cannot reverse the coral crisis. We need scalable, realistic, and highly traceable solutions.
-                        CoralFi<span className="logo-dotted-l prose-none">l</span> is building the structural and chemical foundation for 100,000+ hectares of reef restoration.
+                        CoralFi<span className="logo-pellet-l prose-none">l</span> is building the structural and chemical foundation for 100,000+ hectares of reef restoration.
                     </motion.p>
                 </div>
 

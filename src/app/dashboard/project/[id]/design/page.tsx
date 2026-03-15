@@ -21,7 +21,8 @@ import {
     FileCheck,
     AlertTriangle,
     Activity,
-    Printer
+    Printer,
+    Globe
 } from "lucide-react";
 import { motion, AnimatePresence } from "@/components/motion-client";
 import { dataService } from "@/lib/data-service";
@@ -42,7 +43,9 @@ import { CoralStickExporter } from "@/components/dashboard/CoralStickExporter";
 import { QuotationGenerator } from "@/components/dashboard/QuotationGenerator";
 import { CoralStickFormulator } from "@/components/dashboard/CoralStickFormulator";
 
-type TabType = "parameters" | "species" | "synthesis" | "manufacturing" | "quotation";
+import { BathymetryProfile } from "@/components/dashboard/BathymetryProfile";
+
+type TabType = "parameters" | "species" | "spatial" | "synthesis" | "manufacturing" | "quotation";
 
 export default function DesignPage({ params }: { params: { id: string } }) {
     const { theme, setTheme } = useTheme();
@@ -413,7 +416,7 @@ export default function DesignPage({ params }: { params: { id: string } }) {
                 <div className="flex-1 bg-white/[0.03] rounded-[48px] border border-white/10 flex flex-col overflow-hidden glass-panel">
                     {/* Modular Tabs */}
                     <div className="flex p-3 bg-black/40 border-b border-white/10 gap-2 overflow-x-auto">
-                        {(['parameters', 'species', 'synthesis', 'manufacturing', 'quotation'] as TabType[]).map((tab) => (
+                        {(['parameters', 'species', 'spatial', 'synthesis', 'manufacturing', 'quotation'] as TabType[]).map((tab) => (
                             <button
                                 key={tab}
                                 onClick={() => setActiveTab(tab)}
@@ -424,6 +427,7 @@ export default function DesignPage({ params }: { params: { id: string } }) {
                             >
                                 {tab === 'parameters' && <Settings2 size={16} />}
                                 {tab === 'species' && <Dna size={16} />}
+                                {tab === 'spatial' && <Globe size={16} />}
                                 {tab === 'synthesis' && <Beaker size={16} />}
                                 {tab === 'manufacturing' && <Printer size={16} />}
                                 {tab === 'quotation' && <Terminal size={16} />}
@@ -498,6 +502,46 @@ export default function DesignPage({ params }: { params: { id: string } }) {
                                             selectedIds={selectedSpecies}
                                             onToggle={toggleSpecies}
                                         />
+                                    </div>
+                                )}
+
+                                {activeTab === 'spatial' && (
+                                    <div className="flex flex-col gap-8">
+                                        <div className="flex flex-col">
+                                            <h3 className="text-xl font-black text-white uppercase tracking-tight">Spatial Intelligence</h3>
+                                            <p className="text-[10px] text-primary/60 font-black uppercase tracking-[0.2em] mt-1">Allen Coral Atlas Layer</p>
+                                        </div>
+                                        <div className="p-8 bg-white/5 border border-white/10 rounded-[32px] space-y-8">
+                                            <div className="grid grid-cols-2 gap-6">
+                                                <div className="space-y-1">
+                                                    <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Zone Classification</span>
+                                                    <div className="text-lg font-black text-white uppercase">{atlasData?.geomorphicZone || "N/A"}</div>
+                                                </div>
+                                                <div className="space-y-1 text-right">
+                                                    <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Benthic Type</span>
+                                                    <div className="text-lg font-black text-white uppercase">{atlasData?.benthicHabitat || "N/A"}</div>
+                                                </div>
+                                            </div>
+                                            
+                                            <BathymetryProfile 
+                                                depth={atlasData?.bathymetry || 0} 
+                                                geomorphicZone={atlasData?.geomorphicZone || ""} 
+                                            />
+                                            
+                                            <div className="space-y-4 pt-4 border-t border-white/5">
+                                                <div className="flex justify-between items-center">
+                                                    <span className="text-[10px] font-black text-slate-500 uppercase">Live Coral Cover Estimate</span>
+                                                    <span className="text-xs font-mono font-bold text-primary">{atlasData?.coralCover}%</span>
+                                                </div>
+                                                <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                                                    <motion.div 
+                                                        initial={{ width: 0 }}
+                                                        animate={{ width: `${atlasData?.coralCover}%` }}
+                                                        className="h-full bg-primary shadow-[0_0_10px_rgba(0,217,192,0.5)]"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 )}
 

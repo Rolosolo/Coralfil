@@ -1,0 +1,10 @@
+{
+  "css.lint.unknownAtRules": "ignore",
+  "github-actions.workflows.pinned.workflows": [],
+  "yaml.customTags": [
+    "!env sequence",
+    "!env scalar",
+    "!env mapping"
+  ],
+  "githubActions.validators.contextAccess": "ignore"
+}
