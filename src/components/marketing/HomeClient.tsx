@@ -180,151 +180,189 @@ function CoralStickAnimation() {
         const W = canvas.width;
         const H = canvas.height;
         const frame = frameRef.current;
-        const totalFrames = 300;
+        const totalFrames = 480; // ~8 seconds at 60fps
 
         ctx.clearRect(0, 0, W, H);
 
-        // BG gradient
+        // BG gradient - Deep Oceanic
         const bg = ctx.createLinearGradient(0, 0, 0, H);
-        bg.addColorStop(0, "#041525");
-        bg.addColorStop(0.3, "#061e30");
-        bg.addColorStop(1, "#020a14");
+        bg.addColorStop(0, "#020810");
+        bg.addColorStop(0.4, "#051625");
+        bg.addColorStop(1, "#01040a");
         ctx.fillStyle = bg;
         ctx.fillRect(0, 0, W, H);
 
-        // Shimmer
-        ctx.strokeStyle = "rgba(0,217,192,0.15)";
-        ctx.lineWidth = 1;
-        for (let i = 0; i < 5; i++) {
+        // Volumetric Light / Shimmer
+        for (let i = 0; i < 3; i++) {
             ctx.beginPath();
-            for (let x = 0; x < W; x += 4) {
-                const y = 30 + i * 6 + Math.sin((x + frame * 2) * 0.02) * 3;
-                x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-            }
+            const opacity = 0.05 + Math.sin(frame * 0.01 + i) * 0.02;
+            ctx.strokeStyle = `rgba(0,217,192,${opacity})`;
+            ctx.lineWidth = 40;
+            ctx.moveTo(W * 0.2 + i * 50, -50);
+            ctx.lineTo(W * 0.4 + i * 50, H + 50);
             ctx.stroke();
         }
 
-        // Boat
-        const boatX = W * 0.35 + Math.sin(frame * 0.02) * 8;
-        const boatY = 18;
-        ctx.fillStyle = "#1a3a4a";
+        // Boat - More detailed silhouette
+        const boatX = W * 0.35 + Math.sin(frame * 0.015) * 12;
+        const boatY = 22;
+        
+        // Hull
+        ctx.fillStyle = "#0c1a25";
         ctx.beginPath();
-        ctx.moveTo(boatX - 35, boatY);
-        ctx.lineTo(boatX + 35, boatY);
-        ctx.lineTo(boatX + 25, boatY + 12);
-        ctx.lineTo(boatX - 25, boatY + 12);
+        ctx.moveTo(boatX - 45, boatY);
+        ctx.bezierCurveTo(boatX - 40, boatY + 15, boatX + 40, boatY + 15, boatX + 45, boatY);
         ctx.closePath();
         ctx.fill();
+        
+        // Deck structure
+        ctx.fillStyle = "#152a3a";
+        ctx.fillRect(boatX - 15, boatY - 8, 30, 8);
+        
+        // Antenna/Sensor
         ctx.strokeStyle = "#2a5a6a";
-        ctx.lineWidth = 2;
+        ctx.lineWidth = 1;
         ctx.beginPath();
-        ctx.moveTo(boatX, boatY);
-        ctx.lineTo(boatX, boatY - 14);
+        ctx.moveTo(boatX + 5, boatY - 8);
+        ctx.lineTo(boatX + 5, boatY - 22);
         ctx.stroke();
 
-        const pelletPhase = Math.min(frame / 100, 1);
-        const attractPhase = Math.max(0, Math.min((frame - 100) / 80, 1));
-        const healPhase = Math.max(0, Math.min((frame - 180) / 120, 1));
+        // Oceanic Particles (Snow)
+        ctx.fillStyle = "rgba(255,255,255,0.1)";
+        for (let i = 0; i < 20; i++) {
+            const px = (Math.sin(i * 999) * 0.5 + 0.5) * W;
+            const py = ((frame * 0.2 + i * 50) % H);
+            ctx.beginPath();
+            ctx.arc(px, py, 0.5, 0, Math.PI * 2);
+            ctx.fill();
+        }
 
-        const coralBaseY = H - 30;
+        const coralBaseY = H - 40;
 
-        // Draw multiple corals (a colony)
-        const drawBranch = (x: number, y: number, angle: number, len: number, depth: number, health: number) => {
-            if (depth <= 0 || len < 2) return;
-            const endX = x + Math.cos(angle) * len;
-            const endY = y + Math.sin(angle) * len;
+        // Realistic Coral Rendering
+        const drawOrganicBranch = (x: number, y: number, angle: number, len: number, depth: number, health: number) => {
+            if (depth <= 0 || len < 1.5) return;
+            
+            const sway = Math.sin(frame * 0.015 + x) * (5 - depth) * 0.3;
+            const endX = x + Math.cos(angle + sway * 0.05) * len;
+            const endY = y + Math.sin(angle + sway * 0.05) * len;
 
-            const r = Math.floor(255 - health * 105);
-            const g = Math.floor(240 - health * 140);
-            const b = Math.floor(235 - health * 35);
+            // Color maturation - from bleached white to vibrant coral pink/orange
+            const r = Math.floor(255 - health * 45);
+            const g = Math.floor(245 - health * 180);
+            const b = Math.floor(240 - health * 160);
+            
             ctx.strokeStyle = `rgb(${r},${g},${b})`;
-            ctx.lineWidth = depth * 1;
+            ctx.lineWidth = depth * 1.8;
             ctx.lineCap = "round";
+            
             ctx.beginPath();
             ctx.moveTo(x, y);
             ctx.lineTo(endX, endY);
             ctx.stroke();
 
-            if (health > 0.3) {
-                ctx.shadowColor = `rgba(255,${100 + health * 100},${80 + health * 100},${health * 0.4})`;
-                ctx.shadowBlur = health * 4;
+            // Polyps / Texture
+            if (depth < 3 && health > 0.4) {
+                ctx.fillStyle = `rgba(255,100,100,${health * 0.6})`;
+                ctx.beginPath();
+                ctx.arc(endX, endY, 1.5, 0, Math.PI * 2);
+                ctx.fill();
             }
 
-            drawBranch(endX, endY, angle - 0.4 + Math.sin(frame * 0.01) * 0.05, len * 0.72, depth - 1, health);
-            drawBranch(endX, endY, angle + 0.5 + Math.cos(frame * 0.01) * 0.05, len * 0.68, depth - 1, health);
+            // Glow Effect
+            if (health > 0.2) {
+                ctx.shadowColor = `rgba(255,107,107,${health * 0.3})`;
+                ctx.shadowBlur = 8 * health;
+            }
+
+            const nextLen = len * (0.75 + Math.random() * 0.1);
+            drawOrganicBranch(endX, endY, angle - 0.45 + sway * 0.02, nextLen, depth - 1, health);
+            drawOrganicBranch(endX, endY, angle + 0.55 + sway * 0.02, nextLen, depth - 1, health);
+            
             ctx.shadowBlur = 0;
         };
 
-        // Draw the colony
+        // Colony - Complex Structure
+        const colonyStatus = Math.max(0, Math.min((frame - 200) / 200, 1));
         const colony = [
-            { x: W * 0.65, baseY: coralBaseY, size: 30, depth: 5 },
-            { x: W * 0.55, baseY: coralBaseY + 5, size: 20, depth: 4 },
-            { x: W * 0.75, baseY: coralBaseY + 3, size: 22, depth: 4 },
-            { x: W * 0.45, baseY: coralBaseY + 8, size: 15, depth: 3 },
-            { x: W * 0.85, baseY: coralBaseY + 10, size: 12, depth: 3 },
+            { x: W * 0.7, y: coralBaseY, size: 35, depth: 6 },
+            { x: W * 0.58, y: coralBaseY + 10, size: 22, depth: 5 },
+            { x: W * 0.82, y: coralBaseY + 5, size: 25, depth: 5 },
+            { x: W * 0.48, y: coralBaseY + 15, size: 18, depth: 4 },
         ];
 
         colony.forEach(c => {
-            drawBranch(c.x, c.baseY, -Math.PI / 2 + (Math.random() - 0.5) * 0.2, c.size, c.depth, healPhase);
+            drawOrganicBranch(c.x, c.y, -Math.PI / 2, c.size, c.depth, colonyStatus);
         });
 
-        // Seafloor
-        ctx.fillStyle = "#0a1a25";
-        ctx.fillRect(0, coralBaseY + 5, W, H - coralBaseY);
-
-        // Pellets (smaller now)
-        const pelletStartY = boatY + 20;
-        const pelletTargetX = W * 0.65;
-        const pelletTargetY = coralBaseY - 40;
-
-        if (attractPhase < 1) {
-            const startX = boatX;
-            const px = startX + (pelletTargetX - startX) * attractPhase;
-            const py = pelletStartY + (pelletTargetY - pelletStartY) * (pelletPhase * 0.6 + attractPhase * 0.4);
-
-            if (attractPhase > 0) {
-                for (let i = 0; i < 6; i++) {
-                    const lineAngle = (i / 6) * Math.PI * 2 + frame * 0.03;
-                    const lineLen = 10 + attractPhase * 15;
-                    ctx.strokeStyle = `rgba(0,217,192,${0.1 + attractPhase * 0.2})`;
-                    ctx.lineWidth = 0.5;
-                    ctx.setLineDash([2, 3]);
-                    ctx.beginPath();
-                    ctx.moveTo(px, py);
-                    ctx.lineTo(px + Math.cos(lineAngle) * lineLen, py + Math.sin(lineAngle) * lineLen);
-                    ctx.stroke();
-                    ctx.setLineDash([]);
-                }
-            }
-
-            // Smaller pellet
-            ctx.fillStyle = "#FF8866";
-            ctx.beginPath();
-            ctx.arc(px, py, 3, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.fillStyle = "#FFaa88";
-            ctx.beginPath();
-            ctx.arc(px, py, 1, 0, Math.PI * 2);
-            ctx.fill();
+        // Seafloor - Rocky Texture
+        ctx.fillStyle = "#050c14";
+        ctx.beginPath();
+        ctx.moveTo(0, coralBaseY + 10);
+        for(let x=0; x<=W; x+=10) {
+            ctx.lineTo(x, coralBaseY + 10 + Math.sin(x * 0.05) * 5);
         }
+        ctx.lineTo(W, H);
+        ctx.lineTo(0, H);
+        ctx.fill();
 
-        if (healPhase > 0) {
-            for (let i = 0; i < Math.floor(healPhase * 15); i++) {
-                const px = W * 0.65 + (Math.random() - 0.5) * 100;
-                const py = coralBaseY - 20 - Math.random() * 60;
-                ctx.fillStyle = `rgba(0,217,192,${healPhase * 0.3})`;
+        // Multiple Pellets (The "Array")
+        const pelletCount = 5;
+        for (let i = 0; i < pelletCount; i++) {
+            const delay = i * 25;
+            const pelletFrame = Math.max(0, frame - delay);
+            if (pelletFrame === 0 || pelletFrame > 350) continue;
+
+            const pPhase = Math.min(pelletFrame / 120, 1); // Drop phase
+            const aPhase = Math.max(0, Math.min((pelletFrame - 100) / 100, 1)); // Attraction phase
+            
+            const startX = boatX + (i - 2) * 8;
+            const startY = boatY + 15;
+            const targetX = W * 0.7 + (i - 2) * 15;
+            const targetY = coralBaseY - 20;
+
+            const px = startX + (targetX - startX) * aPhase;
+            const py = startY + (targetY - startY) * (pPhase * 0.6 + aPhase * 0.4);
+
+            // Pellet Glow Trail
+            if (pPhase > 0) {
+                const gradient = ctx.createRadialGradient(px, py, 0, px, py, 6);
+                gradient.addColorStop(0, "rgba(255,136,102,1)");
+                gradient.addColorStop(1, "rgba(255,136,102,0)");
+                ctx.fillStyle = gradient;
                 ctx.beginPath();
-                ctx.arc(px, py + Math.sin(frame * 0.05 + i) * 5, 1, 0, Math.PI * 2);
+                ctx.arc(px, py, 6, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.fillStyle = "#FFaa88";
+                ctx.beginPath();
+                ctx.arc(px, py, 1.5, 0, Math.PI * 2);
                 ctx.fill();
             }
+
+            // Connection Lines (Guided Path)
+            if (aPhase > 0 && aPhase < 1) {
+                ctx.strokeStyle = "rgba(0,217,192,0.2)";
+                ctx.setLineDash([2, 4]);
+                ctx.beginPath();
+                ctx.moveTo(px, py);
+                ctx.lineTo(targetX, targetY);
+                ctx.stroke();
+                ctx.setLineDash([]);
+            }
         }
 
-        ctx.font = "bold 9px monospace";
+        // Status Indicators
+        ctx.font = "bold 8px 'Inter', sans-serif";
+        ctx.letterSpacing = "2px";
         ctx.textAlign = "center";
-        ctx.fillStyle = "rgba(255,255,255,0.6)";
-        if (frame < 100) ctx.fillText("RELEASE", W / 2, H - 8);
-        else if (frame < 180) ctx.fillText("ATTACHING", W / 2, H - 8);
-        else ctx.fillText("RECOVERING", W / 2, H - 8);
+        
+        const statusText = frame < 150 ? "DEPLOYING PELLETS" : 
+                          frame < 300 ? "ATTACHING TO REEF" : 
+                          "RESTORING BIOME";
+        
+        ctx.fillStyle = "rgba(0,217,192,0.6)";
+        ctx.fillText(statusText, W / 2, H - 15);
 
         frameRef.current++;
         if (frameRef.current < totalFrames) {
@@ -352,18 +390,19 @@ function CoralStickAnimation() {
     }, [startAnimation]);
 
     return (
-        <div className="relative">
+        <div className="relative group/anim scale-100 hover:scale-[1.02] transition-transform duration-700">
+            <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-transparent blur opacity-0 group-hover/anim:opacity-100 transition-opacity rounded-2xl"></div>
             <canvas
                 ref={canvasRef}
                 width={360}
                 height={260}
-                className="w-full rounded-2xl border border-white/10 cursor-pointer hover:border-[#00D9C0]/30 transition-colors"
+                className="relative w-full rounded-2xl border border-white/10 cursor-pointer shadow-2xl bg-[#01060b]"
                 onClick={startAnimation}
             />
             {!isPlaying && hasPlayed && (
-                <div className="absolute inset-0 flex items-center justify-center bg-black/30 rounded-2xl cursor-pointer" onClick={startAnimation}>
-                    <div className="text-[10px] font-bold uppercase tracking-widest text-[#00D9C0] bg-black/60 px-4 py-2 rounded-full border border-[#00D9C0]/30">
-                        ▶ Replay
+                <div className="absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-[2px] rounded-2xl cursor-pointer transition-all duration-500 opacity-0 group-hover/anim:opacity-100" onClick={startAnimation}>
+                    <div className="text-[10px] font-black uppercase tracking-[0.3em] text-[#00D9C0] bg-black/80 px-6 py-3 rounded-full border border-[#00D9C0]/30 shadow-[0_0_30px_rgba(0,217,192,0.2)] hover:bg-[#00D9C0] hover:text-black transition-all">
+                        Run Diagnostics Again
                     </div>
                 </div>
             )}
@@ -580,9 +619,9 @@ export default function HomeClient() {
                     
                     <div className="space-y-12">
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-                            <a href="mailto:info@coralfil.com" className="flex items-center gap-4 px-10 py-5 bg-[#00D9C0] text-black font-black uppercase tracking-widest text-sm rounded-2xl hover:scale-105 transition-all shadow-[0_0_30px_rgba(0,217,192,0.3)]">
+                            <a href="mailto:hello@coralfil.com" className="flex items-center gap-4 px-10 py-5 bg-[#00D9C0] text-black font-black uppercase tracking-widest text-sm rounded-2xl hover:scale-105 transition-all shadow-[0_0_30px_rgba(0,217,192,0.3)]">
                                 <Mail size={18} />
-                                Email Us @ info@coralfil.com
+                                Email Us @ hello@coralfil.com
                             </a>
                         </div>
                         

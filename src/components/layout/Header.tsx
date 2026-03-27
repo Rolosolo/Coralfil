@@ -70,7 +70,7 @@ export function Header() {
 
                     <div className="flex items-center gap-4">
                         <Link href="/dashboard" className="hidden sm:flex items-center justify-center px-6 h-10 rounded-full bg-white/5 hover:bg-white/10 text-[10px] font-black uppercase tracking-[0.2em] text-white border border-white/10 transition-all duration-300">
-                            Neural Stack
+                            Coralfil System
                         </Link>
                         <Link href="/dashboard/project/new" className="hidden lg:flex items-center justify-center px-6 h-10 rounded-full bg-primary text-black text-[10px] font-black uppercase tracking-[0.2em] hover:bg-white transition-all shadow-[0_0_20px_rgba(0,217,192,0.3)]">
                             Initiate Project

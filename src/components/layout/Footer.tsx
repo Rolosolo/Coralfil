@@ -44,7 +44,7 @@ export function Footer() {
                             <li><Link href="/#technology" className="text-sm text-slate-500 hover:text-primary transition-colors">Coraltex Sea Bricks (C-Bricks)™</Link></li>
                             <li><Link href="/#technology" className="text-sm text-slate-500 hover:text-primary transition-colors">Coralstick Smart Pellet™</Link></li>
                             <li><Link href="/#technology" className="text-sm text-slate-500 hover:text-primary transition-colors">Spatial Atlas</Link></li>
-                            <li><Link href="/#technology" className="text-sm text-slate-500 hover:text-primary transition-colors">Neural Stack</Link></li>
+                            <li><Link href="/#technology" className="text-sm text-slate-500 hover:text-primary transition-colors">Coralfil System</Link></li>
                         </ul>
                     </div>
 
@@ -78,7 +78,7 @@ export function Footer() {
                         </div>
                         <div className="flex items-start gap-2 pt-2">
                             <Mail size={14} className="text-slate-500 shrink-0 mt-0.5" />
-                            <span className="text-xs text-slate-500">Contact our Privacy Officer at legal@coralfil.com</span>
+                            <span className="text-xs text-slate-500">Contact our Privacy Officer at hello@coralfil.com</span>
                         </div>
                     </div>
                 </div>

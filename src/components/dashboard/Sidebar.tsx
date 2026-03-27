@@ -8,7 +8,7 @@ export function Sidebar() {
     const steps = [
         { number: 1, label: "Set Up Project", status: "completed", href: "/dashboard/project/new" },
         { number: 2, label: "Island Settings", status: "active", href: "/dashboard" },
-        { number: 3, label: "Brain Matrix", status: "pending", href: "#" },
+        { number: 3, label: "Formulation Matrix", status: "active", href: "/dashboard/intelligence/formulation-matrix" },
         { number: 4, label: "Growth Engine", status: "pending", href: "#" },
         { number: 5, label: "Review & Deploy", status: "pending", href: "#" },
     ];
@@ -94,22 +94,32 @@ export function Sidebar() {
                 </nav>
 
                 {/* Intelligence Matrix Tools */}
-                <div className="mt-10 px-2 opacity-40">
-                    <p className="text-[9px] font-black text-slate-500 uppercase tracking-[0.25em] mb-4 px-2">Knowledge Tools (Locked)</p>
-                    <div className="grid grid-cols-2 gap-2 grayscale pointer-events-none">
+                <div className="mt-10 px-2">
+                    <p className="text-[9px] font-black text-primary uppercase tracking-[0.25em] mb-4 px-2">Intelligence Suite</p>
+                    <div className="grid grid-cols-2 gap-2">
                         {[
-                            { label: "Graph", icon: Dna, href: "#" },
-                            { label: "Matrix", icon: FlaskConical, href: "#" },
-                            { label: "Library", icon: Grid2X2, href: "#" },
-                            { label: "Atlas", icon: Globe, href: "#" },
+                            { label: "Knowledge Graph", icon: Dna, href: "/dashboard/intelligence/knowledge-tree", tooltip: "Visual mapping of coral species relationships and restoration success data." },
+                            { label: "Matrix", icon: FlaskConical, href: "/dashboard/intelligence/formulation-matrix", tooltip: "Precision formulation engine for project-specific Coralstick™ nutrients." },
+                            { label: "Library", icon: Grid2X2, href: "/dashboard/intelligence/ingestion", tooltip: "Central repository for imported maritime research and project documentation." },
+                            { label: "Coral Atlas", icon: Globe, href: "/dashboard/intelligence/global-map", tooltip: "Global marine ecosystem mapping integrated with Allen Coral Atlas data." },
                         ].map((tool) => (
-                            <div
+                            <Link
+                                href={tool.href}
                                 key={tool.label}
-                                className="flex flex-col items-center justify-center p-3 rounded-xl bg-white/5 border border-white/5"
+                                title={tool.tooltip}
+                                className="flex flex-col items-center justify-center p-3 rounded-xl bg-white/5 border border-white/5 hover:border-primary/30 hover:bg-primary/5 transition-all group/tool relative"
                             >
-                                <tool.icon size={16} className="text-slate-500 mb-2" />
-                                <span className="text-[8px] font-bold text-slate-500 uppercase tracking-widest">{tool.label}</span>
-                            </div>
+                                <tool.icon size={16} className="text-slate-400 mb-2 group-hover/tool:text-primary transition-colors" />
+                                <span className="text-[8px] font-bold text-slate-500 uppercase tracking-widest group-hover/tool:text-slate-300">{tool.label}</span>
+                                
+                                {/* Hover Tooltip Popup */}
+                                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-2 bg-black border border-white/10 rounded-lg opacity-0 invisible group-hover/tool:opacity-100 group-hover/tool:visible transition-all z-50 pointer-events-none">
+                                    <p className="text-[9px] text-slate-400 leading-tight normal-case font-normal text-center">
+                                        {tool.tooltip}
+                                    </p>
+                                    <div className="absolute top-full left-1/2 -translate-x-1/2 w-2 h-2 bg-black border-r border-b border-white/10 rotate-45 -mt-1"></div>
+                                </div>
+                            </Link>
                         ))}
                     </div>
                 </div>

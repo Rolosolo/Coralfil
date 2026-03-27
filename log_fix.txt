@@ -1,1 +1,16 @@
 STAGING 
+warning: in the working copy of 'copy_image.bat', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'log.txt', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/marketing/HomeClient.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'fix_push.bat', LF will be replaced by CRLF the next time Git touches it
+COMMITTING 
+[main df54536] Fix coralstick cross-section image and reef library order
+ 7 files changed, 46 insertions(+), 9 deletions(-)
+ create mode 100644 copy_error.txt
+ create mode 100644 fix_push.bat
+ create mode 100644 log_fix.txt
+ create mode 100644 public/coralstick-crosssection.png
+PUSHING 
+To https://github.com/Rolosolo/Coralfil
+   57bf9f6..df54536  main -> main
+DONE 
