@@ -33,12 +33,16 @@ router.post('/formulate', async (req, res) => {
         const healthScore = calculateHealthScore(traits, { temperature_c: current_temp });
         const recipe = generateRecipe(nutrients, healthScore);
 
-        // 3. Log Reading
-        await supabase.from('environmental_readings').insert({
+        // 3. Log Formulation History for Precision Analysis
+        await supabase.from('formulation_history').insert({
             species_id,
-            temperature_c: current_temp,
-            ph: current_ph,
-            location_id: 'field_scan_001'
+            health_score: healthScore,
+            base_matrix: recipe.base_matrix,
+            release_profile: recipe.release_profile,
+            buoyancy_control: recipe.buoyancy_control,
+            alphafold_optimized: recipe.alphafold_optimized,
+            recipe: recipe.ingredients, 
+            thermal_stress_factor: traits.temp_optimal_c ? (current_temp - traits.temp_optimal_c) : 0
         });
 
         res.json({
@@ -63,13 +67,29 @@ function calculateHealthScore(traits, env) {
 
 function generateRecipe(nutrients, score) {
     let ingredients = [];
+    let base_matrix = "Patented Slow-Release Encapsulation Polymer";
+    let release_profile = "Slow (24h) - Precision Decoupling";
+    let buoyancy_control = "Neutral (Suspend)";
+
     if (nutrients.skeleton_composition.includes('Silica')) {
         ingredients.push({ name: 'Soluble Silicates', pct: 20 });
+        buoyancy_control = "Low-Density (Stay)";
     } else {
         ingredients.push({ name: 'Calcium Carbonate', pct: 15 });
+        buoyancy_control = "High-Density (Sink)";
     }
-    if (score < 80) ingredients.push({ name: 'Antioxidant Blend', pct: 5 });
-    return ingredients;
+    
+    if (score < 80) {
+        ingredients.push({ name: 'Antioxidant Blend', pct: 5 });
+    }
+
+    return {
+        base_matrix,
+        ingredients,
+        release_profile,
+        buoyancy_control,
+        alphafold_optimized: true
+    };
 }
 
 module.exports = router;

@@ -17,6 +17,8 @@ interface CoralStickSpec {
         spawningTrigger: boolean;
         selectedConsortium?: string | null;
         cellDensity?: number;
+        buoyancyControl?: string;
+        encapsulationGrade?: string;
     };
     packaging: {
         pelletsPerKg: number;
@@ -53,7 +55,9 @@ export function CoralStickExporter({
                 nutrientDensity,
                 spawningTrigger,
                 selectedConsortium,
-                cellDensity
+                cellDensity,
+                buoyancyControl: ionicStrength > 70 ? "High-Density (Sink)" : "Neutral (Suspend)",
+                encapsulationGrade: "Patented AlphaFold-Optimized Polymer"
             },
             packaging: {
                 pelletsPerKg: 435,
@@ -138,6 +142,14 @@ export function CoralStickExporter({
                         <span className={`font-mono ${spawningTrigger ? 'text-primary' : 'text-slate-500'}`}>
                             {spawningTrigger ? 'ACTIVE' : 'INACTIVE'}
                         </span>
+                    </div>
+                    <div className="flex justify-between border-t border-secondary/20 pt-1 mt-1">
+                        <span>Buoyancy Control</span>
+                        <span className="font-mono text-white">{ionicStrength > 70 ? "High-Density (Sink)" : "Neutral (Suspend)"}</span>
+                    </div>
+                    <div className="flex justify-between">
+                        <span>Encapsulation</span>
+                        <span className="font-mono text-[9px] text-white/60">AlphaFold Optimized</span>
                     </div>
                     {selectedConsortium && (
                         <div className="flex justify-between border-t border-secondary/20 pt-1 mt-1">

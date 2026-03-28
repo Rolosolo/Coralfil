@@ -237,6 +237,14 @@ export const C_BRICK_TYPES: CBrickType[] = [
         suitability: ["sp_boulder", "sp_brain"],
         costPerUnit: 95,
         co2Sequestration: 28.2
+    },
+    {
+        id: "cb_coraltex_v1",
+        name: "Coraltex™ Biomimetic Seabed",
+        description: "Patented soft-tissue inspired infrastructure perfected for coral larvae attraction, settlement, and immediate support.",
+        suitability: ["sp_acropora", "sp_elkhorn", "sp_boulder", "sp_brain", "sp_mesa"],
+        costPerUnit: 150,
+        co2Sequestration: 52.0
     }
 ];
 

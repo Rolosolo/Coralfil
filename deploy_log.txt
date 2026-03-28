@@ -1,0 +1,42 @@
+STARTING DEPLOYMENT 
+Installing dependencies... 
+
+added 1 package, removed 1 package, changed 1 package, and audited 388 packages in 6s
+
+141 packages are looking for funding
+  run `npm fund` for details
+
+2 vulnerabilities (1 high, 1 critical)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues, run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+dependencies installed status: 0 
+Running lint check... 
+
+> reefmaker-app@2.0.0 lint
+> eslint
+
+
+Oops! Something went wrong! :(
+
+ESLint: 9.39.4
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module 'C:\Users\User\Documents\Coralfill\Marketing\stitch_coralfill_website_launch.md (3)\stitch_coralfill_website_launch.md\reefmaker-app\node_modules\eslint-config-next\core-web-vitals' imported from C:\Users\User\Documents\Coralfill\Marketing\stitch_coralfill_website_launch.md (3)\stitch_coralfill_website_launch.md\reefmaker-app\eslint.config.mjs
+Did you mean to import "eslint-config-next/core-web-vitals.js"?
+    at finalizeResolution (node:internal/modules/esm/resolve:275:11)
+    at moduleResolve (node:internal/modules/esm/resolve:866:10)
+    at defaultResolve (node:internal/modules/esm/resolve:992:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:719:20)
+    at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:736:38)
+    at ModuleLoader.resolveSync (node:internal/modules/esm/loader:765:52)
+    at #resolve (node:internal/modules/esm/loader:701:17)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:621:35)
+    at ModuleJob.syncLink (node:internal/modules/esm/module_job:160:33)
+    at ModuleJob.link (node:internal/modules/esm/module_job:245:17)
+lint status: 2 
+Staging changes... 

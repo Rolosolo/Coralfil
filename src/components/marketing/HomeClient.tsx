@@ -35,6 +35,8 @@ interface ReefAssociation {
     description: string;
     coralRelationship: string;
     icon: string;
+    supportRating?: number; // 0-100
+    threatRating?: number;  // 0-100
 }
 
 const REEF_ASSOCIATION_LIBRARY: ReefAssociation[] = [
@@ -44,7 +46,8 @@ const REEF_ASSOCIATION_LIBRARY: ReefAssociation[] = [
         type: "positive",
         description: "Very large shells that sit on the bottom.",
         coralRelationship: "They drink lots of water and clean it. Clean water helps the sun reach the coral so it can grow big and strong.",
-        icon: "🐚"
+        icon: "🐚",
+        supportRating: 85
     },
     {
         id: "parrotfish",
@@ -52,7 +55,8 @@ const REEF_ASSOCIATION_LIBRARY: ReefAssociation[] = [
         type: "positive",
         description: "Bright fish that clean the reef.",
         coralRelationship: "These fish eat seaweed that covers the coral. When they eat, they also poop out sand that makes our beaches!",
-        icon: "🐠"
+        icon: "🐠",
+        supportRating: 92
     },
     {
         id: "clownfish",
@@ -60,7 +64,8 @@ const REEF_ASSOCIATION_LIBRARY: ReefAssociation[] = [
         type: "positive",
         description: "Small orange fish that live in wavy anemones.",
         coralRelationship: "They keep the reef healthy by helping other creatures. If you see them, you know the reef is a happy home.",
-        icon: "🐡"
+        icon: "🐡",
+        supportRating: 65
     },
     {
         id: "sea-cucumber",
@@ -68,7 +73,8 @@ const REEF_ASSOCIATION_LIBRARY: ReefAssociation[] = [
         type: "positive",
         description: "Long, bumpy creatures that crawl very slowly.",
         coralRelationship: "They are like underwater vacuum cleaners. They eat the messy stuff on the floor and keep the reef tidy.",
-        icon: "🫒"
+        icon: "🫒",
+        supportRating: 88
     },
     {
         id: "cleaner-wrasse",
@@ -76,7 +82,8 @@ const REEF_ASSOCIATION_LIBRARY: ReefAssociation[] = [
         type: "positive",
         description: "Tiny fish that give checkups to bigger fish.",
         coralRelationship: "They eat bugs and tiny pests off other fish. This keeps everyone healthy so the whole reef stays busy and full of life.",
-        icon: "🐟"
+        icon: "🐟",
+        supportRating: 78
     },
     {
         id: "sea-urchin",
@@ -84,7 +91,8 @@ const REEF_ASSOCIATION_LIBRARY: ReefAssociation[] = [
         type: "positive",
         description: "Spiky balls that love to eat seaweed.",
         coralRelationship: "They eat the seaweed that tries to take over the coral's space. Without them, the reef would get too crowded with plants.",
-        icon: "🟤"
+        icon: "🟤",
+        supportRating: 82
     },
     {
         id: "manta-ray",
@@ -92,7 +100,8 @@ const REEF_ASSOCIATION_LIBRARY: ReefAssociation[] = [
         type: "positive",
         description: "Huge, flat fish that look like they are flying.",
         coralRelationship: "They travel long distances and bring food and energy to the reef. They are signs of a very healthy and rich ocean.",
-        icon: "🦈"
+        icon: "🦈",
+        supportRating: 75
     },
     {
         id: "hawksbill-turtle",
@@ -100,7 +109,8 @@ const REEF_ASSOCIATION_LIBRARY: ReefAssociation[] = [
         type: "positive",
         description: "Beautiful turtles that love to eat snacks on the reef.",
         coralRelationship: "They eat sponges that try to grow over the coral. By eating them, they save a spot for the coral to live.",
-        icon: "🐢"
+        icon: "🐢",
+        supportRating: 84
     },
     {
         id: "snapping-shrimp",
@@ -108,7 +118,8 @@ const REEF_ASSOCIATION_LIBRARY: ReefAssociation[] = [
         type: "positive",
         description: "Tiny shrimp that make a loud 'snap' sound.",
         coralRelationship: "The noise they make helps baby corals find their way home to the reef. It's like a loud bell calling them home!",
-        icon: "🦐"
+        icon: "🦐",
+        supportRating: 70
     },
     {
         id: "whale-shark",
@@ -116,7 +127,8 @@ const REEF_ASSOCIATION_LIBRARY: ReefAssociation[] = [
         type: "positive",
         description: "The biggest fish in the world, but very gentle.",
         coralRelationship: "They bring special nutrients from the deep sea to the shallow reefs. Everyone is happy when the big boss visits!",
-        icon: "🐋"
+        icon: "🐋",
+        supportRating: 95
     },
     {
         id: "octopus",
@@ -124,7 +136,8 @@ const REEF_ASSOCIATION_LIBRARY: ReefAssociation[] = [
         type: "positive",
         description: "Very smart hiders with eight arms.",
         coralRelationship: "They catch little bugs that might hurt the coral. They are the reef's secret guards!",
-        icon: "🐙"
+        icon: "🐙",
+        supportRating: 68
     },
     {
         id: "grouper",
@@ -132,7 +145,8 @@ const REEF_ASSOCIATION_LIBRARY: ReefAssociation[] = [
         type: "positive",
         description: "Big, strong fish that live in holes.",
         coralRelationship: "They keep the reef in balance by being the top fish. When they are around, the whole neighborhood stays safe.",
-        icon: "🐠"
+        icon: "🐠",
+        supportRating: 80
     },
     {
         id: "christmas-tree-worm",
@@ -140,7 +154,8 @@ const REEF_ASSOCIATION_LIBRARY: ReefAssociation[] = [
         type: "positive",
         description: "Tiny, colorful fans that look like trees.",
         coralRelationship: "They live inside the coral and help make it stronger. They add pretty colors and help the coral stay tough.",
-        icon: "🎄"
+        icon: "🎄",
+        supportRating: 55
     },
     {
         id: "crown-of-thorns",
@@ -148,7 +163,8 @@ const REEF_ASSOCIATION_LIBRARY: ReefAssociation[] = [
         type: "negative",
         description: "Spiky starfish that eat the coral.",
         coralRelationship: "⚠️ These guys are a bit too hungry! They eat the coral tissue. We have to make sure there aren't too many of them.",
-        icon: "⭐"
+        icon: "⭐",
+        threatRating: 98
     },
     {
         id: "drupella-snail",
@@ -156,13 +172,97 @@ const REEF_ASSOCIATION_LIBRARY: ReefAssociation[] = [
         type: "negative",
         description: "Small snails that snack on coral.",
         coralRelationship: "⚠️ Just like the spiky starfish, these snails like to eat coral. Too many snails can make the coral feel sick.",
-        icon: "🐌"
+        icon: "🐌",
+        threatRating: 75
     },
 ];
 
 /* ═══════════════════════════════════════════════════════
-   CORALSTICK ANIMATION COMPONENT
+   HERO SLIDER COMPONENT
    ═══════════════════════════════════════════════════════ */
+
+const HERO_SLIDES = [
+    {
+        id: "gap",
+        subtitle: "The Mission",
+        title: "Scaling Resilience for",
+        highlight: "Infinite Oceans.",
+        description: "The oceans are at a breaking point. Coralfill bridges the gap between despair and restoration with precision biotechnology.",
+        color: "#F8FAFC"
+    },
+    {
+        id: "encapsulation",
+        subtitle: "The Technology",
+        title: "Patented Slow-Release",
+        highlight: "Encapsulation.",
+        description: "Revolutionizing restoration with patented ocean-safe slow-release encapsulation. Tailored health support through AlphaFold 3 & BioNeMo optimized molecular design.",
+        color: "#F472B6"
+    },
+    {
+        id: "coraltex",
+        subtitle: "The Infrastructure",
+        title: "Biomimetic Reefs with",
+        highlight: "Coraltex™.",
+        description: "Introducing Coraltex™: The biomimetic artificial reef system. Engineered for maximum coral larvae attraction, settlement, and long-term ecosystem support.",
+        color: "#38BDF8"
+    }
+];
+
+function HeroSlider() {
+    const [currentSlide, setCurrentSlide] = useState(0);
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
+        }, 6000);
+        return () => clearInterval(timer);
+    }, []);
+
+    const slide = HERO_SLIDES[currentSlide];
+
+    return (
+        <div className="relative z-10 text-center max-w-5xl px-6 mt-32 h-[400px] flex items-center justify-center">
+            <AnimatePresence mode="wait">
+                <motion.div
+                    key={slide.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 1, ease: "easeInOut" }}
+                    className="flex flex-col items-center"
+                >
+                    <motion.span
+                        initial={{ opacity: 0, letterSpacing: "0.2em" }}
+                        animate={{ opacity: 1, letterSpacing: "0.4em" }}
+                        className="text-[#00D9C0] font-bold text-xs uppercase mb-6 block"
+                    >
+                        {slide.subtitle}
+                    </motion.span>
+                    <h1 className="text-6xl md:text-8xl font-bold tracking-tighter leading-[0.9] mb-10 text-white">
+                        {slide.title}<br />
+                        <span className="text-glow-gradient" style={{ color: slide.color }}>{slide.highlight}</span>
+                    </h1>
+                    <p className="text-lg md:text-2xl text-gray-300 font-light max-w-3xl mx-auto leading-relaxed">
+                        {slide.description}
+                    </p>
+                </motion.div>
+            </AnimatePresence>
+
+            {/* Pagination dots */}
+            <div className="absolute -bottom-10 flex gap-3">
+                {HERO_SLIDES.map((_, i) => (
+                    <button
+                        key={i}
+                        onClick={() => setCurrentSlide(i)}
+                        className={`w-2 h-2 rounded-full transition-all duration-500 ${
+                            currentSlide === i ? "bg-[#00D9C0] w-8" : "bg-white/20"
+                        }`}
+                    />
+                ))}
+            </div>
+        </div>
+    );
+}
 
 function CoralStickAnimation() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -450,25 +550,7 @@ export default function HomeClient() {
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#010307]/50 to-[#010307]"></div>
                 </div>
 
-                <div className="relative z-10 text-center max-w-5xl px-6 mt-32">
-                    <motion.h1
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1.2, delay: 0.2 }}
-                        className="text-7xl md:text-9xl font-bold tracking-tighter leading-[0.9] mb-10 text-white"
-                    >
-                        Scaling Resilience for<br />
-                        <span className="text-glow-gradient">Infinite Oceans.</span>
-                    </motion.h1>
-                    <motion.p
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 0.8 }}
-                        transition={{ duration: 1.5, delay: 0.6 }}
-                        className="text-lg md:text-2xl text-gray-300 font-light mb-16 max-w-3xl mx-auto leading-relaxed"
-                    >
-                        Working with nature's wisdom and smart tools to save our reefs for the next generation.
-                    </motion.p>
-                </div>
+                <HeroSlider />
 
                 <motion.div
                     animate={{ y: [0, 10, 0] }}
@@ -495,18 +577,18 @@ export default function HomeClient() {
                         <div className="space-y-6">
                             <div className="p-8 rounded-3xl border border-[#FF6B6B]/20 bg-gradient-to-br from-[#FF6B6B]/5 to-transparent">
                                 <h3 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tight mb-2">
-                                    Coralstick Smart Pellet<span className="text-[#FF6B6B]">™</span>
+                                    Coralstick™ Smart Pellet
                                 </h3>
-                                <p className="text-sm text-[#FF6B6B] font-bold uppercase tracking-widest mb-4">Healthy Vitamin Pellets</p>
+                                <p className="text-sm text-[#FF6B6B] font-bold uppercase tracking-widest mb-4">Precision Encapsulation</p>
                                 <p className="text-gray-400 text-sm leading-relaxed mb-6 font-light">
-                                    We make small tablets that stick to the coral. They release vitamins and good bacteria slowly over time. This helps the coral stay strong even when the water gets too warm or messy.
+                                    Our patented ocean-safe slow-release encapsulation technology enables targeted delivery of nutrients and probiotics. Using AlphaFold 3 and NVIDIA BioNeMo, we optimize molecular binding specifically for coral mucus geochemistry.
                                 </p>
                                 <div className="space-y-3">
                                     {[
-                                        "Helps coral fight off sickness",
-                                        "Stays cool during hot days",
-                                        "Super sticky so it doesn't float away",
-                                        "Gives coral everything it needs to grow"
+                                        "Optimized via AlphaFold 3 / BioNeMo",
+                                        "Patented slow-release slow decay support",
+                                        "Species-specific ionic binding (+20 to +40 mV)",
+                                        "Protects against heat, acidification & parasites"
                                     ].map((fact, i) => (
                                         <div key={i} className="flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/10">
                                             <CheckCircle size={14} className="text-[#FF6B6B]" />
@@ -527,9 +609,9 @@ export default function HomeClient() {
                                 <CoralStickAnimation />
                             </div>
                             <div className="p-8 rounded-3xl border border-primary/20 bg-gradient-to-br from-primary/5 to-transparent">
-                                <h3 className="text-2xl font-black text-white uppercase tracking-tight mb-2">Coraltex Sea Bricks (C-Bricks)™</h3>
+                                <h3 className="text-2xl font-black text-white uppercase tracking-tight mb-2">Coraltex™ Sea Bricks</h3>
                                 <p className="text-gray-400 text-sm leading-relaxed font-light">
-                                    Special 3D-printed blocks that act like a new floor for the reef. They have tiny tunnels for food to travel through and stay nice and cool for baby corals to live on.
+                                    Biomimetic-inspired artificial reef & seabed system. Perfected for coral larvae attraction, settlement, and structural support. Engineered to dissipate wave energy and manage sedimentation.
                                 </p>
                             </div>
                         </div>
@@ -562,18 +644,32 @@ export default function HomeClient() {
                                 <div className="flex items-center gap-3 mb-4">
                                     <span className="text-4xl filter drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]">{creature.icon}</span>
                                     <div>
-                                        <h4 className="text-lg font-black text-white uppercase">{creature.name}</h4>
-                                        <span className={`text-[8px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full ${creature.type === 'positive' ? 'bg-green-500/20 text-green-400' : 'bg-amber-500/20 text-amber-400'}`}>
-                                            {creature.type === "positive" ? "Ally" : "Threat"}
-                                        </span>
+                                <h4 className="text-lg font-black text-white uppercase">{creature.name}</h4>
+                                <div className="flex items-center gap-2 mb-4">
+                                    <span className={`text-[8px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full ${creature.type === 'positive' ? 'bg-green-500/20 text-green-400' : 'bg-amber-500/20 text-amber-400'}`}>
+                                        {creature.type === "positive" ? "Ally" : "Threat"}
+                                    </span>
+                                    {creature.type === 'positive' ? (
+                                        <span className="text-[10px] text-green-400/60 font-mono">+{creature.supportRating}% Support</span>
+                                    ) : (
+                                        <span className="text-[10px] text-amber-400/60 font-mono">{creature.threatRating}% Threat</span>
+                                    )}
+                                </div>
+                                <div className="w-full h-1 bg-white/5 rounded-full mb-4 overflow-hidden">
+                                    <motion.div 
+                                        initial={{ width: 0 }}
+                                        whileInView={{ width: `${creature.type === 'positive' ? creature.supportRating : creature.threatRating}%` }}
+                                        className={`h-full ${creature.type === 'positive' ? 'bg-green-500/40' : 'bg-amber-500/40'}`}
+                                    />
+                                </div>
+                                <p className="text-xs text-slate-400 mb-6 font-light leading-relaxed h-12 overflow-hidden">{creature.description}</p>
+                                    <div className={`p-4 rounded-2xl border ${creature.type === 'positive' ? 'bg-green-500/5 border-green-500/10' : 'bg-amber-500/5 border-amber-500/10'}`}>
+                                        <p className="text-[11px] text-slate-300 italic">"{creature.coralRelationship}"</p>
                                     </div>
                                 </div>
-                                <p className="text-xs text-slate-400 mb-6 font-light leading-relaxed">{creature.description}</p>
-                                <div className={`p-4 rounded-2xl border ${creature.type === 'positive' ? 'bg-green-500/5 border-green-500/10' : 'bg-amber-500/5 border-amber-500/10'}`}>
-                                    <p className="text-[11px] text-slate-300 italic">"{creature.coralRelationship}"</p>
-                                </div>
-                            </motion.div>
-                        ))}
+                            </div>
+                        </motion.div>
+                    ))}
                     </div>
                     <p className="mt-12 text-[10px] text-slate-600 font-bold uppercase tracking-[0.3em]">Reload the page to meet more reef friends!</p>
                 </div>

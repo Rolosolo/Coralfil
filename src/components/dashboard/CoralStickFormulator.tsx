@@ -41,6 +41,12 @@ export function CoralStickFormulator({ projectLocation, selectedSpeciesIds, onUp
         }
     }, [recommendedConsortium]);
 
+    useEffect(() => {
+        if (onUpdate) {
+            onUpdate(formulation);
+        }
+    }, [formulation, onUpdate]);
+
     // Calculate Synbiotic Synergy
     const calculateSynergy = () => {
         let base = formulation.cellDensity * 10;

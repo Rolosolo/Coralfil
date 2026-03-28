@@ -39,17 +39,21 @@ class CoralHealthFormulator:
         symbiont = species_profile.get('symbiont_type')
         
         recipe = {
-            "base_matrix": "Alginate",
+            "base_matrix": "Patented Slow-Release Encapsulation Polymer",
             "ingredients": [],
-            "release_profile": "Slow (24h)"
+            "release_profile": "Slow (24h) - Precision Decoupling",
+            "buoyancy_control": "Neutral (Suspend)", # Sinking/Suspension/Attraction
+            "alphafold_optimized": True
         }
         
         # 1. Skeleton Support
         if skeleton == 'Calcium Carbonate':
-            recipe['ingredients'].append({'name': 'Calcium Chloride', ' pct': 15})
+            recipe['ingredients'].append({'name': 'Calcium Chloride', 'pct': 15})
             recipe['ingredients'].append({'name': 'Magnesium Sulfate', 'pct': 5})
+            recipe['buoyancy_control'] = "High-Density (Sink)"
         elif skeleton == 'Silica (SiO2)':
-            recipe['ingredients'].append({'name': 'Soluble Silicates', 'pct': 20}) # Critical for BC Sponges
+            recipe['ingredients'].append({'name': 'Soluble Silicates', 'pct': 20})
+            recipe['buoyancy_control'] = "Low-Density (Stay)"
         
         # 2. Energy Support (Based on Symbionts)
         if symbiont == 'Zooxanthellate':
@@ -58,7 +62,8 @@ class CoralHealthFormulator:
                 recipe['ingredients'].append({'name': 'Antioxidants (Vit E/C)', 'pct': 5})
         else: # Azooxanthellate (BC Corals/Sponges)
             recipe['ingredients'].append({'name': 'Protein Meal (Plankton)', 'pct': 25})
-            recipe['release_profile'] = "Extended (7d)" # Deep water slower metabolism
+            recipe['release_profile'] = "Extended (7d) - Deep-Sea Grade"
+            recipe['buoyancy_control'] = "Negative (Deep Sinking)"
             
         return recipe
 
