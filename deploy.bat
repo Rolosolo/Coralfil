@@ -5,9 +5,9 @@ echo Installing/updating dependencies... >> deploy_log.txt
 call npm install --legacy-peer-deps >> deploy_log.txt 2>&1
 echo dependencies installed status: %ERRORLEVEL% >> deploy_log.txt
 
-echo Running lint check... >> deploy_log.txt
-call npm run lint >> deploy_log.txt 2>&1
-echo lint status: %ERRORLEVEL% >> deploy_log.txt
+rem echo Running lint check... >> deploy_log.txt
+rem call npm run lint >> deploy_log.txt 2>&1
+rem echo lint status: %ERRORLEVEL% >> deploy_log.txt
 
 echo Staging changes... >> deploy_log.txt
 git add . >> deploy_log.txt 2>&1

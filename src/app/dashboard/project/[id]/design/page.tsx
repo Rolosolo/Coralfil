@@ -47,7 +47,8 @@ import { BathymetryProfile } from "@/components/dashboard/BathymetryProfile";
 
 type TabType = "parameters" | "species" | "spatial" | "synthesis" | "manufacturing" | "quotation";
 
-export default function DesignPage({ params }: { params: { id: string } }) {
+export default function DesignPage({ params }: { params: Promise<{ id: string }> }) {
+    const [id, setId] = useState<string>("");
     const { theme, setTheme } = useTheme();
     const [activeTab, setActiveTab] = useState<TabType>("parameters");
     const [selectedBrick, setSelectedBrick] = useState("hex");
@@ -70,10 +71,12 @@ export default function DesignPage({ params }: { params: { id: string } }) {
 
     useEffect(() => {
         const loadData = async () => {
+            const resolvedParams = await params;
             const [sData, pData] = await Promise.all([
                 dataService.getSpecies(),
-                dataService.getProjectById(params.id)
+                dataService.getProjectById(resolvedParams.id)
             ]);
+            setId(resolvedParams.id);
             setSpecies(sData);
             setProject(pData);
             if (pData?.targetSpecies) {
@@ -81,7 +84,7 @@ export default function DesignPage({ params }: { params: { id: string } }) {
             }
 
             // Auto-populate NOAA data based on project location
-            const lat = pData?.coordinates?.[0] ?? 48.8333; // Default to Barkley Sound, BC
+            const lat = pData?.coordinates?.[0] ?? 48.8333;
             const lon = pData?.coordinates?.[1] ?? -125.1333;
 
             const [nData, aData] = await Promise.all([
@@ -91,16 +94,15 @@ export default function DesignPage({ params }: { params: { id: string } }) {
             setNoaaData(nData);
             setAtlasData(aData);
 
-            // Persist spatial intelligence to the master database if successful
             if (nData) {
-                dataService.saveSpatialData(params.id, "NOAA", "sst_heat_stress", nData, { resolution: "5km" });
+                dataService.saveSpatialData(resolvedParams.id, "NOAA", "sst_heat_stress", nData, { resolution: "5km" });
             }
             if (aData) {
-                dataService.saveSpatialData(params.id, "Allen Coral Atlas", "benthic_geomorphic", aData, { resolution: "5m" });
+                dataService.saveSpatialData(resolvedParams.id, "Allen Coral Atlas", "benthic_geomorphic", aData, { resolution: "5m" });
             }
         };
         loadData();
-    }, [params.id]);
+    }, [params]);
 
     const toggleSpecies = (id: string) => {
         setSelectedSpecies(prev =>
@@ -155,7 +157,7 @@ export default function DesignPage({ params }: { params: { id: string } }) {
                             <LayoutDashboard size={16} />
                             <span className="text-xs font-bold">Project Hub</span>
                         </Link>
-                        <Link href={`/dashboard/project/${params.id}/scan`} className="flex items-center gap-3 p-3 rounded-2xl hover:bg-white/5 text-slate-400 hover:text-white transition-all">
+                        <Link href={`/dashboard/project/${id}/scan`} className="flex items-center gap-3 p-3 rounded-2xl hover:bg-white/5 text-slate-400 hover:text-white transition-all">
                             <Target size={16} />
                             <span className="text-xs font-bold">Site Scan</span>
                         </Link>
@@ -574,7 +576,7 @@ export default function DesignPage({ params }: { params: { id: string } }) {
                                         ionicStrength={ionicStrength}
                                         uvFilterLevel={uvFilterLevel}
                                         selectedConsortium={selectedConsortium}
-                                        projectId={params.id}
+                                        projectId={id}
                                     />
                                 )}
                             </motion.div>

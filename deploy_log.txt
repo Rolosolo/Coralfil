@@ -1,66 +1,11 @@
 STARTING DEPLOYMENT 
-Installing dependencies... 
+Installing/updating dependencies... 
 
-added 1 package, removed 1 package, changed 1 package, and audited 388 packages in 6s
+changed 2 packages, and audited 382 packages in 4s
 
 141 packages are looking for funding
   run `npm fund` for details
 
-2 vulnerabilities (1 high, 1 critical)
-
-To address issues that do not require attention, run:
-  npm audit fix
-
-To address all issues, run:
-  npm audit fix --force
-
-Run `npm audit` for details.
+found 0 vulnerabilities
 dependencies installed status: 0 
-Running lint check... 
-
-> reefmaker-app@2.0.0 lint
-> eslint
-
-
-Oops! Something went wrong! :(
-
-ESLint: 9.39.4
-
-Error [ERR_MODULE_NOT_FOUND]: Cannot find module 'C:\Users\User\Documents\Coralfill\Marketing\stitch_coralfill_website_launch.md (3)\stitch_coralfill_website_launch.md\reefmaker-app\node_modules\eslint-config-next\core-web-vitals' imported from C:\Users\User\Documents\Coralfill\Marketing\stitch_coralfill_website_launch.md (3)\stitch_coralfill_website_launch.md\reefmaker-app\eslint.config.mjs
-Did you mean to import "eslint-config-next/core-web-vitals.js"?
-    at finalizeResolution (node:internal/modules/esm/resolve:275:11)
-    at moduleResolve (node:internal/modules/esm/resolve:866:10)
-    at defaultResolve (node:internal/modules/esm/resolve:992:11)
-    at #cachedDefaultResolve (node:internal/modules/esm/loader:719:20)
-    at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:736:38)
-    at ModuleLoader.resolveSync (node:internal/modules/esm/loader:765:52)
-    at #resolve (node:internal/modules/esm/loader:701:17)
-    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:621:35)
-    at ModuleJob.syncLink (node:internal/modules/esm/module_job:160:33)
-    at ModuleJob.link (node:internal/modules/esm/module_job:245:17)
-lint status: 2 
 Staging changes... 
-warning: in the working copy of 'deploy_log.txt', LF will be replaced by CRLF the next time Git touches it
-warning: in the working copy of 'fix_install.bat', LF will be replaced by CRLF the next time Git touches it
-warning: in the working copy of 'scripts/delete-workflow.js', LF will be replaced by CRLF the next time Git touches it
-warning: in the working copy of 'scripts/run-seed.ts', LF will be replaced by CRLF the next time Git touches it
-warning: in the working copy of 'scripts/test-db.ts', LF will be replaced by CRLF the next time Git touches it
-warning: in the working copy of 'scripts/test-keys.js', LF will be replaced by CRLF the next time Git touches it
-Committing... 
-[main ea4a6b6] feat: launch Formulator v2, Formulation Matrix synth, and Growth Engine Digital Twin
- 14 files changed, 5254 insertions(+), 1605 deletions(-)
- create mode 100644 deploy_log.txt
- create mode 100644 fix_install.bat
- create mode 100644 scripts/delete-workflow.js
- create mode 100644 scripts/run-seed.ts
- create mode 100644 scripts/test-db.ts
- create mode 100644 scripts/test-keys.js
-Pushing to GitHub... 
-remote: 
-remote: GitHub found 6 vulnerabilities on Rolosolo/Coralfil's default branch (1 high, 4 moderate, 1 low). To find out more, visit:        
-remote:      https://github.com/Rolosolo/Coralfil/security/dependabot        
-remote: 
-To https://github.com/Rolosolo/Coralfil
-   da8e008..ea4a6b6  main -> main
-push status: 0 
-DEPLOYMENT COMPLETE 
