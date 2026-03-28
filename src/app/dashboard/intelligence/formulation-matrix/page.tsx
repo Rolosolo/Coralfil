@@ -49,7 +49,7 @@ export default function FormulationMatrixPage() {
                     <div>
                         <div className="flex items-center gap-2 mb-1">
                             <span className="px-2 py-0.5 rounded-full text-[8px] font-black uppercase tracking-[0.2em] bg-[#00D9C0]/20 text-[#00D9C0] border border-[#00D9C0]/20">Precision Bio-Synthesis</span>
-                            <span className="text-[10px] text-slate-500 font-mono tracking-tighter">ENGINE: CORALSTICK-V4.2</span>
+                            <span className="text-[10px] text-slate-500 font-mono tracking-tighter">SPECIES: ACROPORA CERVICORNIS</span>
                         </div>
                         <h1 className="text-3xl font-black text-white uppercase tracking-tighter leading-tight">Formulation Matrix</h1>
                     </div>
@@ -255,8 +255,5 @@ export default function FormulationMatrixPage() {
             </div>
         </div>
     );
-}                </div>
-            </div>
-        </div>
-    );
 }
+

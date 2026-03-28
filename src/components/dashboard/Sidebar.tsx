@@ -9,7 +9,7 @@ export function Sidebar() {
         { number: 1, label: "Set Up Project", status: "completed", href: "/dashboard/project/new" },
         { number: 2, label: "Island Settings", status: "active", href: "/dashboard" },
         { number: 3, label: "Formulation Matrix", status: "active", href: "/dashboard/intelligence/formulation-matrix" },
-        { number: 4, label: "Growth Engine", status: "pending", href: "#" },
+        { number: 4, label: "Growth Engine", status: "active", href: "/dashboard/intelligence/growth-engine" },
         { number: 5, label: "Review & Deploy", status: "pending", href: "#" },
     ];
 
