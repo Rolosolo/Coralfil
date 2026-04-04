@@ -9,3 +9,13 @@ changed 2 packages, and audited 382 packages in 4s
 found 0 vulnerabilities
 dependencies installed status: 0 
 Staging changes... 
+warning: in the working copy of 'deploy.bat', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'deploy_log.txt', LF will be replaced by CRLF the next time Git touches it
+Committing... 
+[main 5d99a34] feat: update deps, fix ESLint config, align Next.js 15 + Node v24 [vercel deploy]
+ 5 files changed, 30 insertions(+), 79 deletions(-)
+Pushing to GitHub (triggers Vercel production deploy)... 
+To https://github.com/Rolosolo/Coralfil
+   1ab5e69..5d99a34  main -> main
+push status: 0 
+DEPLOYMENT COMPLETE 

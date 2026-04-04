@@ -16,7 +16,12 @@ const LOG_MESSAGES = [
 
 export default function StatusLog() {
     const [logs, setLogs] = useState<string[]>([]);
+    const [isMounted, setIsMounted] = useState(false);
     const scrollRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
 
     useEffect(() => {
         let index = 0;
@@ -53,7 +58,9 @@ export default function StatusLog() {
             >
                 {logs.map((log, i) => (
                     <div key={i} className={`${log.includes("Warning") ? "text-orange-400" : log.includes("Context7") ? "text-blue-400" : "text-green-500/80"}`}>
-                        <span className="text-slate-600 mr-2">[{new Date().toLocaleTimeString([], { hour12: false })}]</span>
+                        <span className="text-slate-600 mr-2">
+                            {isMounted ? `[${new Date().toLocaleTimeString([], { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' })}]` : "[--:--:--]"}
+                        </span>
                         {log}
                     </div>
                 ))}

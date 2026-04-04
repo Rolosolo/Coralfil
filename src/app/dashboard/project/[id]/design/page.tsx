@@ -47,7 +47,15 @@ import { BathymetryProfile } from "@/components/dashboard/BathymetryProfile";
 
 type TabType = "parameters" | "species" | "spatial" | "synthesis" | "manufacturing" | "quotation";
 
-export default function DesignPage({ params }: { params: Promise<{ id: string }> }) {
+interface PageProps {
+    params: Promise<{ id: string }> | { id: string };
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }> | { [key: string]: string | string[] | undefined };
+}
+
+export default function DesignPage({ 
+    params, 
+    searchParams 
+}: PageProps) {
     const [id, setId] = useState<string>("");
     const { theme, setTheme } = useTheme();
     const [activeTab, setActiveTab] = useState<TabType>("parameters");
@@ -538,7 +546,7 @@ export default function DesignPage({ params }: { params: Promise<{ id: string }>
                                                 <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
                                                     <motion.div 
                                                         initial={{ width: 0 }}
-                                                        animate={{ width: `${atlasData?.coralCover}%` }}
+                                                        animate={{ width: `${atlasData?.coralCover || 0}%` }}
                                                         className="h-full bg-primary shadow-[0_0_10px_rgba(0,217,192,0.5)]"
                                                     />
                                                 </div>

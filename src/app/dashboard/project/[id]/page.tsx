@@ -4,12 +4,14 @@ import { ArrowRight, Globe, Shield, Activity, Share2 } from 'lucide-react';
 import Link from 'next/link';
 import { motion } from "@/components/motion-client";
 
-interface Props {
-    params: { id: string };
+interface PageProps {
+    params: Promise<{ id: string }> | { id: string };
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }> | { [key: string]: string | string[] | undefined };
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const project = await dataService.getProjectById(params.id);
+export async function generateMetadata({ params, searchParams }: PageProps): Promise<Metadata> {
+    const resolvedParams = await params;
+    const project = await dataService.getProjectById(resolvedParams.id);
 
     if (!project) {
         return { title: 'Project Not Found | ReefMaker AI' };
@@ -31,8 +33,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
 }
 
-export default async function ProjectPage({ params }: Props) {
-    const project = await dataService.getProjectById(params.id);
+export default async function ProjectPage({ params, searchParams }: PageProps) {
+    const resolvedParams = await params;
+    const project = await dataService.getProjectById(resolvedParams.id);
 
     if (!project) return <div>Project not found.</div>;
 

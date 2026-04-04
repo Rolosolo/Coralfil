@@ -58,7 +58,7 @@ export default function EnvironmentalScanner({ noaaData, atlasData }: { noaaData
                         <div className="text-slate-500 text-[10px] uppercase mb-1 flex items-center gap-2">
                             <Thermometer size={12} className="text-orange-400" /> SST (NOAA)
                         </div>
-                        <div className="text-xl font-mono text-white">{noaaData?.sst.toFixed(1) || "28.4"}<span className="text-[10px] text-slate-500 ml-1">°C</span></div>
+                        <div className="text-xl font-mono text-white">{noaaData?.sst?.toFixed(1) || "28.4"}<span className="text-[10px] text-slate-500 ml-1">°C</span></div>
                         <div className="w-full bg-white/10 h-1 mt-2 rounded-full overflow-hidden">
                             <div className="h-full bg-orange-400" style={{ width: `${((noaaData?.sst || 28.4) / 35) * 100}%` }}></div>
                         </div>
@@ -69,7 +69,7 @@ export default function EnvironmentalScanner({ noaaData, atlasData }: { noaaData
                         <div className="text-slate-500 text-[10px] uppercase mb-1 flex items-center gap-2">
                             <ShieldAlert size={12} className="text-red-400" /> Heat Stress
                         </div>
-                        <div className="text-xl font-mono text-white">{noaaData?.dhw.toFixed(1) || "4.2"}<span className="text-[10px] text-slate-500 ml-1">DHW</span></div>
+                        <div className="text-xl font-mono text-white">{noaaData?.dhw?.toFixed(1) || "4.2"}<span className="text-[10px] text-slate-500 ml-1">DHW</span></div>
                         <div className="text-[9px] text-red-400 font-bold mt-1 uppercase tracking-tighter">{noaaData?.bleaching_risk || "Alert Level 1"}</div>
                     </div>
 
