@@ -64,6 +64,7 @@ export function Header() {
                     {/* Nav Links (Desktop) - Hidden for launch rollback */}
                     <nav className="hidden md:flex items-center gap-10">
                         <Link href="/#technology" className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-primary transition-all duration-300">Technology</Link>
+                        <Link href="/research" className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-primary transition-all duration-300">Research</Link>
                         <Link href="/company" className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-primary transition-all duration-300">Company</Link>
                         <Link href="/investors" className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-primary transition-all duration-300">Investors</Link>
                     </nav>
