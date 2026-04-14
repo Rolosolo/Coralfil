@@ -1,1 +1,30 @@
 STARTING PUSH 
+warning: in the working copy of 'src/app/api/vibrio/mortality-events/route.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/api/vibrio/risk-scores/route.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/api/vibrio/temp-summary/route.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/dashboard/vibrio/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/dashboard/VibrioDashboard.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'supabase/coralfil_v2_schema.sql', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'supabase/vibrio_schema.sql', LF will be replaced by CRLF the next time Git touches it
+ADDED 
+[main 30bae8c] Final branding refinements and UI polish
+ 26 files changed, 1692 insertions(+), 55 deletions(-)
+ create mode 100644 mass_replace.js
+ create mode 100644 replace.js
+ create mode 100644 replace.ps1
+ create mode 100644 src/app/api/vibrio/mortality-events/route.ts
+ create mode 100644 src/app/api/vibrio/risk-scores/route.ts
+ create mode 100644 src/app/api/vibrio/temp-summary/route.ts
+ create mode 100644 src/app/dashboard/vibrio/page.tsx
+ create mode 100644 src/components/dashboard/VibrioDashboard.tsx
+ create mode 100644 supabase/coralfil_v2_schema.sql
+ create mode 100644 supabase/vibrio_schema.sql
+COMMITTED 
+remote: 
+remote: GitHub found 1 vulnerability on Rolosolo/Coralfil's default branch (1 high). To find out more, visit:        
+remote:      https://github.com/Rolosolo/Coralfil/security/dependabot/30        
+remote: 
+To https://github.com/Rolosolo/Coralfil
+   65b9d88..30bae8c  main -> main
+PUSHED 
+ENDING PUSH 

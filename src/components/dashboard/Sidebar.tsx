@@ -100,6 +100,7 @@ export function Sidebar() {
                         {[
                             { label: "Knowledge Graph", icon: Dna, href: "/dashboard/intelligence/knowledge-tree", tooltip: "Visual mapping of coral species relationships and restoration success data." },
                             { label: "Vibrio Alert", icon: ShieldAlert, href: "/dashboard/vibrio", tooltip: "Real-time mortality surveillance and environmental telemetry for BC shellfish aquaculture." },
+                            { label: "Intervention", icon: Zap, href: "/vibrio-intervention", tooltip: "Predictive defense protocols and molecular intervention strategies for aquaculture." },
                             { label: "Matrix", icon: FlaskConical, href: "/dashboard/intelligence/formulation-matrix", tooltip: "Precision formulation engine for project-specific Coralstick™ nutrients." },
                             { label: "Library", icon: Grid2X2, href: "/dashboard/intelligence/ingestion", tooltip: "Central repository for imported maritime research and project documentation." },
                             { label: "Coral Atlas", icon: Globe, href: "/dashboard/intelligence/global-map", tooltip: "Global marine ecosystem mapping integrated with Allen Coral Atlas data." },
