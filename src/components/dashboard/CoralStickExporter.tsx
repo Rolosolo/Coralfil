@@ -153,7 +153,7 @@ export function CoralStickExporter({
                     </div>
                     {selectedConsortium && (
                         <div className="flex justify-between border-t border-secondary/20 pt-1 mt-1">
-                            <span className="font-bold underline">Probiotic Consortium</span>
+                            <span className="font-bold underline">Prebiotic Consortium</span>
                             <span className="font-mono text-primary">{selectedConsortium}</span>
                         </div>
                     )}

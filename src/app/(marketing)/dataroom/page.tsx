@@ -407,7 +407,7 @@ export default function DataRoom() {
                                                     <Beaker size={20} />
                                                 </div>
                                                 <p className="text-sm font-bold">Bioactive Load</p>
-                                                <p className="text-xs text-slate-500 leading-relaxed italic">Probiotics: Erythrobacter & Prosthecochloris</p>
+                                                <p className="text-xs text-slate-500 leading-relaxed italic">Prebiotics: Erythrobacter & Prosthecochloris</p>
                                             </div>
                                         </div>
                                     </div>
@@ -542,7 +542,7 @@ export default function DataRoom() {
                                             <div className="p-8 rounded-3xl bg-white/[0.03] border border-white/10 group-hover:border-[#00D9C0]/30 transition-colors">
                                                 <p className="text-[10px] text-slate-600 uppercase font-black tracking-widest mb-3 font-mono underline decoration-[#00D9C0]/20">Model Architecture</p>
                                                 <p className="text-lg font-bold text-white tracking-tight">MegaMolBART</p>
-                                                <p className="text-[10px] text-slate-500 mt-2 font-light">Chitosan-probiotic design</p>
+                                                <p className="text-[10px] text-slate-500 mt-2 font-light">Chitosan-prebiotic design</p>
                                             </div>
                                             <div className="p-8 rounded-3xl bg-white/[0.03] border border-white/10 group-hover:border-[#00D9C0]/30 transition-colors">
                                                 <p className="text-[10px] text-slate-600 uppercase font-black tracking-widest mb-3 font-mono underline decoration-[#00D9C0]/20">Validation Engine</p>
@@ -614,7 +614,7 @@ export default function DataRoom() {
                                                     <div className="text-xs text-slate-500">KAUST Scientific Site A-4</div>
                                                 </td>
                                                 <td className="py-8">
-                                                    <div className="text-sm">High-Temp Probiotics</div>
+                                                    <div className="text-sm">High-Temp Prebiotics</div>
                                                 </td>
                                                 <td className="py-8 text-sm text-slate-400">Sep 2026</td>
                                                 <td className="py-8 text-right">

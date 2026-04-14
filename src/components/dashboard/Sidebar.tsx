@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, PauseCircle, Dna, FlaskConical, Grid2X2, Globe } from "lucide-react";
+import { Check, PauseCircle, Dna, FlaskConical, Grid2X2, Globe, ShieldAlert } from "lucide-react";
 import Link from "next/link";
 import { motion } from "@/components/motion-client";
 
@@ -99,6 +99,7 @@ export function Sidebar() {
                     <div className="grid grid-cols-2 gap-2">
                         {[
                             { label: "Knowledge Graph", icon: Dna, href: "/dashboard/intelligence/knowledge-tree", tooltip: "Visual mapping of coral species relationships and restoration success data." },
+                            { label: "Vibrio Alert", icon: ShieldAlert, href: "/dashboard/vibrio", tooltip: "Real-time mortality surveillance and environmental telemetry for BC shellfish aquaculture." },
                             { label: "Matrix", icon: FlaskConical, href: "/dashboard/intelligence/formulation-matrix", tooltip: "Precision formulation engine for project-specific Coralstick™ nutrients." },
                             { label: "Library", icon: Grid2X2, href: "/dashboard/intelligence/ingestion", tooltip: "Central repository for imported maritime research and project documentation." },
                             { label: "Coral Atlas", icon: Globe, href: "/dashboard/intelligence/global-map", tooltip: "Global marine ecosystem mapping integrated with Allen Coral Atlas data." },

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Droplets, Shield, Zap, Info, Thermometer, Waves, Beaker, AlertTriangle, CheckCircle2 } from "lucide-react";
-import { PROBIOTIC_CONSORTIA, REGIONAL_DISEASE_RISK, ProbioticConsortium, SpeciesProfile, SPECIES_DB } from "@/lib/demo-data";
+import { PREBIOTIC_CONSORTIA, REGIONAL_DISEASE_RISK, PrebioticConsortium, SpeciesProfile, SPECIES_DB } from "@/lib/demo-data";
 import { motion, AnimatePresence } from "@/components/motion-client";
 
 interface FormulationState {
@@ -14,13 +14,13 @@ interface FormulationState {
     cellDensity: number; // CFU/g (10^8 format)
 }
 
-interface ProbioticFormulatorProps {
+interface PrebioticFormulatorProps {
     projectLocation?: string;
     selectedSpeciesIds?: string[];
     onUpdate?: (state: FormulationState) => void;
 }
 
-export function CoralStickFormulator({ projectLocation, selectedSpeciesIds, onUpdate }: ProbioticFormulatorProps) {
+export function CoralStickFormulator({ projectLocation, selectedSpeciesIds, onUpdate }: PrebioticFormulatorProps) {
     const [formulation, setFormulation] = useState<FormulationState>({
         ionicStrength: 85,
         uvFilterLevel: 92,
@@ -31,7 +31,7 @@ export function CoralStickFormulator({ projectLocation, selectedSpeciesIds, onUp
     });
 
     const activeRisk = projectLocation ? REGIONAL_DISEASE_RISK[projectLocation] : null;
-    const recommendedConsortium = projectLocation ? PROBIOTIC_CONSORTIA.find(c =>
+    const recommendedConsortium = projectLocation ? PREBIOTIC_CONSORTIA.find(c =>
         c.geographicFocus.some(f => projectLocation.includes(f))
     ) : null;
 
@@ -129,7 +129,7 @@ export function CoralStickFormulator({ projectLocation, selectedSpeciesIds, onUp
                     </div>
                 </div>
 
-                {/* Probiotic Consortium Selection */}
+                {/* Prebiotic Consortium Selection */}
                 <div className="flex flex-col gap-6 p-8 bg-[#00D9C0]/5 rounded-[40px] border border-[#00D9C0]/20 relative overflow-hidden">
                     <div className="absolute top-0 right-0 p-6 opacity-10">
                         <Beaker size={80} className="text-[#00D9C0]" />
@@ -138,7 +138,7 @@ export function CoralStickFormulator({ projectLocation, selectedSpeciesIds, onUp
                     <div className="flex flex-col relative z-10">
                         <div className="flex items-center justify-between mb-4">
                             <div>
-                                <h4 className="text-lg font-black text-white uppercase tracking-tight">Probiotic Consortium</h4>
+                                <h4 className="text-lg font-black text-white uppercase tracking-tight">Prebiotic Consortium</h4>
                                 <p className="text-[10px] text-primary/60 font-black uppercase tracking-[0.2em] mt-1">Disease Management Layer</p>
                             </div>
                             <div className="flex items-center gap-2 px-3 py-1 bg-primary/20 rounded-full border border-primary/30">
@@ -161,7 +161,7 @@ export function CoralStickFormulator({ projectLocation, selectedSpeciesIds, onUp
                         )}
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {PROBIOTIC_CONSORTIA.map(c => (
+                            {PREBIOTIC_CONSORTIA.map(c => (
                                 <div
                                     key={c.name}
                                     onClick={() => setFormulation({ ...formulation, selectedConsortium: c.name })}

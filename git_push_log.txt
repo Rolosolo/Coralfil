@@ -1,1 +1,16 @@
 Starting at 21:31:53.00 
+warning: in the working copy of 'deploy.bat', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/(marketing)/research/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'push.bat', LF will be replaced by CRLF the next time Git touches it
+GIT ADD STATUS: 0 
+[main 65b9d88] feat: Research section blog + smooth pellet animation physics
+ 6 files changed, 339 insertions(+), 152 deletions(-)
+ create mode 100644 git_push_log.txt
+ create mode 100644 push.bat
+ create mode 100644 src/app/(marketing)/research/page.tsx
+GIT COMMIT STATUS: 0 
+To https://github.com/Rolosolo/Coralfil
+   198aac5..65b9d88  main -> main
+GIT PUSH STATUS: 0 
+Finished at 21:31:56.25 
+DONE 

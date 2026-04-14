@@ -107,7 +107,7 @@ export default function GlobalMapPage() {
 
                     <div className="mt-12 p-5 rounded-2xl bg-[#00D9C0]/5 border border-[#00D9C0]/10 border-dashed">
                         <p className="text-[9px] text-[#00D9C0] font-bold leading-relaxed uppercase tracking-widest">
-                            Recommendation: Lucayan Shelf requires 3D-printed C-Bricks™ infused with McH1-7 Probiotics within 30 days.
+                            Recommendation: Lucayan Shelf requires 3D-printed C-Bricks™ infused with McH1-7 Prebiotics within 30 days.
                         </p>
                     </div>
                 </div>

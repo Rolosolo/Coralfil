@@ -1,5 +1,33 @@
 export type ProjectStatus = "planning" | "analyzing" | "designing" | "deployment" | "monitoring";
 
+export interface VibrioRiskScore {
+    farm_name: string;
+    region: string;
+    primary_species: string;
+    production_volume_annual_tonnes: number;
+    mortality_events_count: number;
+    avg_mortality_percent: number;
+    total_economic_loss_cad: number;
+    risk_score: number;
+}
+
+export interface MortalityEvent {
+    id: string;
+    farm_id: string;
+    event_start_date: string;
+    event_end_date: string;
+    estimated_mortality_percent: number;
+    estimated_mortality_tonnes: number;
+    economic_loss_cad: number;
+    bc_shellfish_farms?: {
+        farm_name: string;
+        region: string;
+        location_lat: number;
+        location_lng: number;
+    };
+}
+
+
 export interface Project {
     id: string;
     name: string;
@@ -28,7 +56,7 @@ export interface SpeciesProfile {
     }[];
 }
 
-export interface ProbioticConsortium {
+export interface PrebioticConsortium {
     name: string;
     strains: string[];
     targetDisease?: string;
@@ -184,7 +212,7 @@ export const SPECIES_DB: SpeciesProfile[] = [
     }
 ];
 
-export const PROBIOTIC_CONSORTIA: ProbioticConsortium[] = [
+export const PREBIOTIC_CONSORTIA: PrebioticConsortium[] = [
     {
         name: "Caribbean Shield v1",
         strains: ["Cytobacillus firmus", "Pseudoalteromonas McH1-7", "Endozoicomonas acroporae", "Halomonas smyrnensis"],

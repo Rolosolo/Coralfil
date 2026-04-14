@@ -21,7 +21,7 @@ export default function KnowledgeIngestionPage() {
     ];
 
     const documents = [
-        { id: 1, title: "SCTLD Mitigative Probiotics in Porites astreoides", author: "McHale et al.", year: 2024, type: "PDF", status: "Ingested", relevance: 98 },
+        { id: 1, title: "SCTLD Mitigative Prebiotics in Porites astreoides", author: "McHale et al.", year: 2024, type: "PDF", status: "Ingested", relevance: 98 },
         { id: 2, title: "Thermal Resilience of Symbiodiniaceae in the Lucayan Archipelago", author: "Vanderburgh et al.", year: 2023, type: "PDF", status: "Ingested", relevance: 92 },
         { id: 3, title: "Ionic Calcification Rates Under Variable pH Microenvironments", author: "Zhang et al.", year: 2024, type: "PDF", status: "Processing", relevance: 88 },
         { id: 4, title: "Chitosan-Alginate Hydrogel Release Kinetics in Flowing Seawater", author: "Poulin et al.", year: 2025, type: "DOCX", status: "Ingested", relevance: 100 },

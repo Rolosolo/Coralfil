@@ -83,7 +83,7 @@ export function HelpManual({ isOpen, onClose }: HelpManualProps) {
                                         </div>
                                         <div>
                                             <div className="text-[11px] font-black text-white uppercase mb-1">CoralStick™ Integration</div>
-                                            <p className="text-[11px] text-slate-500 leading-relaxed font-light">Our proprietary probiotic gel provides the chemical signals necessary for larval recruitment. Proper load balancing is critical for early-stage survival.</p>
+                                            <p className="text-[11px] text-slate-500 leading-relaxed font-light">Our proprietary prebiotic gel provides the chemical signals necessary for larval recruitment. Proper load balancing is critical for early-stage survival.</p>
                                         </div>
                                     </div>
 

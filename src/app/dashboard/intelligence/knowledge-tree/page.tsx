@@ -40,7 +40,7 @@ export default function KnowledgeTreePage() {
         },
         {
             id: "P01", label: "McHale 2024", type: "paper", x: 50, y: 25, size: 45, connections: ["C01", "C02", "PR01"],
-            description: "Seminal paper on SCTLD mitigative probiotics in Porites astreoides.",
+            description: "Seminal paper on SCTLD mitigative prebiotics in Porites astreoides.",
             metrics: [{ label: "Citations", value: "42" }, { label: "Impact Factor", value: "9.2" }]
         },
         {

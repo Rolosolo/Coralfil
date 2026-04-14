@@ -8,7 +8,7 @@ import {
 
 const RESEARCH_CATEGORIES = [
     { title: "Biomimetic Substrates", icon: <Grid size={20} />, count: 12 },
-    { title: "Probiotic Consortia", icon: <Beaker size={20} />, count: 8 },
+    { title: "Prebiotic Consortia", icon: <Beaker size={20} />, count: 8 },
     { title: "Larval Attraction", icon: <Zap size={20} />, count: 15 },
     { title: "Ocean Geochemistry", icon: <Globe size={20} />, count: 6 }
 ];
@@ -134,7 +134,7 @@ export default function ResearchPage() {
                                     <Lightbulb size={24} className="text-primary" />
                                     <h5 className="text-sm font-black text-white uppercase tracking-widest">Contribute Research</h5>
                                     <p className="text-[10px] text-slate-400 leading-relaxed font-light">
-                                        Submit your findings on ocean acidification defense or probiotic efficacy.
+                                        Submit your findings on ocean acidification defense or prebiotic efficacy.
                                     </p>
                                     <button className="flex items-center gap-2 text-[9px] font-black text-primary uppercase tracking-widest hover:gap-4 transition-all">
                                         Submission Portal

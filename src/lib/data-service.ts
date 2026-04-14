@@ -1,5 +1,5 @@
 import { supabase } from "./supabase";
-import { Project, SpeciesProfile, CBrickType, MOCK_PROJECTS, SPECIES_DB, C_BRICK_TYPES } from "./demo-data";
+import { Project, SpeciesProfile, CBrickType, MOCK_PROJECTS, SPECIES_DB, C_BRICK_TYPES, VibrioRiskScore, MortalityEvent } from "./demo-data";
 
 export const dataService = {
     // Projects
@@ -152,5 +152,42 @@ export const dataService = {
 
         if (error) return [];
         return data;
+    },
+
+    // Vibrio Sentinel Analytics (Secure API proxy)
+    async getVibrioRiskScores(): Promise<VibrioRiskScore[]> {
+        try {
+            const resp = await fetch("/api/vibrio/risk-scores");
+            const { data, error } = await resp.json();
+            if (error) throw new Error(error);
+            return data || [];
+        } catch (err) {
+            console.error("Error fetching risk scores:", err);
+            return [];
+        }
+    },
+
+    async getMortalityEvents(startYear: number = 2015, endYear: number = 2024): Promise<MortalityEvent[]> {
+        try {
+            const resp = await fetch(`/api/vibrio/mortality-events?startYear=${startYear}&endYear=${endYear}`);
+            const { data, error } = await resp.json();
+            if (error) throw new Error(error);
+            return data || [];
+        } catch (err) {
+            console.error("Error fetching mortality events:", err);
+            return [];
+        }
+    },
+
+    async getTemperatureSummary(): Promise<any[]> {
+        try {
+            const resp = await fetch("/api/vibrio/temp-summary");
+            const { data, error } = await resp.json();
+            if (error) throw new Error(error);
+            return data || [];
+        } catch (err) {
+            console.error("Error fetching temperature summary:", err);
+            return [];
+        }
     }
 };

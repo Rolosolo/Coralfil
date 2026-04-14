@@ -19,7 +19,7 @@ export default function FormulationMatrixPage() {
         { name: "Low MW Chitosan", range: "10-15%", current: 12, function: "Matrix / Antimicrobial", target: "Binding" },
         { name: "Sodium Alginate", range: "15-20%", current: 18, function: "Encapsulation", target: "G-Block" },
         { name: "L-Glutamic Acid", range: "2500ppm", current: 3, function: "Settlement Cue", target: "10^-5 M" },
-        { name: "McH1-7 Probiotics", range: "10^9 CFU", current: 8, function: "Pathogen Shield", target: "Bio-Seal" },
+        { name: "McH1-7 Prebiotics", range: "10^9 CFU", current: 8, function: "Pathogen Shield", target: "Bio-Seal" },
         { name: "MgO Stabilizer", range: "3-7%", current: 5, function: "Thermal Resilience", target: "PSII Support" }
     ];
 

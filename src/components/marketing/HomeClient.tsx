@@ -511,8 +511,9 @@ export default function HomeClient() {
     const [hoveredCreature, setHoveredCreature] = useState<string | null>(null);
     const [activeCreature, setActiveCreature] = useState<string | null>(null);
 
+    // Deterministic selection — no Math.random to avoid hydration mismatch
     const displayedAssociations = useMemo(() => {
-        return [...REEF_ASSOCIATION_LIBRARY].sort(() => Math.random() - 0.5).slice(0, 3);
+        return REEF_ASSOCIATION_LIBRARY.slice(0, 3);
     }, []);
 
     return (
@@ -529,13 +530,17 @@ export default function HomeClient() {
                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuCovIh_7Q6DF2l3xdQQ7w51SV46VEOqVydGiNH2GzC4gXgVCySb2acCYrjvKzk0U5GoL4FknBlIbP-bJ1BmMxXIjfW_UgFqgMQEMgHepX0kIzft4X8gNBqlLq-te7h5XlIpKY_6dQnAuWE4J_vuyqD5qDZCpBro6ti2D4QI-h-duNILkpyubD3swqeaUJsQ4cxtOG0Ou89gkuzl6NBs2dR76piTudHvED9D2TQT7FXOo2rFXifuXvW1AXQIpeIjTivZUOWNj2nIqdU"
                     />
                     <div className="absolute inset-0 z-10 pointer-events-none">
-                        {[...Array(15)].map((_, i) => (
-                            <motion.div
+                        {/* Deterministic particle positions — no Math.random to prevent hydration mismatch */}
+                        {[12, 34, 56, 78, 23, 67].map((seed, i) => (
+                            <div
                                 key={i}
-                                className="absolute w-1 h-1 rounded-full bg-[#00D9C0] blur-[1px]"
-                                initial={{ x: (Math.random() * 100) + "%", y: (Math.random() * 100) + "%", opacity: 0 }}
-                                animate={{ y: ["0px", "-40px", "-20px"], opacity: [0, 0.4, 0], scale: [1, 1.5, 1] }}
-                                transition={{ duration: 8 + Math.random() * 10, repeat: Infinity, delay: Math.random() * 10 }}
+                                className="absolute w-1 h-1 rounded-full bg-[#00D9C0]/40 blur-[1px] animate-float-particle"
+                                style={{
+                                    left: `${seed}%`,
+                                    top: `${(seed * 7 + 13) % 90}%`,
+                                    animationDuration: `${8 + i * 3}s`,
+                                    animationDelay: `${i * 1.5}s`,
+                                }}
                             />
                         ))}
                     </div>
@@ -574,7 +579,7 @@ export default function HomeClient() {
                                 </h3>
                                 <p className="text-sm text-[#FF6B6B] font-bold uppercase tracking-widest mb-4">Precision Encapsulation</p>
                                 <p className="text-gray-400 text-sm leading-relaxed mb-6 font-light">
-                                    Our patented ocean-safe slow-release encapsulation technology enables targeted delivery of nutrients and probiotics. Using AlphaFold 3 and NVIDIA BioNeMo, we optimize molecular binding specifically for coral mucus geochemistry.
+                                    Our patented ocean-safe slow-release encapsulation technology enables targeted delivery of nutrients and prebiotics. Using AlphaFold 3 and NVIDIA BioNeMo, we optimize molecular binding specifically for coral mucus geochemistry.
                                 </p>
                                 <div className="space-y-3">
                                     {[
@@ -589,9 +594,6 @@ export default function HomeClient() {
                                         </div>
                                     ))}
                                 </div>
-                            </div>
-                            <div className="rounded-2xl overflow-hidden border border-white/10 relative">
-                                <img src="/coralstick-crosssection.png" alt="Inside a Coralstick Smart Pellet" className="w-full" />
                             </div>
                         </div>
 

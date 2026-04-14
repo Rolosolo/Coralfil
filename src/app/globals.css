@@ -142,6 +142,27 @@
   animation: bubble-up 1s ease-out forwards;
 }
 
+@keyframes float-particle {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(-40px) scale(1.5);
+    opacity: 0.3;
+  }
+  75% {
+    opacity: 0.1;
+  }
+}
+
+.animate-float-particle {
+  animation: float-particle ease-in-out infinite;
+}
+
 /* Custom Utilities */
 @layer utilities {
   .text-glow-gradient {
