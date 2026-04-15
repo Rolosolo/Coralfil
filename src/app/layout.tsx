@@ -19,20 +19,20 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://coralfill.com'),
+  metadataBase: new URL('https://coralfil.com'),
   title: {
     template: '%s | Coralfil',
     default: 'Marine Restoration Technology | Coralfil',
   },
-  description: 'Restoring reefs at the speed of nature. AI-driven coral synthesis and restoration technology.',
+  description: 'AI-driven restoration for Pacific glass sponge reefs and BC shellfish ecosystems. Reefmaker AI™ v2.0 empowers a resilient blue economy.',
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://coralfill.com',
+    url: 'https://coralfil.com',
     siteName: 'Coralfil',
     images: [
       {
-        url: '/og-image.jpg', // Placeholder, assuming public/og-image.jpg
+        url: '/og-image.jpg',
         width: 1200,
         height: 630,
         alt: 'Coralfil Marine Restoration',
@@ -41,11 +41,11 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    site: '@coralfill',
-    creator: '@coralfill',
+    site: '@coralfil',
+    creator: '@coralfil',
   },
   alternates: {
-    canonical: './',
+    canonical: 'https://coralfil.com',
   },
   icons: {
     icon: '/favicon.svg',
@@ -63,31 +63,31 @@ export default function RootLayout({
     "@graph": [
       {
         "@type": "Organization",
-        "@id": "https://coralfill.com/#organization",
+        "@id": "https://coralfil.com/#organization",
         "name": "Coralfil Inc.",
-        "url": "https://coralfill.com",
+        "url": "https://coralfil.com",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://coralfill.com/logo.png"
+          "url": "https://coralfil.com/logo.png"
         },
         "sameAs": [
-          "https://twitter.com/coralfill",
-          "https://linkedin.com/company/coralfill"
+          "https://twitter.com/coralfil",
+          "https://linkedin.com/company/coralfil"
         ],
         "contactPoint": {
           "@type": "ContactPoint",
-          "email": "info@coralfill.com",
+          "email": "info@coralfil.com",
           "contactType": "customer service"
         }
       },
       {
         "@type": "WebSite",
-        "@id": "https://coralfill.com/#website",
-        "url": "https://coralfill.com",
+        "@id": "https://coralfil.com/#website",
+        "url": "https://coralfil.com",
         "name": "Coralfil Inc.",
-        "description": "AI-driven coral synthesis at scale.",
+        "description": "AI-driven marine restoration at scale.",
         "publisher": {
-          "@id": "https://coralfill.com/#organization"
+          "@id": "https://coralfil.com/#organization"
         }
       }
     ]

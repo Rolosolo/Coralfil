@@ -60,13 +60,13 @@ Please provide more information as requested above.
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "https://coralfill.com"
+                        "item": "https://coralfil.com"
                     },
                     {
                         "@type": "ListItem",
                         "position": 2,
                         "name": "Investor Relations",
-                        "item": "https://coralfill.com/investors"
+                        "item": "https://coralfil.com/investors"
                     }
                 ]
             }} />

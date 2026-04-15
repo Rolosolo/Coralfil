@@ -3,10 +3,10 @@ import HomeClient from "@/components/marketing/HomeClient";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Coralfil - Pacific & Bahamas Marine Restoration Intelligence",
-  description: "AI-driven restoration for Pacific glass sponge reefs and Caribbean coral ecosystems. Reefmaker AI™ v2.0 empowers a resilient blue economy.",
+  title: "Marine Biotech for BC Shellfish & Sessile Species Resilience",
+  description: "Science-driven restoration for BC shellfish ecosystems. Reefmaker AI™ v2.0 empowers marine resilience through precision biotechnology.",
   alternates: {
-    canonical: './',
+    canonical: 'https://coralfil.com',
   },
 };
 
@@ -32,7 +32,7 @@ export default function Home() {
               "price": "50.00",
               "priceCurrency": "USD",
               "availability": "https://schema.org/InStock",
-              "url": "https://coralfill.com/#philanthropy"
+              "url": "https://coralfil.com/#philanthropy"
             }
           },
           {

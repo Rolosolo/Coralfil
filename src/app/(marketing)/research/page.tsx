@@ -11,9 +11,12 @@ import {
 import GuideDownloadForm from "./GuideDownloadForm";
 
 export const metadata: Metadata = {
-    title: "Research | Coralfil",
+    title: "Research",
     description:
         "Science for a Stronger Seafloor. Coralfil's research into immune support, climate resilience, and precision delivery for sessile marine species.",
+    alternates: {
+        canonical: "https://coralfil.com/research",
+    },
 };
 
 // ─────────────────────────────────────────────────────────────

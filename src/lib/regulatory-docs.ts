@@ -135,7 +135,7 @@ ${factSheet.installationGuidelines.monitoringSchedule}
 
 ---
 
-*This fact sheet is generated for regulatory submission and team guidance. For questions, contact Coralfill Compliance at compliance@coralfill.com*
+*This fact sheet is generated for regulatory submission and team guidance. For questions, contact Coralfil Compliance at compliance@coralfil.com*
 `;
     }
 };

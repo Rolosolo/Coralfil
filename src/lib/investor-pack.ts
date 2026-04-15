@@ -211,7 +211,7 @@ Our R&D roadmap is structured to prioritize high-impact manufacturing and biolog
 
 ---
 
-*This document is confidential and intended for accredited investors only. For questions, contact: investors@coralfill.com*
+*This document is confidential and intended for accredited investors only. For questions, contact: investors@coralfil.com*
 `;
     },
 
@@ -221,7 +221,7 @@ Our R&D roadmap is structured to prioritize high-impact manufacturing and biolog
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `coralfill-investor-rd-pack-${new Date().toISOString().split('T')[0]}.md`;
+        a.download = `coralfil-investor-rd-pack-${new Date().toISOString().split('T')[0]}.md`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);

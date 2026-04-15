@@ -185,7 +185,7 @@ const HERO_SLIDES = [
     {
         id: "gap",
         subtitle: "The Mission",
-        title: "Scaling Resilience for",
+        title: "Scaling Resilience for ",
         highlight: "Infinite Oceans.",
         description: "The oceans are at a breaking point. Coralfill bridges the gap between despair and restoration with precision biotechnology.",
         color: "#F8FAFC"
@@ -193,7 +193,7 @@ const HERO_SLIDES = [
     {
         id: "encapsulation",
         subtitle: "The Technology",
-        title: "Patented Slow-Release",
+        title: "Patented Slow-Release ",
         highlight: "Encapsulation.",
         description: "Revolutionizing restoration with patented ocean-safe slow-release encapsulation. Tailored health support through AlphaFold 3 & BioNeMo optimized molecular design.",
         color: "#F472B6"
@@ -201,7 +201,7 @@ const HERO_SLIDES = [
     {
         id: "coraltex",
         subtitle: "The Infrastructure",
-        title: "Biomimetic Reefs with",
+        title: "Biomimetic Reefs with ",
         highlight: "Coraltex™.",
         description: "Introducing Coraltex™: The biomimetic artificial reef system. Engineered for maximum coral larvae attraction, settlement, and long-term ecosystem support.",
         color: "#38BDF8"
