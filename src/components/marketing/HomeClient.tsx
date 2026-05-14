@@ -20,7 +20,9 @@ import {
     Fish,
     Mail,
     Github,
-    Linkedin
+    Linkedin,
+    ArrowUpRight,
+    Sparkles
 } from "lucide-react";
 
 /* ═══════════════════════════════════════════════════════
@@ -242,9 +244,21 @@ function HeroSlider() {
                         {slide.title}<br />
                         <span className="text-glow-gradient" style={{ color: slide.color }}>{slide.highlight}</span>
                     </h1>
-                    <p className="text-lg md:text-2xl text-gray-300 font-light max-w-3xl mx-auto leading-relaxed">
+                    <p className="text-lg md:text-2xl text-gray-300 font-light max-w-3xl mx-auto leading-relaxed mb-8">
                         {slide.description}
                     </p>
+                    <div className="flex justify-center">
+                        <a
+                            href="https://os.coralfil.com/login"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group relative inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#00D9C0] to-[#00A3FF] hover:from-[#00bda6] hover:to-[#008be0] text-[#010307] font-black text-xs md:text-sm uppercase tracking-[0.15em] rounded-xl shadow-[0_0_25px_rgba(0,217,192,0.3)] hover:shadow-[0_0_35px_rgba(0,217,192,0.6)] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+                        >
+                            <Sparkles className="w-4 h-4 text-[#010307] animate-pulse" />
+                            <span>The Ocean System</span>
+                            <ArrowUpRight className="w-4 h-4 text-[#010307] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                        </a>
+                    </div>
                 </motion.div>
             </AnimatePresence>
 

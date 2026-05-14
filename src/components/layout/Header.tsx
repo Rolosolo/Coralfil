@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from "@/components/motion-client";
 import Link from "next/link";
-import { Copy, Menu, X } from "lucide-react";
+import { Copy, Menu, X, ArrowUpRight, Sparkles } from "lucide-react";
 import { useState } from "react";
 
 export function Header() {
@@ -71,9 +71,16 @@ export function Header() {
                     </nav>
 
                     <div className="flex items-center gap-4">
-                        <Link href="/dashboard" className="hidden sm:flex items-center justify-center px-6 h-10 rounded-full bg-white/5 hover:bg-white/10 text-[10px] font-black uppercase tracking-[0.2em] text-white border border-white/10 transition-all duration-300">
-                            Coralfil System
-                        </Link>
+                        <a
+                            href="https://os.coralfil.com/login"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group relative hidden sm:inline-flex items-center gap-2 px-6 h-10 bg-gradient-to-r from-[#00D9C0] to-[#00A3FF] hover:from-[#00bda6] hover:to-[#008be0] text-[#010307] font-black text-[10px] uppercase tracking-[0.15em] rounded-xl shadow-[0_0_25px_rgba(0,217,192,0.3)] hover:shadow-[0_0_35px_rgba(0,217,192,0.6)] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+                        >
+                            <Sparkles className="w-3.5 h-3.5 text-[#010307] animate-pulse" />
+                            <span>The Ocean System</span>
+                            <ArrowUpRight className="w-3.5 h-3.5 text-[#010307] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                        </a>
                         <Link href="/dashboard/project/new" className="hidden lg:flex items-center justify-center px-6 h-10 rounded-full bg-primary text-black text-[10px] font-black uppercase tracking-[0.2em] hover:bg-white transition-all shadow-[0_0_20px_rgba(0,217,192,0.3)]">
                             Initiate Project
                         </Link>
