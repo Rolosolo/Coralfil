@@ -41,11 +41,9 @@ export function Footer() {
                     <div className="space-y-6">
                         <h4 className="text-[10px] font-black text-white uppercase tracking-[0.25em]">Technology</h4>
                         <ul className="space-y-4">
-                            <li><Link href="/#technology" className="text-sm text-slate-500 hover:text-primary transition-colors">Coraltex Sea Bricks (C-Bricks)™</Link></li>
-                            <li><Link href="/#technology" className="text-sm text-slate-500 hover:text-primary transition-colors">Coralstick Smart Pellet™</Link></li>
-                            <li><Link href="/bulk-minerals" className="text-sm text-slate-500 hover:text-primary transition-colors">Bulk Minerals</Link></li>
-                            <li><Link href="/#technology" className="text-sm text-slate-500 hover:text-primary transition-colors">Spatial Atlas</Link></li>
-                            <li><Link href="/#technology" className="text-sm text-slate-500 hover:text-primary transition-colors">Coralfil System</Link></li>
+                            <li><Link href="/#technology" className="text-sm text-slate-500 hover:text-primary transition-colors">Restorative Innovation</Link></li>
+                            <li><Link href="/bulk-minerals" className="text-sm text-slate-500 hover:text-primary transition-colors">Marine Minerals</Link></li>
+                            <li><Link href="https://os.coralfil.com" target="_blank" rel="noopener noreferrer" className="text-sm text-slate-500 hover:text-primary transition-colors">Coralfil OS</Link></li>
                         </ul>
                     </div>
 

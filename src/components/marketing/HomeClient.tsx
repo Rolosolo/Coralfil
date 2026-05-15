@@ -2,22 +2,11 @@
 
 import { motion, AnimatePresence } from "@/components/motion-client";
 import Link from "next/link";
-import { useState, useMemo, useCallback, useRef, useEffect } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import {
     ChevronDown,
-    ArrowRight,
-    FlaskConical,
-    Grid,
-    Brain,
     CheckCircle,
-    Activity,
-    Zap,
-    Shield,
-    Info,
-    Heart,
-    AlertTriangle,
     Droplets,
-    Fish,
     Mail,
     Github,
     Linkedin,
@@ -207,6 +196,14 @@ const HERO_SLIDES = [
         highlight: "Coraltex™.",
         description: "Introducing Coraltex™: The biomimetic artificial reef system. Engineered for maximum coral larvae attraction, settlement, and long-term ecosystem support.",
         color: "#38BDF8"
+    },
+    {
+        id: "biorefined",
+        subtitle: "The Natural Supply",
+        title: "Biorefined from the ",
+        highlight: "Sea Itself.",
+        description: "Coralfil's tertiary supply tier sources and refines premium marine-origin minerals — wild-harvested, sustainably processed, and traceable from ocean to application. Feed the reef. Feed the future.",
+        color: "#34D399"
     }
 ];
 
@@ -518,18 +515,287 @@ function CoralStickAnimation() {
 }
 
 /* ═══════════════════════════════════════════════════════
+   VISITOR SECTOR SELECTOR
+   ═══════════════════════════════════════════════════════ */
+
+const VISITOR_SECTORS = [
+    {
+        id: "marine-restoration",
+        label: "Marine Restoration",
+        icon: "🪸",
+        tagline: "Rebuilding the ocean's architecture",
+        accentColor: "#00D9C0",
+        glowColor: "rgba(0,217,192,0.15)",
+        borderColor: "rgba(0,217,192,0.3)",
+        benefits: [
+            "Deploy Coraltex™ C-Bricks for rapid substrate colonization",
+            "Precision Coralstick™ pellets for species-targeted nutrition",
+            "Coralfil OS tracks reef health in real-time via AI sensors",
+            "Proprietary biopolymer coating boosts coral recruitment 3×",
+        ],
+        cta: "Model your restoration site in the Formulator →",
+    },
+    {
+        id: "aquaculture",
+        label: "Aquaculture",
+        icon: "🐟",
+        tagline: "Optimize your marine production systems",
+        accentColor: "#38BDF8",
+        glowColor: "rgba(56,189,248,0.15)",
+        borderColor: "rgba(56,189,248,0.3)",
+        benefits: [
+            "Marine Minerals improve water chemistry & reduce stress mortality",
+            "Slow-release pellet tech delivers precise ionic support at scale",
+            "Formulator calculates custom mineral blends per species",
+            "Coralfil OS integrates with farm sensors for continuous dosing",
+        ],
+        cta: "Build your aquaculture formula now →",
+    },
+    {
+        id: "agrifeed",
+        label: "Agrifeed / Farming",
+        icon: "🌾",
+        tagline: "Ocean minerals for land-based vitality",
+        accentColor: "#34D399",
+        glowColor: "rgba(52,211,153,0.15)",
+        borderColor: "rgba(52,211,153,0.3)",
+        benefits: [
+            "Traceable marine mineral concentrates for feed & soil amendment",
+            "Biorefined kelp & coral-safe by-product streams",
+            "Certified inputs compatible with organic & regenerative standards",
+            "Custom blend the exact macro/micro mineral profile you need",
+        ],
+        cta: "Formulate your agrifeed mineral mix →",
+    },
+    {
+        id: "premium-minerals",
+        label: "Premium Marine Minerals",
+        icon: "💎",
+        tagline: "The finest ocean-source mineral supply",
+        accentColor: "#A78BFA",
+        glowColor: "rgba(167,139,250,0.15)",
+        borderColor: "rgba(167,139,250,0.3)",
+        benefits: [
+            "Wild-harvested, sustainably sourced from pristine marine zones",
+            "Full-spectrum trace mineral profiles unavailable from terrestrial sources",
+            "Third-party tested for purity, bioavailability & heavy-metal safety",
+            "Available in bulk, concentrate, or custom-encapsulated formats",
+        ],
+        cta: "Explore marine mineral grades in the Formulator →",
+    },
+];
+
+function VisitorSelector() {
+    const [selected, setSelected] = useState<string | null>(null);
+    const [hovered, setHovered] = useState<string | null>(null);
+    const selectedSector = VISITOR_SECTORS.find(s => s.id === selected);
+
+    return (
+        <div className="space-y-10">
+            {/* 4-tile grid */}
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                {VISITOR_SECTORS.map((sector) => {
+                    const isSelected = selected === sector.id;
+                    const isHovered = hovered === sector.id;
+                    const isActive = isSelected || isHovered;
+                    return (
+                        <button
+                            key={sector.id}
+                            id={`visitor-${sector.id}`}
+                            onClick={() => setSelected(isSelected ? null : sector.id)}
+                            onMouseEnter={() => setHovered(sector.id)}
+                            onMouseLeave={() => setHovered(null)}
+                            className="relative group text-left rounded-3xl p-7 border transition-all duration-500 outline-none focus-visible:ring-2 focus-visible:ring-white/30"
+                            style={{
+                                background: isActive
+                                    ? `radial-gradient(ellipse at 30% 20%, ${sector.glowColor} 0%, rgba(2,6,12,0.95) 70%)`
+                                    : "rgba(255,255,255,0.02)",
+                                borderColor: isSelected
+                                    ? sector.borderColor
+                                    : isHovered
+                                    ? sector.borderColor.replace("0.3", "0.15")
+                                    : "rgba(255,255,255,0.06)",
+                                boxShadow: isSelected
+                                    ? `0 0 40px ${sector.glowColor}, inset 0 1px 0 rgba(255,255,255,0.05)`
+                                    : isHovered
+                                    ? `0 0 20px ${sector.glowColor}`
+                                    : "none",
+                                transform: isSelected ? "translateY(-6px) scale(1.02)" : isHovered ? "translateY(-3px)" : "translateY(0)",
+                            }}
+                        >
+                            {/* Active indicator ring */}
+                            {isSelected && (
+                                <div
+                                    className="absolute top-3 right-3 w-2.5 h-2.5 rounded-full animate-ping"
+                                    style={{ background: sector.accentColor, opacity: 0.8 }}
+                                />
+                            )}
+                            {isSelected && (
+                                <div
+                                    className="absolute top-3 right-3 w-2.5 h-2.5 rounded-full"
+                                    style={{ background: sector.accentColor }}
+                                />
+                            )}
+
+                            {/* Icon */}
+                            <div
+                                className="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl mb-5 transition-all duration-500"
+                                style={{
+                                    background: isActive ? `${sector.glowColor.replace("0.15", "0.25")}` : "rgba(255,255,255,0.04)",
+                                    border: `1px solid ${isActive ? sector.borderColor : "rgba(255,255,255,0.06)"}`,
+                                    transform: isActive ? "scale(1.1)" : "scale(1)",
+                                    boxShadow: isActive ? `0 0 20px ${sector.glowColor}` : "none",
+                                }}
+                            >
+                                {sector.icon}
+                            </div>
+
+                            {/* Label */}
+                            <h3
+                                className="text-base font-black uppercase tracking-tight mb-1.5 transition-colors duration-300"
+                                style={{ color: isActive ? sector.accentColor : "#f8fafc" }}
+                            >
+                                {sector.label}
+                            </h3>
+                            <p className="text-[11px] text-slate-500 font-light leading-relaxed group-hover:text-slate-400 transition-colors">
+                                {sector.tagline}
+                            </p>
+
+                            {/* Bottom accent bar */}
+                            <div
+                                className="absolute bottom-0 left-6 right-6 h-px rounded-full transition-all duration-500"
+                                style={{
+                                    background: isActive
+                                        ? `linear-gradient(90deg, transparent, ${sector.accentColor}, transparent)`
+                                        : "transparent",
+                                }}
+                            />
+                        </button>
+                    );
+                })}
+            </div>
+
+            {/* Expanded sector content */}
+            <AnimatePresence mode="wait">
+                {selectedSector && (
+                    <motion.div
+                        key={selectedSector.id}
+                        initial={{ opacity: 0, y: 24, scale: 0.98 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 12, scale: 0.98 }}
+                        transition={{ duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
+                        className="rounded-3xl p-8 md:p-12 border relative overflow-hidden"
+                        style={{
+                            background: `radial-gradient(ellipse at 10% 0%, ${selectedSector.glowColor} 0%, rgba(2,6,12,0.98) 60%)`,
+                            borderColor: selectedSector.borderColor,
+                            boxShadow: `0 0 60px ${selectedSector.glowColor}`,
+                        }}
+                    >
+                        {/* Decorative large icon */}
+                        <div className="absolute -right-6 -bottom-6 text-[160px] opacity-5 select-none pointer-events-none">
+                            {selectedSector.icon}
+                        </div>
+
+                        <div className="grid md:grid-cols-2 gap-10 relative z-10">
+                            {/* Left: benefits */}
+                            <div>
+                                <div className="flex items-center gap-3 mb-6">
+                                    <span className="text-3xl">{selectedSector.icon}</span>
+                                    <div>
+                                        <p
+                                            className="text-[10px] font-black uppercase tracking-[0.3em] mb-0.5"
+                                            style={{ color: selectedSector.accentColor }}
+                                        >
+                                            For {selectedSector.label}
+                                        </p>
+                                        <h3 className="text-xl font-black text-white uppercase tracking-tight">
+                                            {selectedSector.tagline}
+                                        </h3>
+                                    </div>
+                                </div>
+                                <ul className="space-y-3">
+                                    {selectedSector.benefits.map((benefit, i) => (
+                                        <motion.li
+                                            key={i}
+                                            initial={{ opacity: 0, x: -12 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            transition={{ delay: i * 0.08, duration: 0.35 }}
+                                            className="flex items-start gap-3 p-3.5 rounded-xl bg-white/[0.03] border border-white/5"
+                                        >
+                                            <CheckCircle
+                                                size={14}
+                                                className="shrink-0 mt-0.5"
+                                                style={{ color: selectedSector.accentColor }}
+                                            />
+                                            <span className="text-xs text-slate-300 font-light leading-relaxed">{benefit}</span>
+                                        </motion.li>
+                                    ))}
+                                </ul>
+                            </div>
+
+                            {/* Right: CTA */}
+                            <div className="flex flex-col justify-between">
+                                <div
+                                    className="p-6 rounded-2xl border mb-6"
+                                    style={{
+                                        background: selectedSector.glowColor.replace("0.15", "0.08"),
+                                        borderColor: selectedSector.borderColor.replace("0.3", "0.15"),
+                                    }}
+                                >
+                                    <p className="text-xs font-black text-white uppercase tracking-widest mb-2">
+                                        Ready to Experiment?
+                                    </p>
+                                    <p className="text-sm text-slate-400 font-light leading-relaxed">
+                                        The Coralfil Formulator lets you model custom mineral blends, dosing schedules, and species-specific protocols — with AI-assisted precision.
+                                    </p>
+                                </div>
+
+                                <motion.a
+                                    href="https://os.coralfil.com/login"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    whileHover={{ scale: 1.03 }}
+                                    whileTap={{ scale: 0.97 }}
+                                    className="relative group/cta w-full flex items-center justify-center gap-3 px-8 py-5 rounded-2xl font-black text-sm uppercase tracking-widest text-[#010307] transition-all duration-300 overflow-hidden"
+                                    style={{
+                                        background: `linear-gradient(135deg, ${selectedSector.accentColor}, ${selectedSector.accentColor}cc)`,
+                                        boxShadow: `0 0 30px ${selectedSector.glowColor}, 0 4px 20px rgba(0,0,0,0.4)`,
+                                    }}
+                                >
+                                    <span className="relative z-10">{selectedSector.cta}</span>
+                                    <ArrowUpRight size={16} className="relative z-10 transition-transform duration-300 group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5" />
+                                    {/* Shimmer sweep */}
+                                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/cta:translate-x-full transition-transform duration-700" />
+                                </motion.a>
+
+                                <p className="text-[10px] text-slate-600 font-bold uppercase tracking-widest text-center mt-4">
+                                    No account needed to explore
+                                </p>
+                            </div>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            {/* Prompt when nothing selected */}
+            {!selected && (
+                <motion.p
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="text-center text-[11px] text-slate-600 font-bold uppercase tracking-[0.3em] pt-2"
+                >
+                    ↑ Select a tile above to see your Coralfil path
+                </motion.p>
+            )}
+        </div>
+    );
+}
+
+/* ═══════════════════════════════════════════════════════
    MAIN HOME CLIENT COMPONENT
    ═══════════════════════════════════════════════════════ */
 
 export default function HomeClient() {
-    const [hoveredCreature, setHoveredCreature] = useState<string | null>(null);
-    const [activeCreature, setActiveCreature] = useState<string | null>(null);
-
-    // Deterministic selection — no Math.random to avoid hydration mismatch
-    const displayedAssociations = useMemo(() => {
-        return REEF_ASSOCIATION_LIBRARY.slice(0, 3);
-    }, []);
-
     return (
         <div className="flex-grow bg-[#010307] relative overflow-x-hidden">
             {/* 1. HERO SECTION */}
@@ -628,72 +894,42 @@ export default function HomeClient() {
                 </div>
             </section>
 
-            {/* 3. REEF FRIENDS SECTION */}
-            <section className="py-32 bg-[#02060c] border-y border-white/5 relative overflow-hidden">
-                <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#00D9C0]/10 border border-[#00D9C0]/20 mb-12">
-                        <Fish size={16} className="text-primary" />
-                        <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary">Meet The Reef Friends</span>
+            {/* 3. WHO ARE YOU — VISITOR SELECTOR */}
+            <section className="py-32 bg-[#02060c] border-y border-white/5 relative overflow-hidden" id="who-you-are">
+                {/* Ambient background pulse */}
+                <div className="absolute inset-0 pointer-events-none">
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[#00D9C0]/4 blur-[140px] animate-pulse-slow" />
+                </div>
+
+                <div className="max-w-7xl mx-auto px-6 relative z-10">
+                    <div className="text-center mb-16">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#00D9C0]/10 border border-[#00D9C0]/20 mb-8">
+                            <Droplets size={14} className="text-primary" />
+                            <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-primary">Who Are You?</span>
+                        </div>
+                        <h2 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter mb-4">
+                            Find Your <br />
+                            <span className="text-primary brightness-125">Coralfil Path.</span>
+                        </h2>
+                        <p className="text-slate-500 text-sm max-w-xl mx-auto font-light leading-relaxed">
+                            Select the role that best describes you. We'll show you exactly how Coralfil transforms your world.
+                        </p>
                     </div>
-                    <h2 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter mb-16">
-                        Protecting Our <br />
-                        <span className="text-primary brightness-125">Best Allies.</span>
-                    </h2>
-                    
-                    <div className="grid md:grid-cols-3 gap-8">
-                        {displayedAssociations.map((creature) => (
-                            <motion.div
-                                key={creature.id}
-                                whileHover={{ y: -10 }}
-                                className="glass-panel p-8 rounded-3xl border border-white/5 bg-white/[0.02] text-left relative group"
-                            >
-                                <div className="absolute top-0 right-0 p-6 opacity-0 group-hover:opacity-10 transition-opacity">
-                                    <span className="text-8xl">{creature.icon}</span>
-                                </div>
-                                <div className="flex items-center gap-3 mb-4">
-                                    <span className="text-4xl filter drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]">{creature.icon}</span>
-                                    <div>
-                                <h4 className="text-lg font-black text-white uppercase">{creature.name}</h4>
-                                <div className="flex items-center gap-2 mb-4">
-                                    <span className={`text-[8px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full ${creature.type === 'positive' ? 'bg-green-500/20 text-green-400' : 'bg-amber-500/20 text-amber-400'}`}>
-                                        {creature.type === "positive" ? "Ally" : "Threat"}
-                                    </span>
-                                    {creature.type === 'positive' ? (
-                                        <span className="text-[10px] text-green-400/60 font-mono">+{creature.supportRating}% Support</span>
-                                    ) : (
-                                        <span className="text-[10px] text-amber-400/60 font-mono">{creature.threatRating}% Threat</span>
-                                    )}
-                                </div>
-                                <div className="w-full h-1 bg-white/5 rounded-full mb-4 overflow-hidden">
-                                    <motion.div 
-                                        initial={{ width: 0 }}
-                                        whileInView={{ width: `${creature.type === 'positive' ? creature.supportRating : creature.threatRating}%` }}
-                                        className={`h-full ${creature.type === 'positive' ? 'bg-green-500/40' : 'bg-amber-500/40'}`}
-                                    />
-                                </div>
-                                <p className="text-xs text-slate-400 mb-6 font-light leading-relaxed h-12 overflow-hidden">{creature.description}</p>
-                                    <div className={`p-4 rounded-2xl border ${creature.type === 'positive' ? 'bg-green-500/5 border-green-500/10' : 'bg-amber-500/5 border-amber-500/10'}`}>
-                                        <p className="text-[11px] text-slate-300 italic">"{creature.coralRelationship}"</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </motion.div>
-                    ))}
-                    </div>
-                    <p className="mt-12 text-[10px] text-slate-600 font-bold uppercase tracking-[0.3em]">Reload the page to meet more reef friends!</p>
+
+                    <VisitorSelector />
                 </div>
             </section>
 
             {/* 4. FINAL CTA & CONTACT */}
             <section className="py-40 bg-[#010307] relative overflow-hidden">
-                {/* Floating Background Creatures (Subtle) */}
+                {/* Floating Background Icons (Subtle) */}
                 <div className="absolute inset-0 z-0 pointer-events-none opacity-20">
-                    {REEF_ASSOCIATION_LIBRARY.slice(0, 5).map((creature, i) => (
+                    {VISITOR_SECTORS.map((sector, i) => (
                         <motion.div
-                            key={creature.id}
+                            key={sector.id}
                             className="absolute text-6xl"
                             initial={{ 
-                                x: (i * 20 + 10) + "%", 
+                                x: (i * 22 + 8) + "%", 
                                 y: (i % 2 === 0 ? 10 : 70) + "%",
                                 opacity: 0 
                             }}
@@ -709,7 +945,7 @@ export default function HomeClient() {
                                 delay: i * 2
                             }}
                         >
-                            {creature.icon}
+                            {sector.icon}
                         </motion.div>
                     ))}
                 </div>
