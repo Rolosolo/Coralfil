@@ -8,9 +8,8 @@ export function Sidebar() {
     const steps = [
         { number: 1, label: "Set Up Project", status: "completed", href: "/dashboard/project/new" },
         { number: 2, label: "Island Settings", status: "active", href: "/dashboard" },
-        { number: 3, label: "Formulation Matrix", status: "active", href: "/dashboard/intelligence/formulation-matrix" },
-        { number: 4, label: "Growth Engine", status: "active", href: "/dashboard/intelligence/growth-engine" },
-        { number: 5, label: "Review & Deploy", status: "pending", href: "#" },
+        { number: 3, label: "Growth Engine", status: "active", href: "/dashboard/intelligence/growth-engine" },
+        { number: 4, label: "Review & Deploy", status: "pending", href: "#" },
     ];
 
     return (
@@ -101,7 +100,7 @@ export function Sidebar() {
                             { label: "Knowledge Graph", icon: Dna, href: "/dashboard/intelligence/knowledge-tree", tooltip: "Visual mapping of coral species relationships and restoration success data." },
                             { label: "Vibrio Alert", icon: ShieldAlert, href: "/dashboard/vibrio", tooltip: "Real-time mortality surveillance and environmental telemetry for BC shellfish aquaculture." },
                             { label: "Intervention", icon: Zap, href: "/vibrio-intervention", tooltip: "Predictive defense protocols and molecular intervention strategies for aquaculture." },
-                            { label: "Matrix", icon: FlaskConical, href: "/dashboard/intelligence/formulation-matrix", tooltip: "Precision formulation engine for project-specific Coralstick™ nutrients." },
+                            { label: "Matrix", icon: FlaskConical, href: "https://os.coralfil.com/login", tooltip: "Precision formulation engine for project-specific Coralstick™ nutrients." },
                             { label: "Library", icon: Grid2X2, href: "/dashboard/intelligence/ingestion", tooltip: "Central repository for imported maritime research and project documentation." },
                             { label: "Coral Atlas", icon: Globe, href: "/dashboard/intelligence/global-map", tooltip: "Global marine ecosystem mapping integrated with Allen Coral Atlas data." },
                         ].map((tool) => (
